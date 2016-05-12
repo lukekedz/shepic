@@ -5,7 +5,6 @@ Next, you need to set up the default URL options for the Devise mailer in each e
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
 Devise will create some helpers to use inside your controllers and views. To set up a controller with user authentication, just add this before_action (assuming your devise model is 'User'):
-
 before_action :authenticate_user!
 
 To verify if a user is signed in, use the following helper:
