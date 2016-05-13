@@ -1,6 +1,10 @@
 devise => https://github.com/plataformatec/devise
 $ rails generate devise:install
 $ rails generate devise MODEL
+$ rails generate devise:views
+
+
+
 Next, you need to set up the default URL options for the Devise mailer in each environment. Here is a possible configuration for config/environments/development.rb:
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 

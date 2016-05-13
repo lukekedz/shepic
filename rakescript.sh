@@ -1,6 +1,6 @@
 # SOURCE http://www.maclife.com/article/columns/terminal_101_automate_terminal_bash_scripts
 
-# $> be ./rakescript.sh
+# $> bundler exec ./rakescript.sh OR bash rakescript.sh
 
 rake db:drop
 rake db:create
