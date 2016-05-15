@@ -5,8 +5,4 @@ class SiteController < ApplicationController
   def welcome
   end
 
-  def admin_add_for_week
-    @games =
-  end
-
 end

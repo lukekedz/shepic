@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'site#welcome'
-  get  'site/admin_add_for_week'
+  get  'admin/new_week'
 
   devise_for :users
 
