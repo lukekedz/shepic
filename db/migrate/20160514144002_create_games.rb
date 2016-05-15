@@ -1,7 +1,7 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
-      t.integer :week,       null: false
+      t.index   :week_id,    null: false
       t.string  :away,       null: false
       t.string  :home,       null: false
       t.integer :spread,     null: false
