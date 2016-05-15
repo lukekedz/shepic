@@ -13,6 +13,10 @@ Game.create(week_id: 2, away: "Rutgers", home: "Stanford", spread: -4, location:
 Game.create(week_id: 2, away: "Oregon", home: "LSU", spread: 5, location: "Hollywood, CA", tiebreaker: false)
 Game.create(week_id: 2, away: "Georgia State", home: "Georgia", spread: 2, location: "Atlanta, GA", tiebreaker: true)
 
+Game.create(week_id: 3, away: "Michigan State", home: "Utah", spread: -4, location: "Chicago, IL", tiebreaker: true)
+Game.create(week_id: 3, away: "Michigan", home: "Arkansas", spread: 5, location: "Hollywood, CA", tiebreaker: false)
+Game.create(week_id: 3, away: "Boise State", home: "Wisconsin", spread: 2, location: "Atlanta, GA", tiebreaker: true)
+
 Pick.create(game_id: 1, user_id: 1, pick: "Florida State")
 Pick.create(game_id: 2, user_id: 1, pick: "Penn State")
 Pick.create(game_id: 3, user_id: 1, pick: "Alabama")

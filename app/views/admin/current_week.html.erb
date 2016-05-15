@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @current_week.week %></span></div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Status: <%= @current_week.locked ? "Closed" : "Open" %></span></div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @games.count %></span></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div style="text-align:center">
+      <% if @current_week.locked == true %>
+        <a class="waves-effect waves-light btn">Start New Week</a>
+      <% else %>
+        <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div id="add_game"><%= render "add_game" %></div>
+</div>
+
+<% @games.each do |g| %>
+  <div class="row">
+    <div class="col s12" style="border: 1px black solid; text-align:center">
+
+      <div class="row">
+        <div class="col s7" style="border: 1px black solid;">
+          <p style="display: inline block; text-align:center"><strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong></p>
+        </div>
+         <div class="col s1" style="border: 1px black solid;">
+          <p style="display: inline block; text-align:center"><strong><%= g[:spread] %></strong></p>
+        </div>
+         <div class="col s4" style="border: 1px black solid;">
+          <p style="display: inline block; text-align:center"><strong>@</strong> <%= g[:location] %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>

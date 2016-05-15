@@ -3,10 +3,13 @@ class AdminController < ApplicationController
   before_action :authenticate_user!
   before_action :user_is_admin?
 
-  def new_week
-    @current_week = Week.where(locked: false).order("id asc").first
+  def current_week
+    @current_week = Week.last
+    @games = Game.where(week_id: @current_week.id)
   end
 
+  def new_week
+  end
 
   private
 
