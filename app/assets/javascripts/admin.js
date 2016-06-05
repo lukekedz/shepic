@@ -8,6 +8,9 @@ var ready = function() {
      selectYears: 15 // Creates a dropdown of 15 years to control year
    });
 
+  // activating time select dropdown
+  $('select').material_select();
+
   window.shepic = {
 
     addGamePartial: function() {

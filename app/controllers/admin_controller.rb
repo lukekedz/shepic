@@ -8,6 +8,10 @@ class AdminController < ApplicationController
     @current_week = Week.last
     @games = Game.where(week_id: @current_week.id)
     @new_game = Game.new
+
+    @times = @new_game.game_times()
+
+
   end
 
   def new_week
