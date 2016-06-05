@@ -3,7 +3,13 @@ var ready = function() {
   $("#add_game").css("display", "none");
   var add_game_displayed = false;
 
+  $('.datepicker').pickadate({
+     selectMonths: true, // Creates a dropdown to control month
+     selectYears: 15 // Creates a dropdown of 15 years to control year
+   });
+
   window.shepic = {
+
     addGamePartial: function() {
       if (add_game_displayed === false) {
         $("#add_game").css("display", "block");
@@ -15,6 +21,7 @@ var ready = function() {
         add_game_displayed = false;
       };
     }
+
   }
 
 
