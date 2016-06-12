@@ -36,7 +36,7 @@ class AdminController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:week_id, :away, :home, :spread, :location, :tiebreaker)
+    params.require(:game).permit(:week_id, :away, :home, :spread, :location, :tiebreaker, :date, :start_time)
   end
 
 end

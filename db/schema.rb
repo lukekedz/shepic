@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515130106) do
+ActiveRecord::Schema.define(version: 20160612142903) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "week_id",    null: false
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20160515130106) do
     t.boolean  "tiebreaker", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "start_time"
+    t.string   "date"
   end
 
   create_table "picks", id: false, force: :cascade do |t|
