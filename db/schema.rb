@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20160612142903) do
     t.boolean  "tiebreaker", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "start_time"
-    t.string   "date"
+    t.string   "start_time", null: false
+    t.string   "date",       null: false
   end
 
   create_table "picks", id: false, force: :cascade do |t|

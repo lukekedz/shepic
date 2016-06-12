@@ -14,13 +14,13 @@
 
       <div class="row">
         <div class="col s6" style="border: 1px black solid;">
-          <input type="date" class="col s6 offset-s3 datepicker" placeholder="Select Date" name="game[date]" class="validate">
+          <input type="date" class="col s6 offset-s3 datepicker" placeholder="Select Date" name="game[date]">
         </div>
         <div class="col s1" style="border: 1px black solid;">
           <p style="display: inline block; text-align:center"><strong>@</strong></p>
         </div>
         <div class="input-field col s4">
-            <select name="game[start_time]">
+            <select name="game[start_time]" required>
               <option value="" disabled selected>Start Time (EST)</option>
               <% @times.each do |t| %>
                 <option value="<%= t %>"><%= t %></option>
