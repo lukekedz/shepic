@@ -27,17 +27,12 @@ var ready = function() {
       });
   });
 
-  // $(".home-pick").on("click", function(event){
-  //   event.preventDefault();
-  //   console.log( $( this ).serialize() );
-  // });
-
   $("#add_game").css("display", "none");
   var add_game_displayed = false;
 
   $('.datepicker').pickadate({
-     selectMonths: true, // Creates a dropdown to control month
-     selectYears: 15 // Creates a dropdown of 15 years to control year
+     selectMonths: true,
+     closeOnClear: true
    });
 
   // activating time select dropdown
