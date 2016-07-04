@@ -8,11 +8,17 @@ class SiteController < ApplicationController
   def active_week
     @current_week = Week.last
     @games = Game.where(week_id: @current_week.id)
+
+    @picks = {}
+    @games.each do |g|
+      user_pick = g.picks.where(user_id: current_user.id)
+      if user_pick[0] != nil
+        @picks[user_pick[0].game_id] = user_pick[0].pick
+      end
+    end
   end
 
   def game_pick
-    puts params
-
     @pick = Pick.new(pick_params)
 
     respond_to do |format|
