@@ -1,5 +1,8 @@
 var ready = function() {
 
+  // actives
+  $(".dropdown-button").dropdown();
+
   $(".pick").on("click", function(event){
     event.preventDefault();
 

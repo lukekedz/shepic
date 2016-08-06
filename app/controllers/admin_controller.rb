@@ -5,9 +5,9 @@ class AdminController < ApplicationController
   before_action :authenticate_user!
   before_action :user_is_admin?
 
-  def current_week
-    @current_week = Week.last
-    @games = Game.where(week_id: @current_week.id)
+  def active_week
+    @active_week = Week.last
+    @games = Game.where(week_id: @active_week.id)
     @new_game = Game.new
 
     @times = @new_game.game_times()

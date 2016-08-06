@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  root 'site#welcome'
-  get  'site/active_week'
+  root 'site#index'
+  get  'site/current_week'
   post 'site/game_pick'
 
-  get  'admin/current_week'
+  get  'admin/active_week'
   post 'admin/add_new_game'
 
   devise_for :users

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s12" style="text-align:center;">
-    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @current_week.week %></span></div>
-    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Status: <%= @current_week.locked ? "Closed" : "Open" %></span></div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Status: <%= @active_week.locked ? "Closed" : "Open" %></span></div>
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @games.count %></span></div>
   </div>
 </div>
@@ -10,7 +10,7 @@
   <div class="col s12">
 
     <div style="text-align:center">
-      <% if @current_week.locked == true %>
+      <% if @active_week.locked == true %>
         <a class="waves-effect waves-light btn">Start New Week</a>
       <% else %>
         <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>

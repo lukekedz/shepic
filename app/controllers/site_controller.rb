@@ -4,10 +4,10 @@ class SiteController < ApplicationController
 
   before_action :user
 
-  def welcome
+  def index
   end
 
-  def active_week
+  def current_week
     @current_week = Week.last
     @games = Game.where(week_id: @current_week.id)
 
