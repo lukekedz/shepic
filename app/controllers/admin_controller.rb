@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
+
   before_action :authenticate_user!
   before_action :user_is_admin?
 
@@ -10,8 +11,6 @@ class AdminController < ApplicationController
     @new_game = Game.new
 
     @times = @new_game.game_times()
-
-
   end
 
   def new_week
@@ -19,11 +18,12 @@ class AdminController < ApplicationController
   end
 
   def add_new_game
-    # puts params
     @new_game = Game.new(game_params)
 
     if @new_game.save
       redirect_to admin_current_week_path
+    else
+      # TODO: error msg
     end
   end
 

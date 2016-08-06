@@ -3,5 +3,4 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
 
   has_many :picks
-  has_many :games, through: :picks
 end

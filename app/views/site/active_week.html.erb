@@ -23,6 +23,7 @@
             <input type="hidden" value="<%= current_user.id %>" id="user-id">
             <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
             <input type="hidden" value="<%= g[:away] %>" id="game-pick">
+
             <p style="display: inline block; text-align:center">
               <button type="submit"><strong><%= g[:away] %></strong></button>
             </p>
@@ -34,6 +35,7 @@
             <input type="hidden" value="<%= current_user.id %>" id="user-id">
             <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
             <input type="hidden" value="<%= g[:home] %>" id="game-pick">
+
             <p style="display: inline block; text-align:center">
               <button type="submit"><strong><%= g[:home] %></strong></button>
             </p>

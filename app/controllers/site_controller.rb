@@ -2,6 +2,8 @@ class SiteController < ApplicationController
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
+  before_action :user
+
   def welcome
   end
 
@@ -19,22 +21,28 @@ class SiteController < ApplicationController
   end
 
   def game_pick
-    @pick = Pick.new(pick_params)
+    @current_pick = @user.picks.where(game_id: params[:pick][:game_id])
 
     respond_to do |format|
-      if @pick.save
-         # see gmail email / LDS project
-         # data = {:message => "Hitting the controller!"}
-         # render :json => data, :status => :ok
+      if @current_pick == []
+        @pick = Pick.new(user_id: params[:pick][:user_id], game_id: params[:pick][:game_id], pick: params[:pick][:pick] )
 
-         # original
-         format.json { render json: @pick.to_json }
+          if @pick.save
+            format.json { render json: @pick.to_json }
+          else
+            # TODO: error msg
+          end
+      else
+        @pick = Pick.update(@current_pick[0].id, pick: params[:pick][:pick])
+        format.json { render json: @pick.to_json }
       end
     end
   end
 
-  def pick_params
-    params.require(:pick).permit(:user_id, :game_id, :pick)
+  private
+
+  def user
+    @user = User.find(current_user.id)
   end
 
 end

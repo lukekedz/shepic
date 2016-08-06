@@ -27,29 +27,3 @@ Pick.create(game_id: 6, user_id: 1, pick: "Georgia")
 Pick.create(game_id: 1, user_id: 2, pick: "Florida State")
 Pick.create(game_id: 2, user_id: 2, pick: "Ohio State")
 Pick.create(game_id: 3, user_id: 2, pick: "Kentucky")
-
-=begin
-I want all user picks
-lk = User.find(1)
-lk.picks
-
-I want all games in a week
-wk = Week.find_by(week:1)
-wk.games
-
-I want all the picks from a particular weekwk =
-wk = Game.where(week_id:1)
-wk.each do |w|
-  wkpk = w.picks.where(user_id:1) OR wkpk = w.picks.find_by(user_id:1)
-  puts wkpk[0].pick OR puts wkpk.pick
-end
-
-Putting it all together
-wk = Week.find_by(week:2)
-wk.games.each do |g|
-  wkpk = Pick.find_by(game_id: g.id, user_id:2)
-  puts wkpk.pick
-end
-
-
-=end

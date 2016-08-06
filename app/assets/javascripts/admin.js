@@ -5,7 +5,7 @@ var ready = function() {
 
     var userId = event.currentTarget[0].value;
     var gameId = event.currentTarget[1].value;
-    var gamePick = event.target.outerText;
+    var gamePick = event.target.innerText;
 
     $.ajax({
           type: "POST",

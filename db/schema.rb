@@ -11,34 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612142903) do
+ActiveRecord::Schema.define(version: 20160515130106) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "week_id",    null: false
+    t.string   "date"
     t.string   "away",       null: false
     t.string   "home",       null: false
     t.integer  "spread",     null: false
     t.string   "location"
+    t.string   "start_time"
     t.boolean  "tiebreaker", null: false
+    t.string   "winner"
+    t.integer  "away_pts"
+    t.integer  "home_pts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "start_time", null: false
-    t.string   "date",       null: false
   end
 
-  create_table "picks", id: false, force: :cascade do |t|
-    t.integer  "game_id",    null: false
+  create_table "picks", force: :cascade do |t|
     t.integer  "user_id",    null: false
-    t.string   "pick"
-    t.integer  "win"
-    t.integer  "loss"
+    t.integer  "game_id",    null: false
+    t.string   "pick",       null: false
     t.integer  "tbreak_pts"
+    t.boolean  "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "picks", ["game_id"], name: "index_picks_on_game_id"
-  add_index "picks", ["user_id"], name: "index_picks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

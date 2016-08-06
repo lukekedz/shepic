@@ -1,1 +1,25 @@
-Anyong!
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <% if current_user.admin == true %>
+      <br/>
+      <h4>Admin Menu</h4>
+      <br/>
+      <ul>
+          <li><h5><%= link_to "Current Week" %></h5></li>
+          <li><h5><%= link_to "Lock Current Week" %></h5></li>
+          <li><h5><%= link_to "Close Current Week" %></h5></li>
+          <li><h5><%= link_to "Start New Week" %></h5></li>
+          <li><h5><%= link_to "Standings" %></h5></li>
+      </ul>
+    <% else %>
+      <br/>
+      <h4>User Menu</h4>
+      <br/>
+      <ul>
+        <li><h5><%= link_to "Current Week" %></h5></li>
+        <li><h5><%= link_to "Standings" %></h5></li>
+        <li><h5>History (dropdown)</h5></li>
+      </ul>
+    <% end %>
+  </div>
+</div>

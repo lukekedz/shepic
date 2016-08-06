@@ -1,12 +1,11 @@
 class CreatePicks < ActiveRecord::Migration
   def change
-    create_join_table :games, :users, table_name: :picks do |t|
-      t.index   :user_id
-      t.index   :game_id
-      t.string  :pick
-      t.integer :win
-      t.integer :loss
+    create_table :picks do |t|
+      t.integer :user_id, null: false
+      t.integer :game_id, null: false
+      t.string  :pick,    null: false
       t.integer :tbreak_pts
+      t.boolean :correct
 
       t.timestamps null: false
     end
