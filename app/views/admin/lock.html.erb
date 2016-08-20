@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h5>Admin: Lock Week</h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
+    <div class="col s4" style="border: 1px black solid;">
+      <span class="flow-text">
+        Status:
+        <% if @max_games < 10 %>
+          <%= @active_week.locked ? "Closed" : "Open" %>
+        <% else %>
+          <strong>Max</strong>
+        <% end %>
+      </span>
+    </div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @max_games %></span></div>
+  </div>
+</div>
+
+<div class="row"><div class="divider"></div></div>
+
+<% if @max_games < 10 %>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h5 style="color: red; weight: bold;">Warning!</h5>
+  </div>
+  <div class="col s12" style="text-align:center;">
+    <h5>You have only selected <strong><%= @max_games %></strong> games this week.</h5>
+  </div>
+  <div class="col s12" style="text-align:center;">
+    <h5><%= link_to "Return to Game Selection", admin_active_week_path %></h5>
+  </div>
+</div>
+<div class="row"><div class="divider"></div></div>
+<% end %>
+
+<% if @tiebreaker == 0 %>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h5 style="color: red; weight: bold;">Warning!</h5>
+  </div>
+  <div class="col s12" style="text-align:center;">
+    <h5>You have not selected a <strong>Tiebreaker</strong> game.</h5>
+  </div>
+  <div class="col s12" style="text-align:center;">
+    <h5><%= link_to "Return to Game Selection", admin_active_week_path %></h5>
+  </div>
+</div>
+<div class="row"><div class="divider"></div></div>
+<% end %>
+
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <p>Locking the Active Week prevents adding new games for the week.</p>
+    <p>Users will be notified the week's games are available.</p>
+  </div>
+  <div class="col s12" style="text-align:center;">
+    <form action="/admin/locked" role="form" method="POST">
+      <button class="btn waves-effect waves-light" type="submit">Lock Week</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="row"><div class="divider"></div></div>

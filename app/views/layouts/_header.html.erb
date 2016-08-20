@@ -1,7 +1,8 @@
 <ul id="dropdown1" class="dropdown-content">
+  <li><%= link_to "Main Menu", root_path %></li>
   <li><%= link_to "Active Week", admin_active_week_path %></li>
   <li class="divider"></li>
-  <li><%= link_to "Lock Active Week" %></li>
+  <li><%= link_to "Lock Active Week", admin_lock_path %></li>
   <li><%= link_to "Close Active Week" %></li>
   <li><%= link_to "Start New Week" %></li>
   <li class="divider"></li>
@@ -9,6 +10,7 @@
 </ul>
 
 <ul id="dropdown2" class="dropdown-content">
+  <li><%= link_to "Main Menu", root_path %></li>
   <li><%= link_to "Current Week", site_current_week_path %></li>
   <li><%= link_to "Standings" %></li>
   <li><%= link_to "History (dropdown)" %></li>

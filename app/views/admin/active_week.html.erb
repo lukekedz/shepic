@@ -1,11 +1,17 @@
 <div class="row">
   <div class="col s12" style="text-align:center;">
+    <h5>Admin: Active Week</h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12" style="text-align:center;">
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
     <div class="col s4" style="border: 1px black solid;">
       <span class="flow-text">
         Status:
         <% if @max_games < 10 %>
-          <%= @active_week.locked ? "Closed" : "Open" %>
+          <%= @active_week.locked ? "Locked" : "Open" %>
         <% else %>
           <strong>Max</strong>
         <% end %>

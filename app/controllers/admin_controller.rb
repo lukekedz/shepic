@@ -36,6 +36,21 @@ class AdminController < ApplicationController
     redirect_to admin_active_week_path
   end
 
+  def lock
+    @active_week = Week.last
+    @games = Game.where(week_id: @active_week.id)
+    @max_games = @games.where(tiebreaker: false).count
+    @tiebreaker_game = @games.where(tiebreaker: true)
+    @tiebreaker = @games.where(tiebreaker: true).count
+  end
+
+  def locked
+    @active_week = Week.last
+    Week.update(@active_week.id, locked: true)
+
+    redirect_to admin_active_week_path
+  end
+
   private
 
   def user_is_admin?
