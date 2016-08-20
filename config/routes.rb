@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'admin/delete_game'
   get  'admin/lock'
   post 'admin/locked'
+  get  'admin/scores'
 
   devise_for :users
 end

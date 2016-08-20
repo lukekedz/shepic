@@ -23,7 +23,7 @@
 
 <div class="row"><div class="divider"></div></div>
 
-<% if @max_games < 10 %>
+<% if @max_games < 10 && @active_week.locked == false %>
 <div class="row">
   <div class="col s12" style="text-align:center;">
     <h5 style="color: red; weight: bold;">Warning!</h5>
@@ -53,10 +53,11 @@
 <div class="row"><div class="divider"></div></div>
 <% end %>
 
+<% if @active_week.locked == false %>
 <div class="row">
   <div class="col s12" style="text-align:center;">
     <p>Locking the Active Week prevents adding new games for the week.</p>
-    <p>Users will be notified the week's games are available.</p>
+    <p>Users will be notified the full, final slate of games are available.</p>
   </div>
   <div class="col s12" style="text-align:center;">
     <form action="/admin/locked" role="form" method="POST">
@@ -64,6 +65,20 @@
     </form>
   </div>
 </div>
+<% else %>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h5>This week is locked.</h5>
+  </div>
 
+  <div class="col s12" style="text-align:center;">
+    <h5><%= link_to "Return to Game Selection", admin_active_week_path %></h5>
+  </div>
+
+  <div class="col s12" style="text-align:center;">
+    <h5><%= link_to "Add Game Scores", admin_scores_path %></h5>
+  </div>
+</div>
+<% end %>
 
 <div class="row"><div class="divider"></div></div>

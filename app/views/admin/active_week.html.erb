@@ -9,12 +9,12 @@
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
     <div class="col s4" style="border: 1px black solid;">
       <span class="flow-text">
-        Status:
-        <% if @max_games < 10 %>
-          <%= @active_week.locked ? "Locked" : "Open" %>
+        Status: <strong>
+        <% if @active_week.locked == true %>
+          Locked
         <% else %>
-          <strong>Max</strong>
-        <% end %>
+          <%= @max_games < 10 ? "Open" : "Max" %>
+        <% end %></strong>
       </span>
     </div>
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @max_games %></span></div>
@@ -26,10 +26,16 @@
 
     <div style="text-align:center">
       <% if @active_week.locked == true %>
-        <a class="waves-effect waves-light btn">Start New Week</a>
+        <form action="/admin/scores" role="form" method="GET">
+          <button class="btn waves-effect waves-light" type="submit">Add Scores / Start New Week</button>
+        </form>
       <% else %>
         <% if @max_games < 10 %>
           <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
+        <% else %>
+          <form action="/admin/lock" role="form" method="GET">
+            <button class="btn waves-effect waves-light" type="submit">Lock Week</button>
+          </form>
         <% end %>
       <% end %>
     </div>

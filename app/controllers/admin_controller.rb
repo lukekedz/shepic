@@ -51,6 +51,9 @@ class AdminController < ApplicationController
     redirect_to admin_active_week_path
   end
 
+  def scores
+  end
+
   private
 
   def user_is_admin?
