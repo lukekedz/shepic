@@ -19,7 +19,6 @@ class AdminController < ApplicationController
   end
 
   def new_week
-
   end
 
   def add_new_game
@@ -30,6 +29,11 @@ class AdminController < ApplicationController
     else
       # TODO: error msg
     end
+  end
+
+  def delete_game
+    Game.delete(params[:id])
+    redirect_to admin_active_week_path
   end
 
   private

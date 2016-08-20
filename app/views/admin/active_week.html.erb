@@ -67,7 +67,10 @@
             <p style="display: inline block; text-align:center"><strong>@</strong> <%= g[:location] %></p>
           </div>
            <div class="col s2" style="border: 1px black solid;">
-            <p style="display: inline block; text-align:center"><a class="waves-effect waves-light btn">Delete</a></p>
+            <form action="/admin/delete_game" role="form" method="POST">
+              <input type="hidden" name="id" value="<%= g[:id] %>">
+              <button class="waves-effect waves-light btn">Delete</button>
+            </form>
           </div>
         </div>
 

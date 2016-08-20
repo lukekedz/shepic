@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get  'admin/active_week'
   post 'admin/add_new_game'
+  post 'admin/delete_game'
 
   devise_for :users
 end

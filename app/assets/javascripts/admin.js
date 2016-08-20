@@ -61,7 +61,6 @@ var ready = function() {
   $('select').material_select();
 
   window.shepic = {
-
     addGamePartial: function() {
       if (add_game_displayed === false) {
         $("#add_game").css("display", "block");
@@ -73,9 +72,7 @@ var ready = function() {
         add_game_displayed = false;
       };
     }
-
   }
-
 
 };
 
