@@ -1,7 +1,8 @@
 var ready = function() {
 
-  // actives
+  // activation
   $(".dropdown-button").dropdown();
+  $('select').material_select();
 
   $(".pick").on("click", function(event){
     event.preventDefault();
@@ -56,9 +57,6 @@ var ready = function() {
      closeOnClear: true,
      format: 'mm/dd/yy'
    });
-
-  // activating time select dropdown
-  $('select').material_select();
 
   window.shepic = {
     addGamePartial: function() {

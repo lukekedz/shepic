@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col s12" style="text-align:center;;">
+  <div class="col s12" style="text-align:center;">
     <div class="col s4" style="border: 1px black solid;">
       <span class="flow-text">Week: <%= @current_week.week %></span>
     </div>
@@ -11,6 +11,14 @@
     </div>
   </div>
 </div>
+
+<% if @current_week.locked == true %>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h5>Choose, but choose wisely.</h5>
+  </div>
+</div>
+<% end %>
 
 <% @games.each do |g| %>
   <% if g.tiebreaker == false %>
@@ -61,7 +69,7 @@
             <p style="display: inline block; text-align:center;"><%= g[:start_time] %></p>
           </div>
           <div class="input-field col s3">
-            <p id="your-pick-<%= g[:id] %>" style="display: inline block; text-align:center;; font-weight: bold;">
+            <p id="your-pick-<%= g[:id] %>" style="display: inline block; text-align:center; font-weight: bold;">
               Your Pick: <%= @picks[ g[:id] ] %>
             </p>
           </div>
@@ -101,6 +109,7 @@
     </div>
 
   </div>
+  <div class="row"><div class="divider"></div></div>
 <% end %>
 
 
