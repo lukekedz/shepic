@@ -4,7 +4,7 @@
       <span class="flow-text">Week: <%= @current_week.week %></span>
     </div>
     <div class="col s4" style="border: 1px black solid;">
-      <span class="flow-text">Status: <%= @current_week.locked ? "Closed" : "Open" %></span>
+      <span class="flow-text">Status: <strong><%= @current_week.locked ? "Locked" : "Open" %></strong></span>
     </div>
     <div class="col s4" style="border: 1px black solid;">
       <span class="flow-text">Game Count: <%= @games.count %></span>

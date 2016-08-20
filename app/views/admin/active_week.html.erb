@@ -33,9 +33,11 @@
         <% if @max_games < 10 %>
           <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
         <% else %>
+          <% if @tiebreaker == 1 %>
           <form action="/admin/lock" role="form" method="GET">
             <button class="btn waves-effect waves-light" type="submit">Lock Week</button>
           </form>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -79,10 +81,12 @@
             <p style="display: inline block; text-align:center"><strong>@</strong> <%= g[:location] %></p>
           </div>
            <div class="col s2" style="border: 1px black solid;">
+            <% if @active_week.locked == false %>
             <form action="/admin/delete_game" role="form" method="POST">
               <input type="hidden" name="id" value="<%= g[:id] %>">
               <button class="waves-effect waves-light btn">Delete</button>
             </form>
+            <% end %>
           </div>
         </div>
 

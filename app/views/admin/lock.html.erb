@@ -9,12 +9,12 @@
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
     <div class="col s4" style="border: 1px black solid;">
       <span class="flow-text">
-        Status:
-        <% if @max_games < 10 %>
-          <%= @active_week.locked ? "Closed" : "Open" %>
+        Status: <strong>
+        <% if @active_week.locked == true %>
+          Locked
         <% else %>
-          <strong>Max</strong>
-        <% end %>
+          <%= @max_games < 10 ? "Open" : "Max" %>
+        <% end %></strong>
       </span>
     </div>
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @max_games %></span></div>
@@ -56,13 +56,18 @@
 <% if @active_week.locked == false %>
 <div class="row">
   <div class="col s12" style="text-align:center;">
-    <p>Locking the Active Week prevents adding new games for the week.</p>
-    <p>Users will be notified the full, final slate of games are available.</p>
+    <p>Locking the Active Week prevents adding new games.</p>
+    <p>Users will be notified the current, final slate of games are available.</p>
   </div>
   <div class="col s12" style="text-align:center;">
     <form action="/admin/locked" role="form" method="POST">
       <button class="btn waves-effect waves-light" type="submit">Lock Week</button>
     </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <h6><%= link_to "Return to Game Selection", admin_active_week_path %></h6>
   </div>
 </div>
 <% else %>
@@ -76,7 +81,7 @@
   </div>
 
   <div class="col s12" style="text-align:center;">
-    <h5><%= link_to "Add Game Scores", admin_scores_path %></h5>
+    <h5><%= link_to "Add Game Scores / Start New Week", admin_scores_path %></h5>
   </div>
 </div>
 <% end %>
