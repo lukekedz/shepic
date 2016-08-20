@@ -32,7 +32,8 @@ var ready = function() {
 
   $('.datepicker').pickadate({
      selectMonths: true,
-     closeOnClear: true
+     closeOnClear: true,
+     format: 'mm/dd/yy'
    });
 
   // activating time select dropdown
