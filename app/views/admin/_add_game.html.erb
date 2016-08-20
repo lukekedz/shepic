@@ -1,15 +1,14 @@
 <div class="input-field col s12" style="border: 1px black solid; text-align:center">
   <div class="row">
     <form action="/admin/add_new_game" role="form" id="add_new_game" method="POST">
-      <div class="row">
 
+      <div class="row">
         <input type="hidden" value="<%= @active_week.id %>" name="game[week_id]">
         <input type="hidden" value="false" name="game[tiebreaker]">
         <div class="input-field col s4"><input placeholder="Away Team" id="away" type="text" name="game[away]" class="validate" required></div>
         <div class="input-field col s4"><input placeholder="Home Team" id="home" type="text" name="game[home]" class="validate" required></div>
         <div class="input-field col s2"><input placeholder="Spread" id="spread" type="number" name="game[spread]" class="validate" required></div>
         <div class="input-field col s2"><input placeholder="Location" id="location" type="text" name="game[location]" class="validate" required></div>
-
       </div>
 
       <div class="row">
@@ -29,11 +28,7 @@
         </div>
       </div>
 
-
       <button class="waves-effect waves-light btn" action="submit">Add Game</button>
     </form>
   </div>
-
-
-
 </div>

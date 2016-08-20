@@ -6,9 +6,14 @@ class AdminController < ApplicationController
   before_action :user_is_admin?
 
   def active_week
-    @active_week = Week.last
-    @games = Game.where(week_id: @active_week.id)
     @new_game = Game.new
+    @active_week = Week.last
+
+    @games = Game.where(week_id: @active_week.id)
+    @max_games = @games.where(tiebreaker: false).count
+
+    @tiebreaker_game = @games.where(tiebreaker: true)
+    @tiebreaker = @games.where(tiebreaker: true).count
 
     @times = @new_game.game_times()
   end

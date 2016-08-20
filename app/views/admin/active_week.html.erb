@@ -1,7 +1,16 @@
 <div class="row">
   <div class="col s12" style="text-align:center;">
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Week: <%= @active_week.week %></span></div>
-    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Status: <%= @active_week.locked ? "Closed" : "Open" %></span></div>
+    <div class="col s4" style="border: 1px black solid;">
+      <span class="flow-text">
+        Status:
+        <% if @max_games < 10 %>
+          <%= @active_week.locked ? "Closed" : "Open" %>
+        <% else %>
+          <strong>Max</strong>
+        <% end %>
+      </span>
+    </div>
     <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @games.count %></span></div>
   </div>
 </div>
@@ -13,48 +22,75 @@
       <% if @active_week.locked == true %>
         <a class="waves-effect waves-light btn">Start New Week</a>
       <% else %>
-        <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
+        <% if @max_games < 10 %>
+          <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
+        <% end %>
       <% end %>
     </div>
 
   </div>
 </div>
 
-<div class="row">
-  <div id="add_game"><%= render "add_game" %></div>
-</div>
-
-<% @games.each do |g| %>
+<% if @max_games < 10 %>
   <div class="row">
-    <div class="col s12" style="border: 1px black solid; text-align:center">
-
-      <div class="row">
-        <div class="col s6" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong></p>
-        </div>
-         <div class="col s1" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong><%= g[:spread] %></strong></p>
-        </div>
-         <div class="col s3" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong>@</strong> <%= g[:location] %></p>
-        </div>
-         <div class="col s2" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><a class="waves-effect waves-light btn">Edit</a></p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s6" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong><%= game_day(g[:date]) %></strong></p>
-        </div>
-        <div class="col s1" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong>@</strong></p>
-        </div>
-        <div class="col s4" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong><%= g[:start_time] %></strong></p>
-        </div>
-      </div>
-
-    </div>
+    <div id="add_game"><%= render "add_game" %></div>
   </div>
 <% end %>
+
+<div class="row">
+  <div class="col s12">
+
+    <div style="text-align:center">
+        <% if @tiebreaker == 0 %>
+          <%= render "add_tiebreaker" %>
+        <% end %>
+    </div>
+
+  </div>
+</div>
+
+<div class="row"><div class="divider"></div></div>
+
+<% @games.each do |g| %>
+  <% if g.tiebreaker == false %>
+    <div class="row">
+      <div class="col s12" style="border: 1px black solid; text-align:center">
+
+        <div class="row">
+          <div class="col s6" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong></p>
+          </div>
+           <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong><%= g[:spread] %></strong></p>
+          </div>
+           <div class="col s3" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong>@</strong> <%= g[:location] %></p>
+          </div>
+           <div class="col s2" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><a class="waves-effect waves-light btn">Delete</a></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong><%= game_day(g[:date]) %></strong></p>
+          </div>
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong>@</strong></p>
+          </div>
+          <div class="col s4" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center"><strong><%= g[:start_time] %></strong></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @tiebreaker == 1 %>
+    <%= render "tiebreaker" %>
+<% end %>
+
+<div class="row"><div class="divider"></div></div>
+

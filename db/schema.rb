@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160515130106) do
     t.string   "date"
     t.string   "away",       null: false
     t.string   "home",       null: false
-    t.integer  "spread",     null: false
+    t.integer  "spread"
     t.string   "location"
     t.string   "start_time"
     t.boolean  "tiebreaker", null: false

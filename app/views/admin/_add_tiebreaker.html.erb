@@ -1,0 +1,15 @@
+<div class="input-field col s12" style="border: 1px black solid; text-align:center">
+  <div class="row">
+    <form action="/admin/add_new_game" role="form" method="POST">
+
+      <div class="row">
+        <input type="hidden" value="<%= @active_week.id %>" name="game[week_id]">
+        <input type="hidden" value="true" name="game[tiebreaker]">
+        <div class="input-field col s6"><input placeholder="Away Team" id="away" type="text" name="game[away]" class="validate" required></div>
+        <div class="input-field col s6"><input placeholder="Home Team" id="home" type="text" name="game[home]" class="validate" required></div>
+      </div>
+
+      <button class="waves-effect waves-light btn" action="submit">Add Tiebreaker</button>
+    </form>
+  </div>
+</div>
