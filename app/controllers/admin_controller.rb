@@ -21,7 +21,7 @@ class AdminController < ApplicationController
     @new_game = Game.new(game_params)
 
     if @new_game.save
-      redirect_to admin_current_week_path
+      redirect_to admin_active_week_path
     else
       # TODO: error msg
     end
