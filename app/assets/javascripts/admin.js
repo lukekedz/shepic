@@ -17,6 +17,7 @@ var ready = function() {
           success: function(data){
             var confirmed = "#pick-saved-" + gameId;
             $(confirmed).css('visibility', 'visible');
+
             setTimeout(function(){
                $(confirmed).css('visibility', 'hidden');
             }, 1500);
@@ -26,6 +27,26 @@ var ready = function() {
           }
       });
   });
+
+  tiebreaker = function(){
+    var userId = document.getElementById('tbreak-user-id').value;
+    var gameId = document.getElementById('tbreak-game-id').value;
+    var points = document.getElementById('tbreak-pts').value;
+
+    $.ajax({
+          type: "POST",
+          url: "/site/tbreak_pick",
+          data: {"pick" : { "game_id" : gameId, "tbreak_pts" : points, "user_id" : userId }},
+          success: function(data){
+            var confirmed = "#tbreak-saved";
+            $(confirmed).css('visibility', 'visible');
+
+            setTimeout(function(){
+               $(confirmed).css('visibility', 'hidden');
+            }, 1500);
+          }
+      });
+  }
 
   $("#add_game").css("display", "none");
   var add_game_displayed = false;

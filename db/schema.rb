@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160515130106) do
   create_table "picks", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "game_id",    null: false
-    t.string   "pick",       null: false
+    t.string   "pick"
     t.integer  "tbreak_pts"
     t.boolean  "correct"
     t.datetime "created_at", null: false

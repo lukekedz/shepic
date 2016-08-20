@@ -3,7 +3,7 @@ class CreatePicks < ActiveRecord::Migration
     create_table :picks do |t|
       t.integer :user_id, null: false
       t.integer :game_id, null: false
-      t.string  :pick,    null: false
+      t.string  :pick
       t.integer :tbreak_pts
       t.boolean :correct
 
