@@ -12,6 +12,7 @@ class CreateGames < ActiveRecord::Migration
       t.string     :winner
       t.integer    :away_pts
       t.integer    :home_pts
+      t.integer    :total_pts
 
       t.timestamps null: false
     end

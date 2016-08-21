@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160515130106) do
     t.string   "winner"
     t.integer  "away_pts"
     t.integer  "home_pts"
+    t.integer  "total_pts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

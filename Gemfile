@@ -36,6 +36,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'materialize-sass'
 gem 'hirb'
+# gem 'faker'
 
 group :development do
   gem 'spring'
