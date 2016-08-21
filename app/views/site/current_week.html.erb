@@ -34,7 +34,11 @@
               <input type="hidden" value="away" id="away-home">
 
               <p style="display: inline block; text-align:center;">
-                <button type="submit"><strong><%= g[:away] %></strong></button>
+                <% if @current_week.locked == true %>
+                  <button type="submit"><strong><%= g[:away] %></strong></button>
+                <% else %>
+                  <%= g[:away] %>
+                <% end %>
               </p>
             </form>
           </div>
@@ -47,7 +51,11 @@
               <input type="hidden" value="home" id="away-home">
 
               <p style="display: inline block; text-align:center;">
-                <button type="submit"><strong><%= g[:home] %></strong></button>
+                <% if @current_week.locked == true %>
+                  <button type="submit"><strong><%= g[:home] %></strong></button>
+                <% else %>
+                  <%= g[:home] %>
+                <% end %>
               </p>
             </form>
           </div>
