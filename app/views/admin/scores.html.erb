@@ -30,7 +30,7 @@
             </div>
 
             <div class="input-field col s2">
-              <select name="<%= g.id %>-away">
+              <select name="<%= g.id %>-away" required>
               <% @points.each do |p| %>
                 <option value="<%= p %>"><%= p %></option>
               <% end %>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="input-field col s2">
-              <select name="<%= g.id %>-home">
+              <select name="<%= g.id %>-home" required>
               <% @points.each do |p| %>
                 <option value="<%= p %>"><%= p %></option>
               <% end %>

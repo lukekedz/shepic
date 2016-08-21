@@ -12,14 +12,6 @@
   </div>
 </div>
 
-<% if @current_week.locked == true %>
-<div class="row">
-  <div class="col s12" style="text-align:center;">
-    <h5>Choose, but choose wisely.</h5>
-  </div>
-</div>
-<% end %>
-
 <% @games.each do |g| %>
   <% if g.tiebreaker == false %>
     <div class="row">
@@ -27,6 +19,7 @@
         <div class="row">
 
           <div class="col s3" style="border: 1px black solid;">
+            <% if @current_week.locked == true %>
             <form action="" role="form" class="pick" method="POST">
               <input type="hidden" value="<%= current_user.id %>" id="user-id">
               <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -34,16 +27,16 @@
               <input type="hidden" value="away" id="away-home">
 
               <p style="display: inline block; text-align:center;">
-                <% if @current_week.locked == true %>
                   <button type="submit"><strong><%= g[:away] %></strong></button>
-                <% else %>
-                  <%= g[:away] %>
-                <% end %>
               </p>
+            <% else %>
+              <p><%= g[:away] %></p>
+            <% end %>
             </form>
           </div>
 
           <div class="col s3" style="border: 1px black solid;">
+            <% if @current_week.locked == true %>
             <form action="" role="form" class="pick" method="POST">
               <input type="hidden" value="<%= current_user.id %>" id="user-id">
               <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -51,12 +44,11 @@
               <input type="hidden" value="home" id="away-home">
 
               <p style="display: inline block; text-align:center;">
-                <% if @current_week.locked == true %>
                   <button type="submit"><strong><%= g[:home] %></strong></button>
-                <% else %>
-                  <%= g[:home] %>
-                <% end %>
               </p>
+            <% else %>
+              <p><%= g[:home] %></p>
+            <% end %>
             </form>
           </div>
 

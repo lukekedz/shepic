@@ -71,14 +71,19 @@ class AdminController < ApplicationController
           Game.update(game_id, away_pts: pts)
         when "home"
           Game.update(game_id, home_pts: pts)
-        when "tbreak"
-          Game.update(game_id, total_pts: pts)
+
+          # TODO: break out method
+          # TODO: make one call to get game
           game = Game.find(game_id)
           if game.away_pts > ( game.home_pts + game.spread )
             Game.update(game_id, winner: "away")
-          else
+          elsif game.away_pts < ( game.home_pts + game.spread )
             Game.update(game_id, winner: "home")
+          else
+            Game.update(game_id, winner: "push")
           end
+        when "tbreak"
+          Game.update(game_id, total_pts: pts)
         end
       end
 
