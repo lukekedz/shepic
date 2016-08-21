@@ -55,60 +55,32 @@ class AdminController < ApplicationController
     @points = []
     101.times { |i| @points.push i }
     @locked_week = Week.where(locked: true).last
-    @games = Game.where(week_id: @locked_week.id)
+    @games = Game.where(week_id: @locked_week.id).order(:date)
   end
 
   def finalize
-    # if Week.last is not locked... means a new week has been started, and scores already entered
     if Week.last.locked == true
-      puts "PARAMS:"
       params.each do |key, value|
-        # puts "key: " + key + "  =>  " + "value: " + value
-
         game = key.split("-")
         game_id   = game[0]
-        home_away = game[1]
+        away_home = game[1]
         pts = value
 
-        # puts game_id
-        # puts home_away
-        # puts pts
-        # puts
-
-        case home_away
+        case away_home
         when "away"
           Game.update(game_id, away_pts: pts)
         when "home"
           Game.update(game_id, home_pts: pts)
         when "tbreak"
           Game.update(game_id, total_pts: pts)
-        end
-
-      end
-
-      params.each do |key, value|
-        puts "key: " + key + "  =>  " + "value: " + value
-
-        game = key.split("-")
-        game_id = game[0]
-        game = Game.find(game_id)
-
-        if game.tiebreaker == false
-          winner = nil
-
-          home_pts = game.home_pts + game.spread
-          puts home_pts
-
-          if game.away_pts > home_pts
-            winner = "away"
+          game = Game.find(game_id)
+          if game.away_pts > ( game.home_pts + game.spread )
+            Game.update(game_id, winner: "away")
           else
-            winner = "home"
+            Game.update(game_id, winner: "home")
           end
-
-          Game.update(game_id, winner: winner)
         end
       end
-
 
       redirect_to root_path
     else
