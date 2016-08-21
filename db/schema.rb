@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160515130106) do
     t.integer  "user_id",    null: false
     t.integer  "game_id",    null: false
     t.string   "pick"
+    t.string   "away_home"
     t.integer  "tbreak_pts"
     t.boolean  "correct"
     t.datetime "created_at", null: false

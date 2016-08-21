@@ -7,14 +7,19 @@ var ready = function() {
   $(".pick").on("click", function(event){
     event.preventDefault();
 
-    var userId = event.currentTarget[0].value;
-    var gameId = event.currentTarget[1].value;
+    var userId   = event.currentTarget[0].value;
+    var gameId   = event.currentTarget[1].value;
+    var awayHome = event.currentTarget[3].value;
     var gamePick = event.target.innerText;
 
     $.ajax({
           type: "POST",
           url: "/site/game_pick",
-          data: {"pick" : { "game_id" : gameId, "pick" : gamePick, "user_id" : userId }},
+          data: {"pick" : { "game_id"   : gameId,
+                            "pick"      : gamePick,
+                            "user_id"   : userId,
+                            "away_home" : awayHome
+                          }},
           success: function(data){
             var confirmed = "#pick-saved-" + gameId;
             $(confirmed).css('visibility', 'visible');

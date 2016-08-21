@@ -29,7 +29,7 @@ class SiteController < ApplicationController
 
     respond_to do |format|
       if @current_pick == []
-        @pick = Pick.new(user_id: params[:pick][:user_id], game_id: params[:pick][:game_id], pick: params[:pick][:pick])
+        @pick = Pick.new(user_id: params[:pick][:user_id], game_id: params[:pick][:game_id], pick: params[:pick][:pick], away_home: params[:pick][:away_home])
 
           if @pick.save
             format.json { render json: @pick.to_json }
