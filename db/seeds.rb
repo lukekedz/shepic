@@ -1,5 +1,6 @@
 User.create!(admin: true, username: "luke", email: "luke@gmail.com", password: "loplop", password_confirmation: "loplop" )
 User.create!(admin: false, username: "kr", email: "kr@gmail.com", password: "emmie1", password_confirmation: "emmie1" )
+User.create!(admin: false, username: "lk", email: "lk@gmail.com", password: "emmie2", password_confirmation: "emmie2" )
 
 Week.create(week: 1, locked: false, finalized: false)
 

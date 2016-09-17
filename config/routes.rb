@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get  'site/current_week'
   post 'site/game_pick'
   post 'site/tbreak_pick'
+  get  'site/standings'
 
   get  'admin/active_week'
   post 'admin/add_new_game'

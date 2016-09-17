@@ -131,6 +131,9 @@
 <row name="locked" null="1" autoincrement="0">
 <datatype>bit</datatype>
 <default>NULL</default></row>
+<row name="finalized" null="1" autoincrement="0">
+<datatype>ENUM</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -144,9 +147,6 @@
 <default>NULL</default><relation table="users" row="id" />
 </row>
 <row name="wins" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="losses" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">

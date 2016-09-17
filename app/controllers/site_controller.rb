@@ -62,6 +62,10 @@ class SiteController < ApplicationController
     end
   end
 
+  def standings
+
+  end
+
   private
 
   def user

@@ -56,6 +56,8 @@ class AdminController < ApplicationController
   end
 
   def finalize
+    @games = Game.where(week_id: Week.last.week)
+
     if Week.last.locked == true
       Week.last.update(finalized: true)
 
@@ -83,6 +85,21 @@ class AdminController < ApplicationController
           end
         when "tbreak"
           Game.update(game_id, total_pts: pts)
+        end
+      end
+
+      @games.each do |game|
+        picks = Pick.where(game_id: game.id)
+        picks.each do |pick|
+          if game.winner == "push" || game.winner == nil
+            Pick.update(pick.id, correct: nil)
+          else
+            if game.winner == pick.away_home
+              Pick.update(pick.id, correct: true)
+            else
+              Pick.update(pick.id, correct: false)
+            end
+          end
         end
       end
 
