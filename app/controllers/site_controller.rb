@@ -67,6 +67,14 @@ class SiteController < ApplicationController
     @standings = Standing.order(wins: :desc)
   end
 
+  def history
+    @weeks = Week.where(locked: true, finalized: true)
+  end
+
+  def archived
+    @games = Game.where(week_id: params[:week])
+  end
+
   private
 
   def user

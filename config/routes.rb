@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'site/game_pick'
   post 'site/tbreak_pick'
   get  'site/standings'
+  get  'site/history'
+  get  'site/archived'
 
   get  'admin/active_week'
   post 'admin/add_new_game'

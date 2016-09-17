@@ -27,4 +27,3 @@ Game.create(
   date:       "12/31/16",
   start_time: "12:30pm"
 )
-
