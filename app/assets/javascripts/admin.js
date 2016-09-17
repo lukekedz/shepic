@@ -60,7 +60,7 @@ var ready = function() {
   $('.datepicker').pickadate({
      selectMonths: true,
      closeOnClear: true,
-     format: 'mm/dd/yy'
+     format: 'yyyy/mm/dd'
    });
 
   window.shepic = {

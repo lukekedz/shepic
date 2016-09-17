@@ -2,7 +2,7 @@ class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
       t.belongs_to :week,       null: false
-      t.string     :date
+      t.datetime   :date
       t.string     :away,       null: false
       t.string     :home,       null: false
       t.float      :spread

@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20160917132916) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "week_id",    null: false
-    t.string   "date"
+    t.datetime "date"
     t.string   "away",       null: false
     t.string   "home",       null: false
     t.float    "spread"

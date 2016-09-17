@@ -9,7 +9,7 @@ class AdminController < ApplicationController
     @new_game = Game.new
     @active_week = Week.last
 
-    @games = Game.where(week_id: @active_week.id)
+    @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
     @max_games = @games.where(tiebreaker: false).count
 
     @tiebreaker_game = @games.where(tiebreaker: true)
@@ -35,7 +35,7 @@ class AdminController < ApplicationController
 
   def lock
     @active_week = Week.last
-    @games = Game.where(week_id: @active_week.id)
+    @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
     @max_games = @games.where(tiebreaker: false).count
     @tiebreaker_game = @games.where(tiebreaker: true)
     @tiebreaker = @games.where(tiebreaker: true).count
@@ -52,7 +52,7 @@ class AdminController < ApplicationController
     @points = []
     101.times { |i| @points.push i }
     @locked_week = Week.where(locked: true).last
-    @games = Game.where(week_id: @locked_week.id).order(:date)
+    @games = Game.where(week_id: @locked_week.id).order(:date, :start_time)
   end
 
   def finalize
