@@ -8,9 +8,9 @@
 
 <div class="row">
   <div class="col s12" style="text-align:center;">
-    <% @weeks.each do |week| %>
+    <% @weeks.each do |wk| %>
     <div class="col s12" style="border: 1px black solid;">
-      <span class="flow-text"><%= link_to "Week " + week.week.to_s, site_archived_path(:week => week.id) %></span>
+      <span class="flow-text"><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></span>
     </div>
     <% end %>
   </div>

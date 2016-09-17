@@ -5,6 +5,7 @@ class SiteController < ApplicationController
   before_action :user
 
   def index
+    @weeks = Week.where(locked: true, finalized: true)
   end
 
   def current_week

@@ -13,12 +13,18 @@
       </ul>
     <% else %>
       <br/>
-      <h4>User Menu</h4>
+      <h4>Menu</h4>
       <br/>
       <ul>
         <li><h5><%= link_to "Current Week", site_current_week_path %></h5></li>
         <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
-        <li><h5><%= link_to "History", site_history_path %></h5></li>
+        <br/>
+        <ul id="dropdown3" class="dropdown-content">
+          <% @weeks.each do |wk| %>
+            <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
+          <% end %>
+        </ul>
+        <a class="btn dropdown-button" href="#!" data-activates="dropdown3">History<i class="mdi-navigation-arrow-drop-down right"></i></a>
       </ul>
     <% end %>
   </div>
