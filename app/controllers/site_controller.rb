@@ -1,12 +1,13 @@
 class SiteController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :authenticate_user!, :user, :current_week
+  before_action :authenticate_user!, :user
 
   def index
     @weeks = Week.where(locked: true, finalized: true)
   end
 
   def current_week
+    @current_week = Week.last
     @games = Game.where(week_id: @current_week.id).order(:date, :start_time)
 
     @picks = {}
@@ -61,6 +62,7 @@ class SiteController < ApplicationController
   end
 
   def standings
+    @current_week = Week.last
     @week = Week.where(locked: true, finalized: true).last
     @standings = Standing.order(wins: :desc)
   end
@@ -91,10 +93,6 @@ class SiteController < ApplicationController
 
   def user
     @user = User.find(current_user.id)
-  end
-
-  def current_week
-    @current_week = Week.last
   end
 
 end
