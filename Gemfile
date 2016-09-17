@@ -37,6 +37,7 @@ gem 'simple_form'
 gem 'materialize-sass'
 gem 'hirb'
 gem 'faker'
+gem 'auto_increment'
 
 group :development do
   gem 'spring'
