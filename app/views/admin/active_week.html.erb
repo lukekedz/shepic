@@ -27,7 +27,7 @@
     <div style="text-align:center">
       <% if @active_week.locked == true %>
         <form action="/admin/scores" role="form" method="GET">
-          <button class="btn waves-effect waves-light" type="submit">Add Scores / Start New Week</button>
+          <button class="btn waves-effect waves-light" type="submit">Add Game Scores</button>
         </form>
       <% else %>
         <% if @max_games < 10 %>

@@ -1,9 +1,7 @@
 class AdminController < ApplicationController
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
-
-  before_action :authenticate_user!
-  before_action :user_is_admin?
+  before_action :authenticate_user!, :user_is_admin?, :current_week
 
   def active_week
     @new_game = Game.new
@@ -139,9 +137,7 @@ class AdminController < ApplicationController
   end
 
   def new_week
-    active_week = Week.last
-
-    if active_week.locked == true && active_week.finalized == true
+    if @current_week.locked == true && @current_week.finalized == true
       new_week = Week.new(locked: false, finalized: false)
 
       if new_week.save
@@ -164,6 +160,10 @@ class AdminController < ApplicationController
 
   def game_params
     params.require(:game).permit(:week_id, :away, :home, :spread, :location, :tiebreaker, :date, :start_time)
+  end
+
+  def current_week
+    @current_week = Week.last
   end
 
 end

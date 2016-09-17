@@ -1,13 +1,27 @@
+<% if current_user %>
 <ul id="dropdown1" class="dropdown-content">
   <li><%= link_to "Main Menu", root_path %></li>
   <li><%= link_to "Active Week", admin_active_week_path %></li>
+
   <li class="divider"></li>
+
+  <% if @current_week.locked == false %>
   <li><%= link_to "Lock Active Week", admin_lock_path %></li>
+  <% end %>
+
+  <% if @current_week.locked %>
   <li><%= link_to "Add Game Scores", admin_scores_path %></li>
+  <% end %>
+
+  <% if @current_week.finalized %>
   <li><%= link_to "Start New Week", admin_new_week_path, :method => :post %></li>
+  <% end %>
+
   <li class="divider"></li>
+
   <li><%= link_to "Standings", site_standings_path %></li>
   <li><%= link_to "User Profile", edit_user_registration_path %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 </ul>
 
 <ul id="dropdown2" class="dropdown-content">
@@ -18,7 +32,9 @@
   <li><%= link_to "History", site_history_path %></li>
   <li class="divider"></li>
   <li><%= link_to "User Profile", edit_user_registration_path %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 </ul>
+<% end %>
 
 <nav>
   <div class="nav-wrapper">
