@@ -73,7 +73,21 @@ class SiteController < ApplicationController
   end
 
   def archived
+    @weeks = Week.where(locked: true, finalized: true)
+    @archived_week = Week.where(locked: true, finalized: true).last
     @games = Game.where(week_id: params[:week]).order(:date, :start_time)
+
+    @picks = {}
+    @games.each do |g|
+      user_pick = g.picks.where(user_id: current_user.id)
+      if user_pick[0] != nil
+        @picks[user_pick[0].game_id] = { pick: user_pick[0].pick, correct: user_pick[0].correct }
+
+        if user_pick[0].tbreak_pts != nil
+          @tbreak_pts = user_pick[0].tbreak_pts
+        end
+      end
+    end
   end
 
   private

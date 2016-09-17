@@ -1,6 +1,120 @@
-archived.html.erb
 <br/>
-<% @games.each do |g| %>
-  <%= g.away %> vs. <%= g.home %><br/>
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <div class="col s12">
+      <span class="flow-text">Week: <%= @archived_week.week %></span>
+    </div>
+    <br/>
+    <br/>
+    <div class="col s12">
+      <ul id="dropdown3" class="dropdown-content">
+        <% @weeks.each do |wk| %>
+         <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
+        <% end %>
+      </ul>
+     <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
+       History
+       <i class="mdi-navigation-arrow-drop-down right"></i>
+     </a>
+    </div>
+  </div>
+</div>
 
+<% @games.each do |g| %>
+  <% if g.tiebreaker == false %>
+    <div class="row">
+      <div class="col s12" style="border: 1px black solid; text-align:center;">
+
+        <div class="row">
+          <div class="col s3" style="border: 1px black solid;">
+              <p style="display: inline block; text-align:center;">
+                  <strong><%= g[:away] %></strong>
+              </p>
+          </div>
+
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong>@</strong></p>
+          </div>
+
+          <div class="col s3" style="border: 1px black solid;">
+              <p style="display: inline block; text-align:center;">
+                  <strong><%= g[:home] %></strong>
+              </p>
+          </div>
+
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong><%= g[:spread] %></strong></p>
+          </div>
+
+          <div class="col s4" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong>Your Pick:</strong></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s3" style="border: 1px black solid;">
+              <p style="display: inline block; text-align:center;">
+                  <strong><%= g[:away_pts] %></strong>
+              </p>
+          </div>
+
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"></p>
+          </div>
+
+          <div class="col s3" style="border: 1px black solid;">
+              <p style="display: inline block; text-align:center;">
+                  <strong><%= g[:home_pts] %></strong>
+              </p>
+          </div>
+
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;">
+              <% if @picks[ g[:id] ][:correct] == nil %>
+                  push
+              <% else %>
+                <% if @picks[ g[:id] ][:correct] == true %>
+                  <img src='/assets/correct.png' height='30' width='30'>
+                <% else %>
+                  <img src='/assets/x.png' height='30' width='30'>
+                <% end %>
+              <% end %>
+            </p>
+          </div>
+
+          <div class="col s4" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center; font-weight: bold;">
+              <%= @picks[ g[:id] ][:pick] %>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
 <% end %>
+
+<div class="row"><div class="divider"></div></div>
+
+<% @games.where(tiebreaker: true).each do |g| %>
+  <div class="row">
+
+    <div class="col s6" style="border: 1px black solid; text-align:center;">
+      <p style="display: inline block; text-align:center;">
+        Tiebreaker Game: <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong>
+      </p>
+    </div>
+
+    <div class="col s3" style="border: 1px black solid; text-align:right;">
+      <p>Total Points:</p>
+    </div>
+
+    <div class="col s3" style="border: 1px black solid; text-align:center;">
+      <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
+    </div>
+
+  </div>
+  <div class="row"><div class="divider"></div></div>
+<% end %>
+
+
