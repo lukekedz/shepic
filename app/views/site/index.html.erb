@@ -10,6 +10,8 @@
           <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
           <li><h5><%= link_to "Start New Week", admin_new_week_path, :method => :post %></h5></li>
           <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
+          <br/>
+          <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
       </ul>
     <% else %>
       <br/>
@@ -24,7 +26,13 @@
             <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
           <% end %>
         </ul>
-        <a class="btn dropdown-button" href="#!" data-activates="dropdown3">History<i class="mdi-navigation-arrow-drop-down right"></i></a>
+        <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
+          History
+          <i class="mdi-navigation-arrow-drop-down right"></i>
+        </a>
+        <br/>
+        <br/>
+        <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
       </ul>
     <% end %>
   </div>
