@@ -88,6 +88,9 @@ class AdminController < ApplicationController
         end
       end
 
+      @users = User.where(admin: false)
+      # @users = User.where(id: 2)
+
       @games.each do |game|
         picks = Pick.where(game_id: game.id)
         picks.each do |pick|
@@ -101,7 +104,33 @@ class AdminController < ApplicationController
             end
           end
         end
+
+        @users.each do |user|
+          puts "USER: " + user.inspect
+
+          pick = Pick.where(game_id: game.id, user_id: user.id)
+          puts "PICK: " + pick.inspect
+
+          if pick[0].correct
+            if pick[0].correct == true
+              standing = Standing.where(user_id: user.id)
+              puts "STANDING: " + standing.inspect
+              incremented = standing[0].wins + 1
+              Standing.update(standing[0].id, wins: incremented)
+              puts "STANDING2: " + standing.inspect
+
+            else
+
+            end
+          else
+
+          end
+        end
+
+
       end
+
+
 
       redirect_to root_path
     else

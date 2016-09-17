@@ -1,1 +1,31 @@
-standings.html.erb
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <div class="col s12" style="border: 1px black solid;">
+      <span class="flow-text">Standings (through week: <%= @current_week.week %>)</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <div class="col s8" style="border: 1px black solid;">
+      <span class="flow-text">User</span>
+    </div>
+    <div class="col s4" style="border: 1px black solid;">
+      <span class="flow-text">Wins</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12" style="text-align:center;">
+    <% @standings.each do |st| %>
+    <div class="col s8" style="border: 1px black solid;">
+      <span class="flow-text"><%= st.user.username %></span>
+    </div>
+    <div class="col s4" style="border: 1px black solid;">
+      <span class="flow-text"><%= st.wins %></span>
+    </div>
+    <% end %>
+  </div>
+</div>

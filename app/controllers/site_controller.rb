@@ -37,7 +37,7 @@ class SiteController < ApplicationController
             # TODO: error msg
           end
       else
-        @pick = Pick.update(@current_pick[0].id, pick: params[:pick][:pick])
+        @pick = Pick.update(@current_pick[0].id, pick: params[:pick][:pick], away_home: params[:pick][:away_home])
         format.json { render json: @pick.to_json }
       end
     end
@@ -63,7 +63,8 @@ class SiteController < ApplicationController
   end
 
   def standings
-
+    @current_week = Week.where(locked: true, finalized: true).last
+    @standings = Standing.order(wins: :desc)
   end
 
   private
