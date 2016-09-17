@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(version: 20160515130106) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "weeks", force: :cascade do |t|
-    t.string   "week"
+    t.integer  "week"
     t.boolean  "locked"
+    t.boolean  "finalized"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

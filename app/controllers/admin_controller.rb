@@ -18,9 +18,6 @@ class AdminController < ApplicationController
     @times = @new_game.game_times()
   end
 
-  def new_week
-  end
-
   def add_new_game
     @new_game = Game.new(game_params)
 
@@ -60,6 +57,8 @@ class AdminController < ApplicationController
 
   def finalize
     if Week.last.locked == true
+      Week.last.update(finalized: true)
+
       params.each do |key, value|
         game = key.split("-")
         game_id   = game[0]
@@ -90,6 +89,18 @@ class AdminController < ApplicationController
       redirect_to root_path
     else
       # TODO: error msgs
+    end
+  end
+
+  def new_week
+    active_week = Week.last
+    # TODO: if Week.last is not locked OR finalized
+    new_week = Week.new(locked: false)
+
+    if new_week.save
+      redirect_to admin_active_week_path
+    else
+      # TODO: error msgs/route
     end
   end
 

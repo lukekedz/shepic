@@ -32,7 +32,11 @@
             <div class="input-field col s2">
               <select name="<%= g.id %>-away" required>
               <% @points.each do |p| %>
-                <option value="<%= p %>"><%= p %></option>
+                <option value="<%= p %>"
+                  <% if g.away_pts == p %>
+                    <%= "selected" %>
+                  <% end %>
+                ><%= p %></option>
               <% end %>
               </select>
             </div>
@@ -44,7 +48,11 @@
             <div class="input-field col s2">
               <select name="<%= g.id %>-home" required>
               <% @points.each do |p| %>
-                <option value="<%= p %>"><%= p %></option>
+                <option value="<%= p %>"
+                  <% if g.home_pts == p %>
+                    <%= "selected" %>
+                  <% end %>
+                ><%= p %></option>
               <% end %>
               </select>
             </div>

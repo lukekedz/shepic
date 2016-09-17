@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'admin/locked'
   get  'admin/scores'
   post 'admin/finalize'
-
+  post 'admin/new_week'
 
   devise_for :users
 end

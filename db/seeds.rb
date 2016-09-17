@@ -1,7 +1,7 @@
 User.create!(admin: true, username: "luke", email: "luke@gmail.com", password: "loplop", password_confirmation: "loplop" )
 User.create!(admin: false, username: "kr", email: "kr@gmail.com", password: "emmie1", password_confirmation: "emmie1" )
 
-Week.create(week: 1, locked: false)
+Week.create(week: 1, locked: false, finalized: false)
 
 10.times do |t|
   Game.create(
@@ -17,7 +17,7 @@ Week.create(week: 1, locked: false)
 end
 
 Game.create(
-  week_id: 1,
+  week_id:    1,
   away:       "Florida",
   home:       "Florida State",
   spread:     1.5,

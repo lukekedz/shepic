@@ -8,7 +8,7 @@
           <li><h5><%= link_to "Active Week", admin_active_week_path %></h5></li>
           <li><h5><%= link_to "Lock Active Week", admin_lock_path %></h5></li>
           <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
-          <li><h5><%= link_to "Start New Week" %></h5></li>
+          <li><h5><%= link_to "Start New Week", admin_new_week_path, :method => :post %></h5></li>
           <li><h5><%= link_to "Standings" %></h5></li>
       </ul>
     <% else %>
