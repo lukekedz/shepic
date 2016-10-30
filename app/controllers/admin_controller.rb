@@ -9,11 +9,8 @@ class AdminController < ApplicationController
     @new_game = Game.new
     @active_week = Week.last
 
-    @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
+    @games = Game.where(week_id: @active_week.id).order(:tiebreaker, :date, :start_time)
     @max_games = @games.where(tiebreaker: false).count
-
-    @tiebreaker_game = @games.where(tiebreaker: true)
-    @tiebreaker = @games.where(tiebreaker: true).count
 
     @times = @new_game.game_times()
   end

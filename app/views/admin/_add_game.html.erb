@@ -4,7 +4,6 @@
 
       <div class="row">
         <input type="hidden" value="<%= @active_week.id %>" name="game[week_id]">
-        <input type="hidden" value="false" name="game[tiebreaker]">
 
         <div class="input-field col s4">
           <select name="game[away]" class="validate" required>
@@ -45,7 +44,22 @@
         </div>
       </div>
 
-      <button class="waves-effect waves-light btn" action="submit">Add Game</button>
+      <div class="row">
+        <div class="col s12" style="border: 1px black solid;">
+          <button class="waves-effect waves-light btn" action="submit">Add Game</button>
+        </div>
+      </div>
+
+      <input type="hidden" value="false" name="game[tiebreaker]">
+      <% if @tiebreaker == 0 && @active_week.locked == false %>
+      <div class="row">
+        <div class="col s12" style="border: 1px black solid;">
+          <input type="checkbox" id="tiebreaker" name="game[tiebreaker]"/>
+          <label for="tiebreaker">Tiebreaker</label>
+        </div>
+      </div>
+      <% end %>
+
     </form>
   </div>
 </div>
