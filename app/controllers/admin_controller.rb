@@ -12,6 +12,10 @@ class AdminController < ApplicationController
     @games = Game.where(week_id: @active_week.id).order(:tiebreaker, :date, :start_time)
     @max_games = @games.where(tiebreaker: false).count
 
+    # TODO remove or modify ?
+    @tiebreaker_game = @games.where(tiebreaker: true)
+    @tiebreaker = @games.where(tiebreaker: true).count
+
     @times = @new_game.game_times()
   end
 
