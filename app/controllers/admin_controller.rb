@@ -10,7 +10,7 @@ class AdminController < ApplicationController
     @active_week = Week.last
 
     @games = Game.where(week_id: @active_week.id).order(:tiebreaker, :date, :start_time)
-    @max_games = @games.where(tiebreaker: false).count
+    # @max_games = @games.where(tiebreaker: false).count
 
     # TODO remove or modify ?
     @tiebreaker_game = @games.where(tiebreaker: true)
@@ -37,7 +37,7 @@ class AdminController < ApplicationController
   def lock
     @active_week = Week.last
     @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
-    @max_games = @games.where(tiebreaker: false).count
+    # @max_games = @games.where(tiebreaker: false).count
     @tiebreaker_game = @games.where(tiebreaker: true)
     @tiebreaker = @games.where(tiebreaker: true).count
   end
@@ -112,20 +112,16 @@ class AdminController < ApplicationController
           pick = Pick.where(game_id: game.id, user_id: user.id)
           puts "PICK: " + pick.inspect
 
-          if pick[0].correct
-            if pick[0].correct == true
+            if pick.any? && pick[0].correct == true
               standing = Standing.where(user_id: user.id)
-              puts "STANDING: " + standing.inspect
+              # puts "STANDING: " + standing.inspect
               incremented = standing[0].wins + 1
               Standing.update(standing[0].id, wins: incremented)
-              puts "STANDING2: " + standing.inspect
-
+              # puts "STANDING2: " + standing.inspect
             else
-
+              # TODO: anything?
             end
-          else
 
-          end
         end
 
 

@@ -13,23 +13,23 @@
         <% if @active_week.locked == true %>
           Locked
         <% else %>
-          <%= @max_games < 10 ? "Open" : "Max" %>
+          <%= @games.count < 10 ? "Open" : "Max" %>
         <% end %></strong>
       </span>
     </div>
-    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @max_games %></span></div>
+    <div class="col s4" style="border: 1px black solid;"><span class="flow-text">Game Count: <%= @games.count %></span></div>
   </div>
 </div>
 
 <div class="row"><div class="divider"></div></div>
 
-<% if @max_games < 10 && @active_week.locked == false %>
+<% if @games.count < 10 && @active_week.locked == false %>
 <div class="row">
   <div class="col s12" style="text-align:center;">
     <h5 style="color: red; weight: bold;">Warning!</h5>
   </div>
   <div class="col s12" style="text-align:center;">
-    <h5>You have only selected <strong><%= @max_games %></strong> games this week.</h5>
+    <h5>You have only selected <strong><%= @games.count %></strong> games this week.</h5>
   </div>
   <div class="col s12" style="text-align:center;">
     <h5><%= link_to "Return to Game Selection", admin_active_week_path %></h5>
