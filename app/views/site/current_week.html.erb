@@ -20,7 +20,7 @@
           <div class="row">
 
             <div class="col s3" style="border: 1px black solid;">
-              <% if @current_week.locked == true %>
+              <% if @current_week.locked == true && !@current_week.finalized %>
               <form action="" role="form" class="pick" method="POST">
                 <input type="hidden" value="<%= current_user.id %>" id="user-id">
                 <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="col s3" style="border: 1px black solid;">
-              <% if @current_week.locked == true %>
+              <% if @current_week.locked == true && !@current_week.finalized %>
               <form action="" role="form" class="pick" method="POST">
                 <input type="hidden" value="<%= current_user.id %>" id="user-id">
                 <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -99,19 +99,25 @@
         </p>
       </div>
 
-      <div class="col s3" style="border: 1px black solid; text-align:right;">
-        <p>Enter Total Points:</p>
-      </div>
+      <% if !@current_week.finalized %>
+        <div class="col s3" style="border: 1px black solid; text-align:right;">
+          <p>Enter Total Points:</p>
+        </div>
 
-      <div class="col s2" style="border: 1px black solid; text-align:center;">
-        <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
-        <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
-        <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
-      </div>
+        <div class="col s2" style="border: 1px black solid; text-align:center;">
+          <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+          <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
+          <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
+        </div>
 
-      <div id="tbreak-saved" style="visibility: hidden;">
-        <img src="/assets/check.png" height="30" width="30">
-      </div>
+        <div id="tbreak-saved" style="visibility: hidden;">
+          <img src="/assets/check.png" height="30" width="30">
+        </div>
+      <% else %>
+        <div class="col s2" style="border: 1px black solid; text-align:center;">
+          <input type="number" value="<%= @tbreak_pts %>" disabled>
+        </div>
+      <% end %>
 
     </div>
     <div class="row"><div class="divider"></div></div>
