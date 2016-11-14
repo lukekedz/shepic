@@ -13,7 +13,8 @@
         <% if @active_week.locked == true %>
           Locked
         <% else %>
-          <%= @games.count < 10 ? "Open" : "Max" %>
+          <%= @games.count
+           < 10 ? "Open" : "Max" %>
         <% end %></strong>
       </span>
     </div>
