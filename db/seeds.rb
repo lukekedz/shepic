@@ -6,7 +6,7 @@ User.create!(admin: false, username: "lk", email: "lk@gmail.com", password: "emm
 
 Week.create(week: 1, locked: false, finalized: false)
 
-10.times do |t|
+9.times do
   Game.create(
     week_id:    1,
     away:       Faker::University.name,
