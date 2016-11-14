@@ -1,5 +1,4 @@
-var ready = function() {
-
+$(document).ready(function() {
   // activation
   $(".dropdown-button").dropdown();
   $('select').material_select();
@@ -10,7 +9,8 @@ var ready = function() {
     var userId   = event.currentTarget[0].value;
     var gameId   = event.currentTarget[1].value;
     var awayHome = event.currentTarget[3].value;
-    var gamePick = event.target.innerText;
+    var selector = "#" + awayHome + "-game-pick-" + gameId;
+    var gamePick = $(selector)[0].value;
 
     $.ajax({
           type: "POST",
@@ -76,9 +76,4 @@ var ready = function() {
       };
     }
   }
-
-};
-
-// optimized for Rails page loads
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});

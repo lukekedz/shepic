@@ -24,7 +24,7 @@
               <form action="" role="form" class="pick" method="POST">
                 <input type="hidden" value="<%= current_user.id %>" id="user-id">
                 <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                <input type="hidden" value="<%= g[:away] %>" id="game-pick">
+                <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
                 <input type="hidden" value="away" id="away-home">
 
                 <p style="display: inline block; text-align:center;">
@@ -41,7 +41,7 @@
               <form action="" role="form" class="pick" method="POST">
                 <input type="hidden" value="<%= current_user.id %>" id="user-id">
                 <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                <input type="hidden" value="<%= g[:home] %>" id="game-pick">
+                <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
                 <input type="hidden" value="home" id="away-home">
 
                 <p style="display: inline block; text-align:center;">
