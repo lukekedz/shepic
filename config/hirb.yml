@@ -1,0 +1,18 @@
+:output:
+    Game:
+        :options:
+            :fields:
+                - id
+                - week_id
+                - date
+                - away 
+                - home
+                - spread
+                - location
+                - start_time 
+                - tiebreaker
+                - winner 
+                - away_pts 
+                - home_pts
+                - total_pts
+                - updated_at

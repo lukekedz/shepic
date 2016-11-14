@@ -1,3 +1,5 @@
+puts "Seeding DB... "
+
 User.create!(admin: true, username: "luke", email: "luke@gmail.com", password: "loplop", password_confirmation: "loplop" )
 User.create!(admin: false, username: "kr", email: "kr@gmail.com", password: "emmie1", password_confirmation: "emmie1" )
 User.create!(admin: false, username: "lk", email: "lk@gmail.com", password: "emmie2", password_confirmation: "emmie2" )
@@ -27,7 +29,3 @@ Game.create(
   date:       Faker::Date.between(Date.today, Date.today + 2),
   start_time: ["12:00pm", "12:15pm", "3:00pm", "3:30pm", "8:00pm", "8:30pm", "9:00pm"].sample
 )
-
-User.all.each do |u|
-  Standing.create(user_id: u.id, wins: 0)
-end
