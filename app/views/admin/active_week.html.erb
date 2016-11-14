@@ -25,17 +25,20 @@
   <div class="col s12">
 
     <div style="text-align:center">
-      <% if @active_week.locked == true %>
+      <% if @active_week.locked == true && !@current_week.finalized %>
         <form action="/admin/scores" role="form" method="GET">
           <button class="btn waves-effect waves-light" type="submit">Add Game Scores</button>
         </form>
       <% else %>
         <% if @games.count < 10 %>
           <a class="waves-effect waves-light btn" onclick="shepic.addGamePartial()" id="add_game_btn">Add Game</a>
-        <% else %>
+        <% elsif !@current_week.finalized %>
           <form action="/admin/lock" role="form" method="GET">
             <button class="btn waves-effect waves-light" type="submit">Lock Week</button>
           </form>
+        <% else %>
+          <!-- TODO: user shouldn't be able to navigate here once the week is finalized -->
+          <!-- but jic nothing displays... in Trello to review logic -->
         <% end %>
       <% end %>
     </div>

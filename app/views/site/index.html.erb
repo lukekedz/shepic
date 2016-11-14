@@ -11,7 +11,7 @@
           <li><h5><%= link_to "Lock Active Week", admin_lock_path %></h5></li>
           <% end %>
 
-          <% if @current_week.locked %>
+          <% if @current_week.locked && !@current_week.finalized %>
           <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
           <% end %>
 
