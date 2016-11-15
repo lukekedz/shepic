@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get  'admin/scores'
   post 'admin/review'
   get  'admin/finalize'
-  post 'admin/new_week'
 
   devise_for :users
 end

@@ -15,10 +15,6 @@
           <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
           <% end %>
 
-          <% if @current_week.finalized %>
-          <li><h5><%= link_to "Start New Week", admin_new_week_path, :method => :post %></h5></li>
-          <% end %>
-
           <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
           <br/>
           <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>

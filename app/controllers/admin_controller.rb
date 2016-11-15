@@ -128,27 +128,20 @@ class AdminController < ApplicationController
             else
               # TODO: anything?
             end
-
         end
-
-
       end
 
+      start_new_week = Week.new(locked: false, finalized: false)
 
+      current_week = Week.last
+      if current_week.locked == true && current_week.finalized == true
+        new_week = Week.new(locked: false, finalized: false)
 
-      redirect_to root_path
-    else
-      # TODO: error msgs/route
-    end
-  end
-
-  def new_week
-    current_week = Week.last
-    if current_week.locked == true && current_week.finalized == true
-      new_week = Week.new(locked: false, finalized: false)
-
-      if new_week.save
-        redirect_to admin_active_week_path
+        if new_week.save
+          redirect_to admin_active_week_path
+        else
+          # TODO: error msgs/route
+        end
       else
         # TODO: error msgs/route
       end
