@@ -4,11 +4,11 @@
   </div>
 </div>
 
-<form action="/admin/finalize" role="form" method="POST">
+<form action="/admin/review" role="form" method="POST">
 
   <div class="row">
     <div class="col s12" style="text-align:center;">
-        <button class="waves-effect waves-light btn" type="submit">Finalize Scores</button>
+        <button class="waves-effect waves-light btn" type="submit">Review Scores</button>
     </div>
   </div>
 
@@ -20,53 +20,48 @@
   <div class="row"><div class="divider"></div></div>
 
   <% @games.each do |g| %>
-    <% if g.tiebreaker == false %>
-      <div class="row">
-        <div class="col s12" style="border: 1px black solid; text-align:center;">
+    <div class="row">
+      <div class="col s12" style="border: 1px black solid; text-align:center;">
 
-          <div class="row">
-            <div class="col s4" style="border: 1px black solid;">
-              <p><strong><%= g[:away] %></strong></p>
-            </div>
-
-            <div class="input-field col s2">
-              <select name="<%= g.id %>-away" required>
-              <% @points.each do |p| %>
-                <option value="<%= p %>"
-                  <% if g.away_pts == p %>
-                    <%= "selected" %>
-                  <% end %>
-                ><%= p %></option>
-              <% end %>
-              </select>
-            </div>
-
-            <div class="col s4">
-              <p><strong><%= g[:home] %></strong></p>
-            </div>
-
-            <div class="input-field col s2">
-              <select name="<%= g.id %>-home" required>
-              <% @points.each do |p| %>
-                <option value="<%= p %>"
-                  <% if g.home_pts == p %>
-                    <%= "selected" %>
-                  <% end %>
-                ><%= p %></option>
-              <% end %>
-              </select>
-            </div>
+        <div class="row">
+          <div class="col s4" style="border: 1px black solid;">
+            <p><strong><%= g[:away] %></strong></p>
           </div>
 
+          <div class="input-field col s2">
+            <select name="<%= g.id %>-away" required>
+            <% @points.each do |p| %>
+              <option value="<%= p %>"
+                <%= if g.away_pts == p then "selected" end %>
+              ><%= p %></option>
+            <% end %>
+            </select>
+          </div>
+
+          <div class="col s4">
+            <p><strong><%= g[:home] %></strong></p>
+          </div>
+
+          <div class="input-field col s2">
+            <select name="<%= g.id %>-home" required>
+            <% @points.each do |p| %>
+              <option value="<%= p %>"
+                <%= if g.home_pts == p then "selected" end %>
+              ><%= p %></option>
+            <% end %>
+            </select>
+          </div>
         </div>
+
       </div>
-    <% end %>
+    </div>
   <% end %>
 
   <div class="row"><div class="divider"></div></div>
 
   <% @games.each do |g| %>
     <% if g.tiebreaker == true %>
+
       <div class="row">
         <div class="col s12" style="border: 1px black solid; text-align:center">
 
@@ -81,9 +76,11 @@
           </div>
 
           <div class="input-field col s2">
-            <select name="<%= g.id %>-tbreak">
+            <select name="<%= g.id %>-tbreak" required>
             <% @points.each do |p| %>
-              <option value="<%= p %>"><%= p %></option>
+              <option value="<%= p %>"
+                <%= if g.total_pts == p then "selected" end %>
+              ><%= p %></option>
             <% end %>
             </select>
           </div>
@@ -97,7 +94,7 @@
 
   <div class="row">
     <div class="col s12" style="text-align:center;">
-      <button class="waves-effect waves-light btn" type="submit">Finalize Scores</button>
+      <button class="waves-effect waves-light btn" type="submit">Review Scores</button>
     </div>
   </div>
 

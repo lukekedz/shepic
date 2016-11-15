@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get  'admin/lock'
   post 'admin/locked'
   get  'admin/scores'
-  post 'admin/finalize'
+  post 'admin/review'
+  get  'admin/finalize'
   post 'admin/new_week'
 
   devise_for :users

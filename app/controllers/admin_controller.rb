@@ -56,11 +56,11 @@ class AdminController < ApplicationController
     @games = Game.where(week_id: @locked_week.id).order(:date, :start_time)
   end
 
-  def finalize
+  def review
     @games = Game.where(week_id: Week.last.week)
 
     if Week.last.locked == true
-      Week.last.update(finalized: true)
+      # Week.last.update(finalized: true)
 
       params.each do |key, value|
         game = key.split("-")
@@ -88,6 +88,14 @@ class AdminController < ApplicationController
           Game.update(game_id, total_pts: pts)
         end
       end
+    end
+  end
+
+  def finalize
+    @games = Game.where(week_id: Week.last.week)
+
+    if Week.last.locked == true
+      Week.last.update(finalized: true)
 
       @users = User.where(admin: false)
       # @users = User.where(id: 2)
