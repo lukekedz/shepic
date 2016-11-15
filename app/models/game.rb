@@ -1,4 +1,9 @@
 class Game < ActiveRecord::Base
+  validates :week_id,     presence: true
+  validates :away,        presence: true
+  validates :home,        presence: true
+  validates_inclusion_of :tiebreaker, in: [true, false]
+
   belongs_to :weeks
   has_many :picks
 

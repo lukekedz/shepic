@@ -43,7 +43,8 @@ gem 'hirb'
 gem 'faker'
 gem 'auto_increment'
 
-group :development do
+
+group :development, :test do
   gem 'spring'
   gem 'dotenv-rails'
 end
