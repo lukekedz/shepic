@@ -40,7 +40,7 @@ class GameTest < ActiveSupport::TestCase
 	end
 
 	test "game_times() should return array" do
-		assert @game_times.kind_of?(Array), "expecting Array"
+		assert @game_times.kind_of?(Array), "game_times() not returning an array"
 	end
 
 	test "game_times() should have 36 times" do
@@ -48,6 +48,10 @@ class GameTest < ActiveSupport::TestCase
 	end
 
 	test "game_times() should contain strings" do
-		assert @game_times.sample.kind_of?(String), "random element should be a string"
+		assert @game_times.sample.kind_of?(String), "random element not a string"
+	end
+
+	test "should have AR has_many :picks" do
+		assert @game.picks.respond_to?(:new), "not responding to .new"
 	end
 end
