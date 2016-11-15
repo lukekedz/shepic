@@ -14,76 +14,74 @@
 
 <% if @games %>
   <% @games.each do |g| %>
-    <% if g.tiebreaker == false %>
-      <div class="row">
-        <div class="col s12" style="border: 1px black solid; text-align:center;">
-          <div class="row">
+    <div class="row">
+      <div class="col s12" style="border: 1px black solid; text-align:center;">
+        <div class="row">
 
-            <div class="col s3" style="border: 1px black solid;">
-              <% if @current_week.locked == true && !@current_week.finalized %>
-              <form action="" role="form" class="pick" method="POST">
-                <input type="hidden" value="<%= current_user.id %>" id="user-id">
-                <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
-                <input type="hidden" value="away" id="away-home">
+          <div class="col s3" style="border: 1px black solid;">
+            <% if @current_week.locked == true && !@current_week.finalized %>
+            <form action="" role="form" class="pick" method="POST">
+              <input type="hidden" value="<%= current_user.id %>" id="user-id">
+              <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
+              <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
+              <input type="hidden" value="away" id="away-home">
 
-                <p style="display: inline block; text-align:center;">
-                    <button type="submit"><strong><%= g[:away] %></strong></button>
-                </p>
-              <% else %>
-                <p><%= g[:away] %></p>
-              <% end %>
-              </form>
-            </div>
-
-            <div class="col s3" style="border: 1px black solid;">
-              <% if @current_week.locked == true && !@current_week.finalized %>
-              <form action="" role="form" class="pick" method="POST">
-                <input type="hidden" value="<%= current_user.id %>" id="user-id">
-                <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
-                <input type="hidden" value="home" id="away-home">
-
-                <p style="display: inline block; text-align:center;">
-                    <button type="submit"><strong><%= g[:home] %></strong></button>
-                </p>
-              <% else %>
-                <p><%= g[:home] %></p>
-              <% end %>
-              </form>
-            </div>
-
-             <div class="col s1" style="border: 1px black solid;">
-              <p style="display: inline block; text-align:center;"><strong><%= g[:spread] %></strong></p>
-            </div>
-             <div class="col s3" style="border: 1px black solid;">
-              <p style="display: inline block; text-align:center;"><strong>@</strong> <%= g[:location] %></p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col s4" style="border: 1px black solid;">
-              <p style="display: inline block; text-align:center;"><%= game_day(g[:date]) %></p>
-            </div>
-            <div class="col s1" style="border: 1px black solid;">
-              <p style="display: inline block; text-align:center;"><strong>@</strong></p>
-            </div>
-            <div class="input-field col s2">
-              <p style="display: inline block; text-align:center;"><%= g[:start_time] %></p>
-            </div>
-            <div class="input-field col s3">
-              <p id="your-pick-<%= g[:id] %>" style="display: inline block; text-align:center; font-weight: bold;">
-                Your Pick: <%= @picks[ g[:id] ] %>
+              <p style="display: inline block; text-align:center;">
+                  <button type="submit"><strong><%= g[:away] %></strong></button>
               </p>
-            </div>
-            <div id="pick-saved-<%= g[:id] %>" style="visibility: hidden;">
-              <img src="/assets/check.png" height="30" width="30">
-            </div>
+            <% else %>
+              <p><%= g[:away] %></p>
+            <% end %>
+            </form>
           </div>
 
+          <div class="col s3" style="border: 1px black solid;">
+            <% if @current_week.locked == true && !@current_week.finalized %>
+            <form action="" role="form" class="pick" method="POST">
+              <input type="hidden" value="<%= current_user.id %>" id="user-id">
+              <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
+              <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
+              <input type="hidden" value="home" id="away-home">
+
+              <p style="display: inline block; text-align:center;">
+                  <button type="submit"><strong><%= g[:home] %></strong></button>
+              </p>
+            <% else %>
+              <p><%= g[:home] %></p>
+            <% end %>
+            </form>
+          </div>
+
+           <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong><%= g[:spread] %></strong></p>
+          </div>
+           <div class="col s3" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong>@</strong> <%= g[:location] %></p>
+          </div>
         </div>
+
+        <div class="row">
+          <div class="col s4" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><%= game_day(g[:date]) %></p>
+          </div>
+          <div class="col s1" style="border: 1px black solid;">
+            <p style="display: inline block; text-align:center;"><strong>@</strong></p>
+          </div>
+          <div class="input-field col s2">
+            <p style="display: inline block; text-align:center;"><%= g[:start_time] %></p>
+          </div>
+          <div class="input-field col s3">
+            <p id="your-pick-<%= g[:id] %>" style="display: inline block; text-align:center; font-weight: bold;">
+              Your Pick: <%= @picks[ g[:id] ] %>
+            </p>
+          </div>
+          <div id="pick-saved-<%= g[:id] %>" style="visibility: hidden;">
+            <img src="/assets/check.png" height="30" width="30">
+          </div>
+        </div>
+
       </div>
-    <% end %>
+    </div>
   <% end %>
 <% end %>
 
