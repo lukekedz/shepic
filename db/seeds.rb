@@ -29,3 +29,9 @@ Game.create(
   date:       Faker::Date.between(Date.today, Date.today + 2),
   start_time: ["12:00pm", "12:15pm", "3:00pm", "3:30pm", "8:00pm", "8:30pm", "9:00pm"].sample
 )
+
+teams = ["Air Force",  "Akron",  "Alabama",  "Arizona", "Army", "Auburn", "Ball State", "Baylor", "BYU", "Boise State", "Boston College", "Buffalo", "Cal", "UCF", "Central Michigan", "Cincinnati", "Clemson", "Colorado", "Colorado State", "UConn", "Duke", "Eastern Michigan", "Florida", "Florida Atlantic", "Florida International", "Florida State", "Fresno State", "Georgia", "Georgia Tech", "Hawaii", "Houston", "Idaho", "Illinois", "Indiana", "Iowa", "Iowa State", "Kansas", "Kansas State", "Kent State", "Kentucky", "LSU", "Louisiana Tech", "Louisiana-Lafayette", "Louisiana-Monroe", "Louisville", "Marshall", "Maryland", "Memphis", "Miami (FL)", "Miami (OH)", "Michigan", "Michigan State", "Middle Tennessee State", "Minnesota", "Mississippi", "Mississippi State", "Missouri", "Navy", "Nebraska", "Nevada", "UNLV", "New Mexico", "New Mexico State", "North Carolina", "North Carolina State", "North Texas", "Northern Illinois", "Northwestern", "Notre Dame", "Ohio", "Ohio State", "Oklahoma", "Oklahoma State", "Oregon", "Oregon State", "Penn State", "Pitt", "Purdue", "Rice", "Rutgers", "San Diego State", "San Jose State", "South Carolina", "South Florida", "SMU", "Southern Mississippi", "Stanford", "Syracuse", "Temple", "Tennessee", "Texas", "Texas A&M", "TCU", "Texas Tech", "Texas-El Paso", "Toledo", "Troy", "Tulane", "Tulsa", "UCLA", "Utah", "Utah State", "Vanderbilt", "Virginia", "Virginia Tech", "Wake Forest", "Washington", "Washington State", "West Virginia", "Western Kentucky", "Western Michigan", "Wisconsin", "Wyoming"]
+
+teams.each do |t|
+  Team.create(name: t)
+end

@@ -9,7 +9,7 @@
           <select name="game[away]" class="validate" required>
             <option>Away Team</option>
             <% @teams.each do |away| %>
-              <option value="<%= away %>"><%= away %></option>
+              <option value="<%= away.name %>"><%= away.name %></option>
             <% end %>
           </select>
         </div>
@@ -18,7 +18,7 @@
           <select name="game[home]" class="validate" required>
             <option>Home Team</option>
             <% @teams.each do |home| %>
-              <option value="<%= home %>"><%= home %></option>
+              <option value="<%= home.name %>"><%= home.name %></option>
             <% end %>
           </select>
         </div>

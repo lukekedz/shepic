@@ -3,12 +3,14 @@ require 'test_helper'
 class GameTest < ActiveSupport::TestCase
 	def setup
     	@game = Game.new(week_id:    rand(1000), 
-    					 away:       "OSU", 
-    					 home:       "Michigan", 
+    					 away:       "Michigan", 
+    					 home:       "Ohio State", 
     					 tiebreaker: [true, false].sample
     					)
 
 		@game_times = Game.new.game_times
+
+
   	end
 
   	test 'valid Game' do
