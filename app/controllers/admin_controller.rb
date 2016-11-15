@@ -59,8 +59,6 @@ class AdminController < ApplicationController
     @games = Game.where(week_id: Week.last.week)
 
     if Week.last.locked == true
-      # Week.last.update(finalized: true)
-
       params.each do |key, value|
         game = key.split("-")
         game_id   = game[0]
@@ -97,7 +95,6 @@ class AdminController < ApplicationController
       Week.last.update(finalized: true)
 
       @users = User.where(admin: false)
-      # @users = User.where(id: 2)
 
       @games.each do |game|
         picks = Pick.where(game_id: game.id)
@@ -114,24 +111,18 @@ class AdminController < ApplicationController
         end
 
         @users.each do |user|
-          puts "USER: " + user.inspect
-
           pick = Pick.where(game_id: game.id, user_id: user.id)
-          puts "PICK: " + pick.inspect
 
             if pick.any? && pick[0].correct == true
               standing = Standing.where(user_id: user.id)
-              # puts "STANDING: " + standing.inspect
               incremented = standing[0].wins + 1
+          
               Standing.update(standing[0].id, wins: incremented)
-              # puts "STANDING2: " + standing.inspect
             else
               # TODO: anything?
             end
         end
       end
-
-      start_new_week = Week.new(locked: false, finalized: false)
 
       current_week = Week.last
       if current_week.locked == true && current_week.finalized == true
