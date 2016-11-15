@@ -7,6 +7,8 @@ class GameTest < ActiveSupport::TestCase
     					 home:       "Michigan", 
     					 tiebreaker: [true, false].sample
     					)
+
+		@game_times = Game.new.game_times
   	end
 
   	test 'valid Game' do
@@ -37,8 +39,15 @@ class GameTest < ActiveSupport::TestCase
 		assert_not_nil @game.errors[:tiebreaker], "no validation error for tiebreaker boolean present"
 	end
 
-	# test "#game_times" do
-	# 	game_times = Game.game_times()
-	# 	assert game_times.any?
-	# end
+	test "game_times() should return array" do
+		assert @game_times.kind_of?(Array), "expecting Array"
+	end
+
+	test "game_times() should have 36 times" do
+		assert @game_times.count == 36, "count should == 36"
+	end
+
+	test "game_times() should contain strings" do
+		assert @game_times.sample.kind_of?(String), "random element should be a string"
+	end
 end
