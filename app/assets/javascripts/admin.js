@@ -1,4 +1,4 @@
-$(document).ready(function() {
+var ready = function() {
   // activation
   $(".dropdown-button").dropdown();
   $('select').material_select();
@@ -76,4 +76,8 @@ $(document).ready(function() {
       };
     }
   }
-});
+};
+
+// optimized for Rails page loads
+$(document).ready(ready);
+$(document).on('page:load', ready);
