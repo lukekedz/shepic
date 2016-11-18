@@ -9,8 +9,6 @@ class GameTest < ActiveSupport::TestCase
     					)
 
 		@game_times = Game.new.game_times
-
-
   	end
 
   	test 'valid Game' do
