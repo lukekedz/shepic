@@ -43,8 +43,6 @@ gem 'hirb'
 gem 'faker'
 gem 'auto_increment'
 gem 'simplecov', :require => false, :group => :test
-gem 'simplecov-rcov'
-
 
 group :development, :test do
   gem 'spring'
