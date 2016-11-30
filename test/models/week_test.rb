@@ -2,19 +2,17 @@ require 'test_helper'
 
 class WeekTest < ActiveSupport::TestCase
 	def setup
-		@week = Week.new(id:        rand(1000), 
-		 				 week:      rand(1000),
+		@week = Week.new(week:      rand(1000),
 		 				 locked:    [true, false].sample,
 		 				 finalized: [true, false].sample
 						)
 
 		lock_final = [true, true, false]
 		3.times do |i|
-    		Week.create(id:        i + 1, 
-					    week:      i + 1,
+    		Week.create(week:      i + 1,
 					    locked:    lock_final[i],
 					    finalized: lock_final[i]
-					    )
+					   )
     	end
   	end
 
@@ -25,7 +23,6 @@ class WeekTest < ActiveSupport::TestCase
   	test 'should not save without a week #' do
   		@week.week = nil
   		refute @week.valid?, 'saved Week without week #'
-		assert_not_nil @week.errors[:week_id], 'no validation error for week present'
 	end
 
 	test 'method current() returns last week' do
