@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!, :user_is_admin?
+  before_action :user_is_admin?
 
   def active_week
     @teams = Team.all.order(:name)

@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
   protect_from_forgery with: :exception
-  before_action :authenticate_user!, :user
+  before_action :user
 
   def index
     @weeks = Week.where(locked: true, finalized: true)
