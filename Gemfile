@@ -26,13 +26,13 @@ gem 'devise'
 gem 'simple_form'
 gem 'materialize-sass'
 gem 'hirb'
-gem 'faker'
 gem 'auto_increment'
 
 group :development, :test do
 	gem 'spring'
 	gem 'dotenv-rails'
 	gem 'rspec-rails', '~> 3.5'
+	gem 'faker'
 	gem 'simplecov', :require => false, :group => :test
 end
 
