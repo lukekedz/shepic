@@ -15,3 +15,5 @@ teams = ["Air Force",  "Akron",  "Alabama",  "Arizona", "Army", "Auburn", "Ball 
 if Team.count == 0 
   teams.each { |t| Team.create(name: t) }
 end
+
+Week.create(week: 1, locked: false, finalized: false)

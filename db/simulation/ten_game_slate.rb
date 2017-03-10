@@ -1,11 +1,8 @@
 start_times = ["12:00pm", "12:15pm", "3:00pm", "3:30pm", "8:00pm", "8:30pm", "9:00pm"]
 
-last_week = Week.last ? Week.last.week : 0
-new_week  = Week.create(week: last_week + 1, locked: false, finalized: false)
-
 10.times do
   Game.create(
-    week_id:    new_week.week,
+    week_id:    Week.last.week,
     away:       Team.all.sample.name,
     home:       Team.all.sample.name,
     spread:     Faker::Number.between(-15, 15),

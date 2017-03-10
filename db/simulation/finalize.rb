@@ -3,7 +3,6 @@ games = Game.where(week_id: current_week.id)
 
 if Week.last.locked == true
     Week.last.update(finalized: true)
-	# in seeds, new week creation is part of ten_game_slate
 
 	games.each do |game|
 		picks = Pick.where(game_id: game.id)
@@ -31,4 +30,6 @@ if Week.last.locked == true
             end
         end
 	end
+
+	Week.create(week: Week.last.week + 1, locked: false, finalized: false)
 end
