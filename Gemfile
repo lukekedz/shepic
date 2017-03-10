@@ -28,15 +28,17 @@ gem 'materialize-sass'
 gem 'hirb'
 gem 'faker'
 gem 'auto_increment'
-gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
-  gem 'spring'
-  gem 'dotenv-rails'
+	gem 'spring'
+	gem 'dotenv-rails'
+	gem 'rspec-rails', '~> 3.5'
+	gem 'simplecov', :require => false, :group => :test
+
 end
 
 group :production do
-  gem 'rails_12factor'
+	gem 'rails_12factor'
 end
 
 
