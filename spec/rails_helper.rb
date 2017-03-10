@@ -12,6 +12,9 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  require 'simplecov'
+  SimpleCov.start
+
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
 
