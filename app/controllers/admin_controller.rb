@@ -114,7 +114,7 @@ class AdminController < ApplicationController
           pick = Pick.where(game_id: game.id, user_id: user.id)
 
             if pick.any? && pick[0].correct == true
-              standing = Standing.where(user_id: user.id)
+              standing    = Standing.where(user_id: user.id)
               incremented = standing[0].wins + 1
           
               Standing.update(standing[0].id, wins: incremented)

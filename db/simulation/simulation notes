@@ -1,0 +1,10 @@
+"HOW TO" RUN SIMULATION
+
+From command line, run one at a time in this order:
+
+1. rake db:seed:single SEED=ten_game_slate
+2. rake db:seed:single SEED=user_picks
+3. rake db:seed:single SEED=add_game_scores
+4. rake db:seed:single SEED=finalize
+
+Run tests and review data after each step.

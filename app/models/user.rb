@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
 	def set_standing_wins
 		user = User.last
-		Standing.create(user_id: user.id, wins: 0)
+		if user.admin == false
+			Standing.create(user_id: user.id, wins: 0)
+		end
 	end
 end

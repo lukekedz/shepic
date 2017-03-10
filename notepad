@@ -1,3 +1,15 @@
+### APP FLOW
+create new week
+populate games
+lock week
+users can now see games, notified
+user select picks
+week auto-locks at certain time
+if user did not make picks, no big
+use cannot make more selections
+admin enter in game scores
+
+
 ### close, lock week
 lock the week... ??
 ... for picks!

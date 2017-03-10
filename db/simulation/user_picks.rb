@@ -1,8 +1,7 @@
 current_week_id = Week.last.id
 games = Game.where(week_id: current_week_id)
 
-User.all.each do |user|
-
+User.where(admin: false).each do |user|
 	games.each do |game|
 		away_home = ["away", "home"]
 		versus    = [game.away, game.home]
@@ -17,5 +16,4 @@ User.all.each do |user|
 							 tbreak_pts: tbreak
 							)
 	end
-
 end
