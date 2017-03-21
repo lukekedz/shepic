@@ -8,3 +8,6 @@ From command line, run one at a time in this order:
 4. rake db:seed:single SEED=finalize
 
 Run tests and review data after each step.
+
+Reference: 
+http://stackoverflow.com/questions/19872271/adding-a-custom-seed-file
