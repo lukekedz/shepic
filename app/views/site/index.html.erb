@@ -1,45 +1,58 @@
-<div class="row">
-  <div class="col s12" style="text-align:center;">
+<div class="row center-align">
+    <div class="col s10 offset-s1">
     <% if current_user && current_user.admin == true %>
-      <br/>
-      <h4>Admin Menu</h4>
-      <br/>
-      <ul>
-          <li><h5><%= link_to "Active Week", admin_active_week_path %></h5></li>
 
-          <% if @current_week.locked == false %>
-          <li><h5><%= link_to "Lock Active Week", admin_lock_path %></h5></li>
-          <% end %>
+        <div class="row">
 
-          <% if @current_week.locked && !@current_week.finalized %>
-          <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
-          <% end %>
+        <br/><h5>Admin Menu</h5><br/>
 
-          <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
-          <br/>
-          <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
-      </ul>
-    <% else %>
-      <br/>
-      <h4>Menu</h4>
-      <br/>
-      <ul>
-        <li><h5><%= link_to "Current Week", site_current_week_path %></h5></li>
-        <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
-        <br/>
-        <ul id="dropdown3" class="dropdown-content">
-          <% @weeks.each do |wk| %>
-            <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
-          <% end %>
+        <ul>
+            <li><h5><%= link_to "Active Week", admin_active_week_path %></h5></li>
+
+            <% if @current_week.locked == false %>
+            <li><h5><%= link_to "Lock Active Week", admin_lock_path %></h5></li>
+            <% end %>
+
+            <% if @current_week.locked && !@current_week.finalized %>
+            <li><h5><%= link_to "Add Game Scores", admin_scores_path %></h5></li>
+            <% end %>
+
+            <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
+            
+            <br/>
+
+            <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
         </ul>
-        <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
-          History
-          <i class="mdi-navigation-arrow-drop-down right"></i>
-        </a>
-        <br/>
-        <br/>
-        <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
-      </ul>
+
+        </div>
+
+    <% else %>
+
+        <br/><h4>Menu</h4><br/>
+
+        <ul>
+            <li><h5><%= link_to "Current Week", site_current_week_path %></h5></li>
+            <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
+            
+            <br/>
+
+            <ul id="dropdown3" class="dropdown-content">
+              <% @weeks.each do |wk| %>
+                <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
+              <% end %>
+            </ul>
+
+            <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
+              History
+              <i class="mdi-navigation-arrow-drop-down right"></i>
+            </a>
+
+            <br/>
+            <br/>
+
+            <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
+        </ul>
+
     <% end %>
-  </div>
+    </div>
 </div>

@@ -63,19 +63,6 @@ var ready = function() {
      format: 'yyyy/mm/dd'
    });
 
-  window.shepic = {
-    addGamePartial: function() {
-      if (add_game_displayed === false) {
-        $("#add_game").css("display", "block");
-        $("#add_game_btn").text("Cancel");
-        add_game_displayed = true;
-      } else {
-        $("#add_game").css("display", "none");
-        $("#add_game_btn").text("Add Game");
-        add_game_displayed = false;
-      };
-    }
-  }
 };
 
 // optimized for Rails page loads

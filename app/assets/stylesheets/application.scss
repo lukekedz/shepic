@@ -12,8 +12,19 @@ main {
     flex: 1 0 auto;
 }
 
+#football-img {
+    height: 25px; 
+    width:  25px;
+    position: relative;
+    right: 10px;
+}
+
 .alert {
     color: red;
+}
+
+.background {
+    background-color: #F5F5F5;
 }
     
 @media only screen and (max-device-width: 320px) {

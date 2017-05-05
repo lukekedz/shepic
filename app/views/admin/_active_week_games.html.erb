@@ -1,0 +1,47 @@
+<div class="row center-align flow-text">
+    <div class="col s12">
+
+    <% @games.each_with_index do |g, i| %>
+        <div class="row">
+            <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
+
+                <div class="row">
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        Game <%= i + 1 %> 
+                        <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        <%= game_day(g[:date]) %> <%= g[:start_time] %>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        @ <strong><%= g[:location] %></strong>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        &nbsp;
+                        <% if @active_week.locked == false %>
+                            <form action="/admin/delete_game" role="form" method="POST">
+                                <input type="hidden" name="id" value="<%= g[:id] %>">
+                                <button class="waves-effect waves-light btn">Delete</button>
+                            </form>
+                        <% end %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <% end %>
+
+    </div>
+</div>

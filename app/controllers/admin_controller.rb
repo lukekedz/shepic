@@ -113,24 +113,24 @@ class AdminController < ApplicationController
         @users.each do |user|
           pick = Pick.where(game_id: game.id, user_id: user.id)
 
-            if pick.any? && pick[0].correct == true
-              standing    = Standing.where(user_id: user.id)
-              incremented = standing[0].wins + 1
-          
-              Standing.update(standing[0].id, wins: incremented)
-            else
+          if pick.any? && pick[0].correct == true
+            standing    = Standing.where(user_id: user.id)
+            incremented = standing[0].wins + 1
+            
+            Standing.update(standing[0].id, wins: incremented)
+          else
               # TODO: anything?
             end
+          end
         end
-      end
 
-      current_week = Week.last
-      if current_week.locked == true && current_week.finalized == true
-        new_week = Week.new(locked: false, finalized: false)
+        current_week = Week.last
+        if current_week.locked == true && current_week.finalized == true
+          new_week = Week.new(locked: false, finalized: false)
 
-        if new_week.save
-          redirect_to admin_active_week_path
-        else
+          if new_week.save
+            redirect_to admin_active_week_path
+          else
           # TODO: error msgs/route
         end
       else

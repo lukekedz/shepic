@@ -1,65 +1,73 @@
-<div class="input-field col s12" style="border: 1px black solid; text-align:center">
-  <div class="row">
+<div class="input-field col s12">
     <form action="/admin/add_new_game" role="form" id="add_new_game" method="POST">
 
-      <div class="row">
         <input type="hidden" value="<%= @active_week.id %>" name="game[week_id]">
+        <input type="hidden" value="false" name="game[tiebreaker]">
 
-        <div class="input-field col s4">
-          <select name="game[away]" class="validate" required>
-            <option>Away Team</option>
-            <% @teams.each do |away| %>
-              <option value="<%= away.name %>"><%= away.name %></option>
+        <div class="row">
+            <!-- 12 cols -->
+            <div class="input-field col s6">
+                <select name="game[away]" class="validate" required>
+                    <option>Away Team</option>
+
+                    <% @teams.each do |away| %>
+                        <option value="<%= away.name %>"><%= away.name %></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <div class="input-field col s6">
+                <select name="game[home]" class="validate" required>
+                    <option>Home Team</option>
+
+                    <% @teams.each do |home| %>
+                        <option value="<%= home.name %>"><%= home.name %></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <!-- 12 cols -->
+            <div class="input-field col s4">
+                <input placeholder="Spread" id="spread" type="number" step="0.5" name="game[spread]" class="validate" required>
+            </div>
+
+            <div class="input-field col s8">
+                <input placeholder="Location" id="location" type="text" name="game[location]" class="validate" required>
+            </div>
+
+            <!-- 12 cols -->
+            <div class="col s5" >
+                <input type="date" class="datepicker" placeholder="Select Date" name="game[date]" required>
+            </div>
+
+            <div class="col s1">
+                <p><strong>@</strong></p>
+            </div>
+
+            <div class="col s6">
+                <select name="game[start_time]" required>
+                    <option value="" disabled selected>Start Time (EST)</option>
+
+                    <% @times.each do |t| %>
+                        <option value="<%= t %>"><%= t %></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <!-- 12 cols -->
+            <div class="col s12">
+                <button class="waves-effect waves-light btn" action="submit">Add Game</button>
+            </div>
+
+            <!-- 12 cols -->
+            <% if @tiebreaker == 0  %>
+                <div class="col s11">
+                    <input type="checkbox" id="tiebreaker" name="game[tiebreaker]"/>
+                    <label for="tiebreaker">Tiebreaker</label>
+                </div>
             <% end %>
-          </select>
-        </div>
 
-        <div class="input-field col s4">
-          <select name="game[home]" class="validate" required>
-            <option>Home Team</option>
-            <% @teams.each do |home| %>
-              <option value="<%= home.name %>"><%= home.name %></option>
-            <% end %>
-          </select>
         </div>
-
-        <div class="input-field col s2"><input placeholder="Spread" id="spread" type="number" step="0.5" name="game[spread]" class="validate" required></div>
-        <div class="input-field col s2"><input placeholder="Location" id="location" type="text" name="game[location]" class="validate" required></div>
-      </div>
-
-      <div class="row">
-        <div class="col s6" style="border: 1px black solid;">
-          <input type="date" class="col s6 offset-s3 datepicker" placeholder="Select Date" name="game[date]" required>
-        </div>
-        <div class="col s1" style="border: 1px black solid;">
-          <p style="display: inline block; text-align:center"><strong>@</strong></p>
-        </div>
-        <div class="input-field col s4">
-            <select name="game[start_time]" required>
-              <option value="" disabled selected>Start Time (EST)</option>
-              <% @times.each do |t| %>
-                <option value="<%= t %>"><%= t %></option>
-              <% end %>
-            </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s12">
-          <button class="waves-effect waves-light btn" action="submit">Add Game</button>
-        </div>
-      </div>
-
-      <input type="hidden" value="false" name="game[tiebreaker]">
-      <% if @tiebreaker == 0 && @active_week.locked == false %>
-      <div class="row">
-        <div class="col s12"">
-          <input type="checkbox" id="tiebreaker" name="game[tiebreaker]"/>
-          <label for="tiebreaker">Tiebreaker</label>
-        </div>
-      </div>
-      <% end %>
 
     </form>
-  </div>
 </div>
