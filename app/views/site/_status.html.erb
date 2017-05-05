@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col s12">
+
+        <div class="col s4">
+            Week:<br/>
+            <strong><%= @current_week.week %></strong>
+        </div>
+
+        <div class="col s4">
+            Status:<br/> 
+            <strong><%= @current_week.locked ? "Make Your Picks!" : "Open" %></strong>
+        </div>
+
+        <div class="col s4">
+            Games:<br/>
+            <strong><%= @games ? @games.count : 0 %></strong>
+        </div>
+
+  </div>
+</div>

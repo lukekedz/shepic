@@ -14,18 +14,26 @@
 
                     <!-- 12 cols -->
                     <div class="col s12">
-                        <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %> </strong>
+                        <strong><%= game_day(g[:date]) %> <%= g[:start_time] %></strong>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
                         @ <%= g[:location] %>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <!-- BREAK -->
+                    <div class="col s12"><br/></div>
+
+                    <!-- 12 cols -->
+                    <div class="col s12">
+                        <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %> </strong>
                     </div>
 
                     <!-- 12 cols -->
                     <div class="col s12">
                         Spread: <strong><%= g[:spread] %></strong>
-                    </div>
-
-                    <!-- 12 cols -->
-                    <div class="col s12">
-                        <%= game_day(g[:date]) %> <%= g[:start_time] %>
                     </div>
 
                     <!-- 12 cols -->

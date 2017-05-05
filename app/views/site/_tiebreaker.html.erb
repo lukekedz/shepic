@@ -1,0 +1,45 @@
+<div class="row"><div class="divider"></div></div>
+
+<div class="row center-align flow-text">
+    <div class="col s12">
+
+        <% if @games %>
+            <% @games.where(tiebreaker: true).each do |g| %>
+                <div class="row">
+
+                    <!-- 12 cols -->
+                    <div class="col s12 alert">
+                        Tiebreaker Game: 
+                    </div>
+
+                     <!-- 12 cols -->
+                     <!-- BREAK -->
+                    <div class="col s12"><br/></div>
+
+                    <div class="col s12">
+                        <strong>
+                            <%= g[:away] %></strong> vs. <strong><%= g[:home] %>
+                        </strong>
+                    </div>
+
+                    <!-- 12 cols -->
+                    <!-- BREAK -->
+                    <div class="col s12"><br/></div>
+
+                    <div class="col s6 offset-s3">
+                        <% if !@current_week.finalized %>
+                            Enter Total Points:
+                            <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+                            <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
+                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
+                        <% else %>
+                            <input type="number" value="<%= @tbreak_pts %>" disabled>
+                        <% end %>
+                    </div>
+
+                </div>
+            <% end %>
+        <% end %>    
+
+    </div>
+</div>
