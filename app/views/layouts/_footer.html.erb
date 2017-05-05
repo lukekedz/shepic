@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col s12" style="text-align:center">
-    <p><%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+    <% if !current_page?(new_user_session_path) %>
+        <p><%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+    <% end %>
   </div>
 </div>
 
