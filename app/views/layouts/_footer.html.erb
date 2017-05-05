@@ -1,16 +1,22 @@
-<div class="row">
-  <div class="col s12" style="text-align:center">
-    <% if !current_page?(new_user_session_path) %>
-        <p><%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
-    <% end %>
-  </div>
-</div>
+<div class="footer-copyright center-align">
 
-<div class="row">
-  <div class="col s12" style="text-align:center">
-    <p><strong>sia inc &copy; 2016</strong></p>
-  </div>
-   <div class="col s12" style="text-align:center">
-    <p><img src="/assets/sia.png" height="30" width="30"></p>
-  </div>
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s10 offset-s1">
+        <% if !current_page?(new_user_session_path) %>
+            <p><%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s10 offset-s1">
+        <strong>sia inc</strong>
+      </div>
+       <div class="col s10 offset-s1">
+        <img src="/assets/sia.png" height="30" width="30">
+      </div>
+    </div>
+
 </div>

@@ -1,8 +1,16 @@
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
-  <h2 class="text-center">Login</h2>
-    <%= f.input :username, required: false, autofocus: true, label: false, placeholder: "User Name", input_html: {class: "form-control"} %>
-    <%= f.input :password, required: false, label: false, placeholder: "Password", input_html: {class: "form-control"} %>
-    <%= f.button :submit, "Login", class: "btn btn-primary btn-block" %>
-<% end %>
+<div class="row center-align">
+    <div class="col s10 offset-s1">
+
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
+          <h4>Login</h4>
+            <%= f.input :username, required: false, autofocus: true, label: false, placeholder: "User Name", input_html: {class: "form-control"} %>
+            <%= f.input :password, required: false, label: false, placeholder: "Password", input_html: {class: "form-control"} %>
+            <%= f.button :submit, "Login" %>
+        <% end %>
+
+    </div>
+</div>
+
+<div class="row"><br/></div>
 
 <%= render "devise/shared/links" %>
