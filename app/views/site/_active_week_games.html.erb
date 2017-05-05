@@ -29,8 +29,9 @@
                             <div class="col s12"><br/></div>
 
                             <!-- 12 cols -->
+                            <!-- 6 -->
                             <!-- AWAY BUTTON/FORM SELECTION -->
-                            <div class="col s12">
+                            <div class="col s6">
                                 <% if @current_week.locked == true && !@current_week.finalized %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
@@ -38,8 +39,8 @@
                                     <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="away" id="away-home">
 
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">
-                                        <strong><%= g[:away] %></strong>
+                                    <button type="submit" name="action">
+                                        <strong><img class="responsive-img" src="/assets/osu.png"></strong>
                                     </button>
                                 <% else %>
                                     <%= g[:away] %>
@@ -47,11 +48,9 @@
                                 </form>
                             </div>
 
-                                vs. 
-
-                            <!-- 12 cols -->
+                            <!-- 6 -->
                             <!-- HOME BUTTON/FORM SELECTION -->
-                            <div class="col s12">
+                            <div class="col s6">
                                 <% if @current_week.locked == true && !@current_week.finalized %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
@@ -59,8 +58,8 @@
                                     <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="home" id="away-home">
 
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">
-                                        <strong><%= g[:home] %></strong>
+                                    <button type="submit" name="action">
+                                        <strong><img class="responsive-img" src="/assets/michigan.png"></strong>
                                     </button>
                                 <% else %>
                                     <%= g[:home] %>
