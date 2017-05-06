@@ -1,17 +1,24 @@
-<div class="row">
-  <div class="col s12" style="text-align:center;">
+<div class="row center-align flow-text">
     <div class="col s12">
-      <span class="flow-text"><h5>History</h5></span>
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col s12" style="text-align:center;">
-    <% @weeks.each do |wk| %>
-    <div class="col s12">
-      <span class="flow-text"><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></span>
+        <div class="row">
+            <!-- 12 cols -->
+            <div class="col s12">
+                <h5>History</h5>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- 12 cols -->
+            <div class="col s12">
+                <% @weeks.each_with_index do |wk, index| %>
+                    <%= link_to "Week " + wk.week.to_s + " => " + @weekly_user_win_total[index].to_s + " wins", site_archived_path(:week => wk.id) %>
+                    <br/>
+                <% end %>
+            </div>
+
+        </div>
+
     </div>
-    <% end %>
-  </div>
 </div>

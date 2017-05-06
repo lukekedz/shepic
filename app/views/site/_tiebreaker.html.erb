@@ -9,7 +9,7 @@
 
                     <!-- 12 cols -->
                     <div class="col s12 alert">
-                        Tiebreaker Game: 
+                        Tiebreaker Game:
                     </div>
 
                      <!-- 12 cols -->
@@ -31,7 +31,7 @@
                             Enter Total Points:
                             <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
                             <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
-                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
+                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
                         <% else %>
                             <input type="number" value="<%= @tbreak_pts %>" disabled>
                         <% end %>
@@ -39,7 +39,7 @@
 
                 </div>
             <% end %>
-        <% end %>    
+        <% end %>
 
     </div>
 </div>

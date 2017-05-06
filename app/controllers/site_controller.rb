@@ -67,9 +67,24 @@ class SiteController < ApplicationController
     @standings = Standing.order(wins: :desc)
   end
 
-  def history
-    @weeks = Week.where(locked: true, finalized: true)
-  end
+    def history
+        @weeks = Week.where(locked: true, finalized: true)
+
+        @weekly_user_win_total = []
+
+        @weeks.each_with_index do |wk, index|
+            games = Game.where(week_id: wk.id)
+
+            @weekly_user_win_total[index] = 0
+
+            games.each do |g|
+                pick = Pick.where(game_id: g.id, user_id: current_user.id)
+                if pick[0].correct == true
+                    @weekly_user_win_total[index] += 1
+                end
+            end
+        end
+    end
 
   def archived
     @weeks = Week.where(locked: true, finalized: true)
