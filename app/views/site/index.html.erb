@@ -18,7 +18,7 @@
             <% end %>
 
             <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
-            
+
             <br/>
 
             <li><h5><%= link_to "User Profile", edit_user_registration_path %></h5></li>
@@ -33,7 +33,7 @@
         <ul>
             <li><h5><%= link_to "Current Week", site_current_week_path %></h5></li>
             <li><h5><%= link_to "Standings", site_standings_path %></h5></li>
-            
+
             <br/>
 
             <ul id="dropdown3" class="dropdown-content">
@@ -42,10 +42,12 @@
               <% end %>
             </ul>
 
-            <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
-              History
-              <i class="mdi-navigation-arrow-drop-down right"></i>
-            </a>
+            <% if @weeks != [] %>
+                <a class="btn dropdown-button" href="#!" data-activates="dropdown3">
+                  History
+                  <i class="mdi-navigation-arrow-drop-down right"></i>
+                </a>
+            <% end %>
 
             <br/>
             <br/>
