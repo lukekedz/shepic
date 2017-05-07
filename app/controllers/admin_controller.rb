@@ -60,30 +60,37 @@ class AdminController < ApplicationController
 
         if Week.last.locked == true
             params.each do |key, value|
-                game = key.split("-")
-                game_id   = game[0]
-                away_home = game[1]
-                pts = value
+                # TODO: better logic
+                if key != 'controller' &&
+                   key != 'admin' &&
+                   key != 'action' &&
+                   key != 'review'
 
-                case away_home
-                when "away"
-                    Game.update(game_id, away_pts: pts)
-                when "home"
-                    Game.update(game_id, home_pts: pts)
+                    game = key.split("-")
+                    game_id   = game[0]
+                    away_home = game[1]
+                    pts = value
 
-                    # TODO: break out method
-                    # TODO: make one call to get game
                     game = Game.find(game_id)
-                    if game.away_pts > ( game.home_pts + game.spread )
-                        Game.update(game_id, winner: "away")
-                    elsif game.away_pts < ( game.home_pts + game.spread )
-                        Game.update(game_id, winner: "home")
-                    else
-                        Game.update(game_id, winner: "push")
+                    if game.tiebreaker == true then game.increment!(:total_pts, by = pts.to_i) end
+
+                    case away_home
+                    when "away"
+                        game.update(away_pts: pts)
+                    when "home"
+                        game.update(home_pts: pts)
+
+                        # TODO: break out method
+                        if game.away_pts > ( game.home_pts + game.spread )
+                            game.update(winner: "away")
+                        elsif game.away_pts < ( game.home_pts + game.spread )
+                            game.update(winner: "home")
+                        else
+                            game.update(winner: "push")
+                        end
                     end
-                when "tbreak"
-                    Game.update(game_id, total_pts: pts)
                 end
+
             end
         end
     end
