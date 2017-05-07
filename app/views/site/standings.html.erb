@@ -5,7 +5,7 @@
             <!-- 12 cols -->
             <div class="col s12">
                 <h5>Standings</h5>
-                <h6>(through Week <%= @week.week %>)</h6>
+                <h6>(through Week <%= @week != nil ? @week.week : 1 %>)</h6>
             </div>
         </div>
 
@@ -25,20 +25,22 @@
         </div>
 
         <div class="row">
-            <!-- 12 cols -->
-            <% @standings.each_with_index do |st, i| %>
-                <% if st.user.admin == false %>
-                <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
-                    <%= st.user.username %>
-                </div>
+            <% if @week != nil %>
+                <!-- 12 cols -->
+                <% @standings.each_with_index do |st, i| %>
+                    <% if st.user.admin == false %>
+                    <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
+                        <%= st.user.username %>
+                    </div>
 
-                <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
-                    <%= st.wins %>
-                </div>
+                    <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
+                        <%= st.wins %>
+                    </div>
 
-                <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
-                    + <%= @last_weeks_wins[i] %> wins
-                </div>
+                    <div class="col s4 <%= if i % 2 == 0 then 'background' end %>">
+                        + <%= @last_weeks_wins[i] %> wins
+                    </div>
+                    <% end %>
                 <% end %>
             <% end %>
         </div>

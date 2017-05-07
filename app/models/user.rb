@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 	has_many :picks
 	has_one  :standing
 
+	# TODO: prevent new Users from being Admin
+	# this causes my development seed Admin user to flip to a regular user
 	def default_admin
 		user = User.last
 	   	user.admin = false

@@ -104,8 +104,8 @@ class AdminController < ApplicationController
 
             @games.each do |game|
                 if game.tiebreaker == true
-                    pts = g.away_pts.to_i + g.home_pts.to_i
-                    game.update(total_pts = pts)
+                    pts = game.away_pts.to_i + game.home_pts.to_i
+                    game.update(total_pts: pts)
                 end
 
                 picks = Pick.where(game_id: game.id)

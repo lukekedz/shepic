@@ -68,15 +68,18 @@ class SiteController < ApplicationController
 
         @last_weeks_wins = []
 
-        @standings.each_with_index do |st, index|
-            games = Game.where(week_id: @week.id)
+        # TODO: better way? edge case for wk 1
+        if @week != nil
+            @standings.each_with_index do |st, index|
+                games = Game.where(week_id: @week.id)
 
-            @last_weeks_wins[index] = 0
+                @last_weeks_wins[index] = 0
 
-            games.each do |g|
-                pick = Pick.where(game_id: g.id, user_id: st.user_id)
-                if pick[0].correct == true
-                    @last_weeks_wins[index] += 1
+                games.each do |g|
+                    pick = Pick.where(game_id: g.id, user_id: st.user_id)
+                    if pick[0].correct == true
+                        @last_weeks_wins[index] += 1
+                    end
                 end
             end
         end

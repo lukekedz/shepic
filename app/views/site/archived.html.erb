@@ -49,11 +49,28 @@
                         <div class="col s12"><br/></div>
 
                         <!-- 12 cols -->
+                        <!-- TEAM MATCHUP -->
+                        <strong>
+                        <div class="col s5">
+                            <%= g[:away] %>
+                        </div>
+                        <div class="col s2">
+                            vs.
+                        </div>
+                        <div class="col s5">
+                            <%= g[:home] %>
+                        </div>
+                        </strong>
+
+                        <!-- 12 cols -->
                         <!-- TEAM LOGOS -->
-                        <div class="col s6">
+                        <div class="col s5">
                             <strong><img class="responsive-img" src="/assets/osu.png"></strong>
                         </div>
-                        <div class="col s6">
+                        <div class="col s2">
+                            &nbsp;
+                        </div>
+                        <div class="col s5">
                             <strong><img class="responsive-img" src="/assets/michigan.png"></strong>
                         </div>
 
@@ -93,7 +110,7 @@
 
                         <div class="col s6">
                             <% if @picks[ g[:id] ][:correct] == nil %>
-                                push
+                                <span class="alert">PUSH</span>
                             <% else %>
                                 <% if @picks[ g[:id] ][:correct] == true %>
                                     <img src='/assets/correct.png' height='30' width='30'>

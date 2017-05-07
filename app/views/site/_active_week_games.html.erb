@@ -24,14 +24,32 @@
                                 @ <%= g[:location] %>
                             </div>
 
-                             <!-- 12 cols -->
-                             <!-- BREAK -->
+                            <!-- 12 cols -->
+                            <! -- BREAK -->
                             <div class="col s12"><br/></div>
 
                             <!-- 12 cols -->
-                            <!-- 6 -->
+                            <!-- TEAM MATCHUP -->
+                            <strong>
+                            <div class="col s5">
+                                <%= g[:away] %>
+                            </div>
+                            <div class="col s2">
+                                vs.
+                            </div>
+                            <div class="col s5">
+                                <%= g[:home] %>
+                            </div>
+                            </strong>
+
+                            <!-- 12 cols -->
+                            <!-- BREAK -->
+                            <div class="col s12"><br/></div>
+
+                            <!-- 12 cols -->
+                            <!-- 5 -->
                             <!-- AWAY BUTTON/FORM SELECTION -->
-                            <div class="col s6">
+                            <div class="col s5">
                                 <% if @current_week.locked == true && !@current_week.finalized %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
@@ -48,9 +66,14 @@
                                 </form>
                             </div>
 
-                            <!-- 6 -->
+                            <!-- 2 -->
+                            <div class="col s2">
+                                &nbsp;
+                            </div>
+
+                            <!-- 5 -->
                             <!-- HOME BUTTON/FORM SELECTION -->
-                            <div class="col s6">
+                            <div class="col s5">
                                 <% if @current_week.locked == true && !@current_week.finalized %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
@@ -68,7 +91,7 @@
                             </div>
 
                             <!-- 12 cols -->
-                            <div class="col s6 offset-s6">
+                            <div class="col s5 offset-s7">
                                 Spread:
                                 <strong>
                                     <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
@@ -85,6 +108,25 @@
                                 Your Pick: <%= @picks[ g[:id] ] %>
                             </div>
                             </strong>
+
+                            <!-- 12 cols -->
+                            <!-- BREAK -->
+                            <div class="col s12"><br/></div>
+
+                            <!-- 12 cols  -->
+                            <!-- TIEBREAKER -->
+                            <% if g[:tiebreaker] == true %>
+                                <div class="col s6 offset-s3">
+                                    <% if !@current_week.finalized %>
+                                        <span class="alert">Enter Total Points:</span>
+                                        <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+                                        <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
+                                        <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
+                                    <% else %>
+                                        <input type="number" value="<%= @tbreak_pts %>" disabled>
+                                    <% end %>
+                                </div>
+                            <% end %>
                         </div>
 
                     </div>
