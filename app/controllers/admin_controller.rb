@@ -72,7 +72,6 @@ class AdminController < ApplicationController
                     pts = value
 
                     game = Game.find(game_id)
-                    if game.tiebreaker == true then game.increment!(:total_pts, by = pts.to_i) end
 
                     case away_home
                     when "away"
@@ -104,6 +103,11 @@ class AdminController < ApplicationController
             @users = User.where(admin: false)
 
             @games.each do |game|
+                if game.tiebreaker == true
+                    pts = g.away_pts.to_i + g.home_pts.to_i
+                    game.update(total_pts = pts)
+                end
+
                 picks = Pick.where(game_id: game.id)
                 picks.each do |pick|
                     if game.winner == "push" || game.winner == nil

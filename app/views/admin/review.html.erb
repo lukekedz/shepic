@@ -1,77 +1,89 @@
-<div class="row">
-	<div class="col s12" style="text-align:center;">
-    	<h6>Admin: Review & Finalize</h6>
-    	<h6>Game Scores</h6>
+<div class="row center-align flow-text">
+    <div class="col s12">
+
+        <div class="row">
+            <div class="col s12">
+                <h5>Admin: Review & Finalize</h5>
+                <h5>Game Scores</h5>
+            </div>
+        </div>
+
+	    <% @games.each_with_index do |g, i| %>
+            <div class="row">
+                <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
+
+                    <div class="row">
+
+                        <!-- 12 cols -->
+                        <div class="col s12">
+                            Game <%= i + 1 %>
+                            <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
+                        </div>
+
+                        <!-- 12 cols -->
+                        <div class="col s12">
+                            <strong><%= game_day(g[:date]) %> <%= g[:start_time] %></strong>
+                        </div>
+
+                        <!-- 12 cols -->
+                        <div class="col s12">
+                            @ <%= g[:location] %>
+                        </div>
+
+                        <!-- 12 cols -->
+                        <!-- BREAK -->
+                        <div class="col s12"><br/></div>
+
+                        <!-- 12 cols -->
+                        <!-- TEAM MATCHUP -->
+                        <div class="col s12">
+                            <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong>
+                        </div>
+
+                        <!-- 12 cols -->
+                        <!-- TEAM LOGOS -->
+                        <div class="col s6">
+                            <strong><img class="responsive-img" src="/assets/osu.png"></strong>
+                        </div>
+                        <div class="col s6">
+                            <strong><img class="responsive-img" src="/assets/michigan.png"></strong>
+                        </div>
+
+                        <!-- 12 cols -->
+                        <strong>
+                        <div class="col s12">
+                            Final Score:
+                        </div>
+                        </strong>
+
+                        <!-- 12 cols -->
+                        <div class="col s6">
+                            <strong><%= g[:away_pts] %></strong>
+                        </div>
+                        <div class="col s6">
+                            <strong><%= g[:home_pts] %></strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        <% end %>
+
+        <div class="row"><div class="divider"></div></div>
+
+	    <div class="row">
+	        <div class="col s12">
+	            <a onclick="return confirm('Warning! Finalizing scores calculates correct picks & increments standings. It cannot be reversed!')"
+	               href="/admin/finalize" class="waves-effect waves-light btn">Finalize Scores</a>
+	        </div>
+	    </div>
+
+	    <div class="row">
+	        <div class="col s12">
+	          <a href="/admin/scores" class="waves-effect waves-light btn">Return to Add Game Scores</a>
+	        </div>
+	    </div>
+
 	</div>
 </div>
-
-<form action="" role="form" method="POST">
-
-	<div class="row">
-	  	<div class="col s6" style="border: 1px black solid; text-align:center;">AWAY</div>
-	  	<div class="col s6" style="border: 1px black solid; text-align:center;">HOME</div>
-	</div>
-
-	<div class="row"><div class="divider"></div></div>
-
-	<% @games.each do |g| %>
-		<div class="row">
-			<div class="col s12" style="border: 1px black solid; text-align:center;">
-				<div class="row">
-					<div class="col s4" style="border: 1px black solid;">
-						<p><strong><%= g[:away] %></strong></p>
-					</div>
-					<div class="col s2" style="border: 1px black solid;">
-						<p><strong><%= g[:away_pts] %></strong></p>
-					</div>
-
-					<div class="col s4">
-						<p><strong><%= g[:home] %></strong></p>
-					</div>
-					<div class="col s2" style="border: 1px black solid;">
-						<p><strong><%= g[:home_pts] %></strong></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% end %>
-
-  	<% @games.each do |g| %>
-    	<% if g.tiebreaker == true %>
-
-      	<div class="row">
-    			<div class="col s12" style="border: 1px black solid; text-align:center">
-
-				<div class="col s7" style="border: 1px black solid;">
-					<p style="display: inline block; text-align:center">
-						Tiebreaker: <strong><%= g[:away] %></strong> vs. <strong><%= g[:home] %></strong>
-					</p>
-				</div>
-
-	          	<div class="col s3" style="border: 1px black solid;">
-	            	<p>Total Points:</p>
-	          	</div>
-
-	          	<div class="input-field col s2">
-					<%= g[:total_pts] %>
-	          	</div>
-        	</div>
-      	</div>
-    	<% end %>
-	<% end %>
-	<div class="row"><div class="divider"></div></div>
-
-	<div class="row">
-		<div class="col s12" style="text-align:center;">
-		  	<a onclick="return confirm('Warning! Finalizing scores calculates correct picks & increments standings. It cannot be reversed!')"
-		       href="/admin/finalize" class="waves-effect waves-light btn">Finalize Scores</a>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col s12" style="text-align:center;">
-		  <a href="/admin/scores" class="waves-effect waves-light btn">Return to Add Game Scores</a>
-		</div>
-	</div>
-
-</form>
