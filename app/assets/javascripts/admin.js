@@ -54,6 +54,7 @@ var ready = function() {
       });
   }
 
+  // TODO: no longer using ?? after refactored admin add game per Gary
   $("#add_game").css("display", "none");
   var add_game_displayed = false;
 
