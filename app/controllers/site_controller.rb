@@ -61,11 +61,26 @@ class SiteController < ApplicationController
     end
   end
 
-  def standings
-    @current_week = Week.last
-    @week = Week.where(locked: true, finalized: true).last
-    @standings = Standing.order(wins: :desc)
-  end
+    def standings
+        @current_week = Week.last
+        @week = Week.where(locked: true, finalized: true).last
+        @standings = Standing.order(wins: :desc)
+
+        @last_weeks_wins = []
+
+        @standings.each_with_index do |st, index|
+            games = Game.where(week_id: @week.id)
+
+            @last_weeks_wins[index] = 0
+
+            games.each do |g|
+                pick = Pick.where(game_id: g.id, user_id: st.user_id)
+                if pick[0].correct == true
+                    @last_weeks_wins[index] += 1
+                end
+            end
+        end
+    end
 
     def history
         @weeks = Week.where(locked: true, finalized: true)
@@ -86,23 +101,23 @@ class SiteController < ApplicationController
         end
     end
 
-  def archived
-    @weeks = Week.where(locked: true, finalized: true)
-    @archived_week = Week.find(params[:week])
-    @games = Game.where(week_id: params[:week]).order(:date, :start_time)
+    def archived
+        @weeks = Week.where(locked: true, finalized: true)
+        @archived_week = Week.find(params[:week])
+        @games = Game.where(week_id: params[:week]).order(:date, :start_time)
 
-    @picks = {}
-    @games.each do |g|
-      user_pick = g.picks.where(user_id: current_user.id)
-      if user_pick[0] != nil
-        @picks[user_pick[0].game_id] = { pick: user_pick[0].pick, correct: user_pick[0].correct }
+        @picks = {}
+        @games.each do |g|
+            user_pick = g.picks.where(user_id: current_user.id)
+            if user_pick[0] != nil
+                @picks[user_pick[0].game_id] = { pick: user_pick[0].pick, correct: user_pick[0].correct }
 
-        if user_pick[0].tbreak_pts != nil
-          @tbreak_pts = user_pick[0].tbreak_pts
+                if user_pick[0].tbreak_pts != nil
+                    @tbreak_pts = user_pick[0].tbreak_pts
+                end
+            end
         end
-      end
     end
-  end
 
   private
 
