@@ -15,3 +15,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var ready = function() {
+    // activation
+    $(".dropdown-button").dropdown();
+    $('select').material_select();
+    
+    $('.datepicker').pickadate({
+        selectMonths: true,
+        closeOnClear: true,
+        format: 'mm-dd-yyyy'
+    });
+};
+
+// LDFE-126 in backlog
+$(document).ready(ready);
+$(document).on('page:load', ready);
