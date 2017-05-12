@@ -42,6 +42,33 @@
                             </div>
                             </strong>
 
+                            <% if g[:game_started] == true %>
+                                <!-- 12 cols -->
+                                <!-- LIVE SCORE -->
+                                <strong>
+                                <div class="col s4">
+                                    6
+                                </div>
+                                <div class="col s4">
+                                    SCORE
+                                </div>
+                                <div class="col s4">
+                                    14
+                                </div>
+                                </strong>
+
+                                <!-- 12 cols -->
+                                <!-- TIME DETAILS -->
+                                <strong>
+                                <div class="col s6">
+                                    Quarter 1
+                                </div>
+                                <div class="col s6">
+                                    4:32 remaining
+                                </div>
+                                </strong>
+                            <% end %>
+                            
                             <!-- 12 cols -->
                             <!-- BREAK -->
                             <div class="col s12"><br/></div>
@@ -126,13 +153,14 @@
                             <% if @current_week.locked == true && !@current_week.finalized %>
 
                                 <% if g[:tiebreaker] == true %>
-                                    <div class="col s6 offset-s3">
+                                    <div class="col s12">
                                         <% if !@current_week.finalized && g[:game_started] == false %>
                                             <span class="alert">Enter Total Points:</span>
                                             <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
                                             <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
                                             <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
                                         <% else %>
+                                            <!--  TODO: make display, not disabled input -->
                                             <input type="number" value="<%= @tbreak_pts %>" disabled>
                                         <% end %>
                                     </div>
