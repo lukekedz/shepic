@@ -1,0 +1,24 @@
+<div class="row center-align flow-text">
+    <div class="col s12">
+
+        <div class="row">
+            <!-- 12 cols -->
+            <div class="col s12">
+                <h5>Admin: Export Weekly Results</h5>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- 12 cols -->
+            <div class="col s12">
+                <% @weeks.each_with_index do |wk, index| %>
+                    Week <%= wk.id %>
+                    <br/>
+                <% end %>
+            </div>
+
+        </div>
+
+    </div>
+</div>

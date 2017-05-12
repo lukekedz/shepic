@@ -89,6 +89,7 @@ class AdminController < ApplicationController
                         game.update(home_pts: pts)
 
                         # TODO: break out method
+                        # also calculating in _active_week_games.html.erb
                         if game.away_pts > ( game.home_pts + game.spread )
                             game.update(winner: "away")
                         elsif game.away_pts < ( game.home_pts + game.spread )
@@ -162,6 +163,8 @@ class AdminController < ApplicationController
     end
 
     def export_results
+        @weeks = Week.where(locked: true, finalized: true)
+
     end
 
 private
