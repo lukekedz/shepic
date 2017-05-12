@@ -106,7 +106,11 @@
                             <strong>
                             <div class="col s12" id="your-pick-<%= g[:id] %>">
                                 <% if g[:game_started] == false %>
-                                    Current Pick: <%= @picks[ g[:id] ] %>
+                                    <% if @picks[ g[:id] ] %>
+                                        Current Pick: <%= @picks[ g[:id] ] %>
+                                    <% else %>
+                                        <span class="make-your-pick">Make Your Selection!</span>
+                                    <% end %>
                                 <% else %>
                                     Pick Locked: <%= @picks[ g[:id] ] %>
                                 <% end %>
