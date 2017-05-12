@@ -161,6 +161,9 @@ class AdminController < ApplicationController
         end
     end
 
+    def export_results
+    end
+
 private
 
     def user_is_admin?
