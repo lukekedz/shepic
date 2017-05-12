@@ -76,6 +76,9 @@ class SiteController < ApplicationController
                 @last_weeks_wins[index] = 0
 
                 games.each do |g|
+                    puts g.inspect
+                    puts st.inspect
+
                     pick = Pick.where(game_id: g.id, user_id: st.user_id)
                     if pick[0].correct == true
                         @last_weeks_wins[index] += 1

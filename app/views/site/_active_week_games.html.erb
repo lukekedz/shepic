@@ -41,33 +41,6 @@
                                 <%= g[:home] %>
                             </div>
                             </strong>
-
-                            <% if g[:game_started] == true %>
-                                <!-- 12 cols -->
-                                <!-- LIVE SCORE -->
-                                <strong>
-                                <div class="col s4">
-                                    6
-                                </div>
-                                <div class="col s4">
-                                    SCORE
-                                </div>
-                                <div class="col s4">
-                                    14
-                                </div>
-                                </strong>
-
-                                <!-- 12 cols -->
-                                <!-- TIME DETAILS -->
-                                <strong>
-                                <div class="col s6">
-                                    Quarter 1
-                                </div>
-                                <div class="col s6">
-                                    4:32 remaining
-                                </div>
-                                </strong>
-                            <% end %>
                             
                             <!-- 12 cols -->
                             <!-- BREAK -->
@@ -124,6 +97,41 @@
                                     <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
                                 </strong>
                             </div>
+
+                            <% if g[:game_started] == true %>
+                                <!-- 12 cols -->
+                                <strong>
+                                <div class="col s12">
+                                    Current Score:
+                                </div>
+                                </strong>
+
+                                <!-- 12 cols -->
+                                <div class="col s6">
+                                    <strong><%= g[:away_pts] %></strong>
+                                </div>
+                                <div class="col s6">
+                                    <!-- TODO: refactor -->
+                                    <!-- TODO: need PUSH conditional as well -->
+                                    <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
+
+                                        <% if @picks[ g[:id] ] == g[:away] %>
+                                            <strong style="border: 1px green solid;"><%= g[:home_pts] %></strong>
+                                        <% else %>
+                                            <strong style="border: 1px red solid;"><%= g[:home_pts] %></strong>
+                                        <% end %>
+
+                                    <% else %>
+                                        
+                                        <% if @picks[ g[:id] ] == g[:home] %>
+                                            <strong style="border: 1px green solid;"><%= g[:home_pts] %></strong>
+                                        <% else %>
+                                            <strong style="border: 1px red solid;"><%= g[:home_pts] %></strong>
+                                        <% end %>
+
+                                    <% end %>
+                                </div>
+                            <% end %>
 
                              <!-- 12 cols -->
                              <!-- BREAK -->
