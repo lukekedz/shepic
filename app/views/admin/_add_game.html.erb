@@ -15,6 +15,7 @@
         <form action="/admin/add_new_game" role="form" id="add_new_game" method="POST">
                 <input type="hidden" value="<%= @active_week.week %>" name="game[week_id]">
                 <input type="hidden" value="false" name="game[tiebreaker]">
+                <input type="hidden" value="false" name="game[game_started]">
 
                 <!-- 12 cols -->
                 <div class="input-field col s6">
@@ -65,7 +66,7 @@
                         <option value="" disabled selected>All Times Must Be EST!</option>
 
                         <% @times.each do |t| %>
-                            <option value="<%= t %>"><%= t %></option>
+                            <option value="<%= t %>"><%= convert_military_to_ampm(t) %></option>
                         <% end %>
                     </select>
                 </div>

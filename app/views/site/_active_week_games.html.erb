@@ -16,7 +16,7 @@
 
                             <!-- 12 cols -->
                             <div class="col s12">
-                                <strong><%= game_day(g[:date]) %> <%= g[:start_time] %></strong>
+                                <strong><%= game_day(g[:date]) %> <%= convert_military_to_ampm(g[:start_time]) %></strong>
                             </div>
 
                             <!-- 12 cols -->
@@ -50,7 +50,7 @@
                             <!-- 5 -->
                             <!-- AWAY BUTTON/FORM SELECTION -->
                             <div class="col s5">
-                                <% if @current_week.locked == true && !@current_week.finalized %>
+                                <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
                                     <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -60,8 +60,10 @@
                                     <button type="submit" name="action">
                                         <strong><%= image_tag 'osu.png', :class => 'responsive-img' %></strong>
                                     </button>
-                                <% end %>
                                 </form>
+                                <% else %>
+                                    <strong><%= image_tag 'osu.png', :class => 'responsive-img' %></strong>
+                                <% end %>
                             </div>
 
                             <!-- 2 -->
@@ -72,7 +74,7 @@
                             <!-- 5 -->
                             <!-- HOME BUTTON/FORM SELECTION -->
                             <div class="col s5">
-                                <% if @current_week.locked == true && !@current_week.finalized %>
+                                <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
                                 <form action="" role="form" class="pick" method="POST">
                                     <input type="hidden" value="<%= current_user.id %>" id="user-id">
                                     <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
@@ -82,8 +84,10 @@
                                     <button type="submit" name="action">
                                         <strong><%= image_tag 'michigan.png', :class => 'responsive-img' %></strong>
                                     </button>
-                                <% end %>
                                 </form>
+                                <% else %>
+                                    <strong><%= image_tag 'michigan.png', :class => 'responsive-img' %></strong>
+                                <% end %>
                             </div>
 
                             <!-- 12 cols -->
@@ -101,7 +105,11 @@
                             <!-- 12 cols -->
                             <strong>
                             <div class="col s12" id="your-pick-<%= g[:id] %>">
-                                Your Pick: <%= @picks[ g[:id] ] %>
+                                <% if g[:game_started] == false %>
+                                    Current Pick: <%= @picks[ g[:id] ] %>
+                                <% else %>
+                                    Pick Locked: <%= @picks[ g[:id] ] %>
+                                <% end %>
                             </div>
                             </strong>
 
@@ -115,7 +123,7 @@
 
                                 <% if g[:tiebreaker] == true %>
                                     <div class="col s6 offset-s3">
-                                        <% if !@current_week.finalized %>
+                                        <% if !@current_week.finalized && g[:game_started] == false %>
                                             <span class="alert">Enter Total Points:</span>
                                             <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
                                             <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">

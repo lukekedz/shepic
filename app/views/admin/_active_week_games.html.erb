@@ -14,7 +14,7 @@
 
                         <!-- 12 cols -->
                         <div class="col s12">
-                            <strong><%= game_day(g[:date]) %> <%= g[:start_time] %></strong>
+                            <strong><%= game_day(g[:date]) %> <%= convert_military_to_ampm(g[:start_time]) %></strong>
                         </div>
 
                         <!-- 12 cols -->
