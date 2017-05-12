@@ -28,6 +28,8 @@ gem 'materialize-sass'
 gem 'hirb'
 gem 'auto_increment'
 
+gem 'faker'
+
 # solving problem after brew install postgresql, when trying to restore copy of Heroku db
 # tried bew link readline --force, but still had errors when launching rails c
 gem 'rb-readline' 
@@ -36,7 +38,6 @@ group :development, :test do
 	gem 'spring'
 	gem 'dotenv-rails'
 	gem 'rspec-rails', '~> 3.5'
-	gem 'faker'
 	gem 'simplecov', :require => false, :group => :test
 end
 
