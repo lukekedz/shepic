@@ -9,7 +9,8 @@
                 - home
                 - spread
                 - location
-                - start_time 
+                - start_time
+                - game_started
                 - tiebreaker
                 - winner 
                 - away_pts 
