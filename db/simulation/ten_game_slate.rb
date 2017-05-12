@@ -1,4 +1,4 @@
-start_times = ["12:00pm", "12:15pm", "3:00pm", "3:30pm", "8:00pm", "8:30pm", "9:00pm"]
+start_times = ["1200", "1215", "300", "330", "800", "830", "900"]
 
 10.times do
   Game.create(
@@ -9,7 +9,8 @@ start_times = ["12:00pm", "12:15pm", "3:00pm", "3:30pm", "8:00pm", "8:30pm", "9:
     location:   Faker::Address.city,
     tiebreaker: false,
     date:       Faker::Date.between(Date.today, Date.today + 2),
-    start_time: start_times.sample
+    start_time: start_times.sample,
+    game_started: false
   )
 end
 
