@@ -111,17 +111,21 @@
 
                             <!-- 12 cols  -->
                             <!-- TIEBREAKER -->
-                            <% if g[:tiebreaker] == true %>
-                                <div class="col s6 offset-s3">
-                                    <% if !@current_week.finalized %>
-                                        <span class="alert">Enter Total Points:</span>
-                                        <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
-                                        <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
-                                        <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
-                                    <% else %>
-                                        <input type="number" value="<%= @tbreak_pts %>" disabled>
-                                    <% end %>
-                                </div>
+                            <% if @current_week.locked == true && !@current_week.finalized %>
+
+                                <% if g[:tiebreaker] == true %>
+                                    <div class="col s6 offset-s3">
+                                        <% if !@current_week.finalized %>
+                                            <span class="alert">Enter Total Points:</span>
+                                            <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+                                            <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
+                                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
+                                        <% else %>
+                                            <input type="number" value="<%= @tbreak_pts %>" disabled>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+
                             <% end %>
                         </div>
 

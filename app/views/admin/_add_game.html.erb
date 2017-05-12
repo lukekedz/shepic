@@ -1,11 +1,20 @@
 <script>
+    $(".dropdown-button").dropdown();
     $('select').material_select();
+
+    $('.datepicker').pickadate({
+        selectMonths: true,
+        closeOnClear: true,
+        format: 'mm-dd-yyyy'
+    });
 </script>
 
 <div class="input-field col s12">
     <div class="row">
 
         <form action="/admin/add_new_game" role="form" id="add_new_game" method="POST">
+                <input type="hidden" value="<%= @active_week.week %>" name="game[week_id]">
+                <input type="hidden" value="false" name="game[tiebreaker]">
 
                 <!-- 12 cols -->
                 <div class="input-field col s6">

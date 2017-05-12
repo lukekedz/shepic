@@ -19,6 +19,9 @@ class AdminController < ApplicationController
     end
 
     def add_new_game
+        params[:game][:date] = Date.new(params[:game][:date][6..9].to_i, params[:game][:date][0..1].to_i, params[:game][:date][3..4].to_i)
+        params[:game][:spread] = params[:game][:spread].to_i
+
         @new_game = Game.new(game_params)
 
         if @new_game.save
