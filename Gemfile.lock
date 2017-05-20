@@ -202,7 +202,6 @@ PLATFORMS
 
 DEPENDENCIES
   auto_increment
-  axlsx (= 2.1.0.pre)
   axlsx_rails
   coffee-rails (~> 4.1.0)
   devise
@@ -217,7 +216,6 @@ DEPENDENCIES
   rails_12factor
   rb-readline
   rspec-rails (~> 3.5)
-  rubyzip (~> 1.1.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form

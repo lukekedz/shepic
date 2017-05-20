@@ -31,13 +31,11 @@ gem 'auto_increment'
 gem 'faker'
 
 # exporting
-gem 'rubyzip', '~> 1.1.0'
-gem 'axlsx', '2.1.0.pre'
 gem 'axlsx_rails'
 
 # solving problem after brew install postgresql, when trying to restore copy of Heroku db
 # tried bew link readline --force, but still had errors when launching rails c
-gem 'rb-readline' 
+gem 'rb-readline'
 
 group :development, :test do
 	gem 'spring'
