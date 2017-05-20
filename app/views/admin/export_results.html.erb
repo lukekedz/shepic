@@ -12,8 +12,8 @@
 
             <!-- 12 cols -->
             <div class="col s12">
-                <% @weeks.each_with_index do |wk, index| %>
-                    Week <%= wk.id %>
+                <% @weeks.each do |wk| %>
+                    <%= link_to 'Week ' + wk.id.to_s, admin_export_results_path(format: :xlsx) %>
                     <br/>
                 <% end %>
             </div>

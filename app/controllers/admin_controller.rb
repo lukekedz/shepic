@@ -164,7 +164,14 @@ class AdminController < ApplicationController
 
     def export_results
         @weeks = Week.where(locked: true, finalized: true)
+        # rails c
+        # weeks.first.picks OR weeks.each do { |w| w.picks }
+        # have to tie-in username and standings
 
+        respond_to do |format|
+            format.html
+            format.xlsx
+        end
     end
 
 private

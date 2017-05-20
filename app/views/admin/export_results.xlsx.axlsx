@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Weekly Results") do |sheet|
+    @weeks.each do |wk|
+      sheet.add_row [wk.id, wk.week, wk.locked, wk.finalized, wk.created_at, wk.updated_at]
+    end
+end
