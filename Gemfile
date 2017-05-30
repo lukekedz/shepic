@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 gem 'pg'
 
+# TODO: eliminate gems not in use
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,8 +28,11 @@ gem 'devise'
 gem 'simple_form'
 gem 'materialize-sass'
 gem 'hirb'
+
+# TODO: needed? take the time to review & understand
 gem 'auto_increment'
 
+# TODO: dev env only
 gem 'faker'
 
 # exporting
