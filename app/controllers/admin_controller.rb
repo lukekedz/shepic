@@ -9,13 +9,12 @@ class AdminController < ApplicationController
         @active_week = Week.last
 
         @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
-        # @max_games = @games.where(tiebreaker: false).count
-
-        # TODO remove or modify ?
-        @tiebreaker_game = @games.where(tiebreaker: true)
         @tiebreaker = @games.where(tiebreaker: true).count
-
         @times = @new_game.game_times()
+
+        # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
+        # @max_games = @games.where(tiebreaker: false).count
+        # @tiebreaker_game = @games.where(tiebreaker: true)
     end
 
     def add_new_game
@@ -45,9 +44,11 @@ class AdminController < ApplicationController
     def lock
         @active_week = Week.last
         @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
-        # @max_games = @games.where(tiebreaker: false).count
-        @tiebreaker_game = @games.where(tiebreaker: true)
         @tiebreaker = @games.where(tiebreaker: true).count
+
+        # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
+        # @max_games = @games.where(tiebreaker: false).count
+        # @tiebreaker_game = @games.where(tiebreaker: true)
     end
 
     def locked
