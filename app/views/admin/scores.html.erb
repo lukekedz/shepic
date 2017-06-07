@@ -8,6 +8,7 @@
         </div>
 
         <form action="/admin/review" role="form" method="POST">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <% @games.each_with_index do |g, i| %>
             <div class="row">
                 <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
