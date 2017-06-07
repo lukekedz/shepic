@@ -183,34 +183,5 @@ describe AdminController, :type => :controller do
             expect(assigns(:weeks)).not_to be_nil
             expect(assigns(:weeks)).to be_a(ActiveRecord::Relation)
         end
-
-
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
