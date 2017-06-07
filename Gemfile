@@ -29,9 +29,6 @@ gem 'simple_form'
 gem 'materialize-sass'
 gem 'hirb'
 
-# TODO: needed? take the time to review & understand
-gem 'auto_increment'
-
 # TODO: dev env only
 gem 'faker'
 
