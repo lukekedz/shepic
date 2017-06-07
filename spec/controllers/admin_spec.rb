@@ -83,4 +83,72 @@ describe AdminController, :type => :controller do
         end
     end
 
+    describe 'GET lock' do
+        before :each do
+            admin = double('user', :admin => true)
+            allow(request.env['warden']).to receive(:authenticate!).and_return(admin)
+            allow(controller).to receive(:current_user).and_return(admin)
+
+            get :lock
+        end
+
+        it 'returns response status 200 if logged in' do
+            expect(response.status).to eq(200)
+        end
+
+        it 'includes instance variable @active_week' do
+            expect(assigns(:active_week)).not_to be_nil
+            expect(assigns(:active_week)).to be_a(Week)
+        end
+
+        it 'includes instance variable @games' do
+            expect(assigns(:games)).not_to be_nil
+            expect(assigns(:games)).to be_kind_of(ActiveRecord::Relation)
+        end
+
+        it 'includes model Game at @games sample' do
+            expect(assigns(:games).sample).to be_a(Game)
+        end
+
+        it 'includes @games w/ expected # of games' do
+            # TODO: will not always pass! need to update
+            expect(assigns(:games).length).to eq(10)
+        end
+
+        it 'includes instance variable @tiebreaker' do
+            expect(assigns(:tiebreaker)).not_to be_nil
+        end
+
+        it 'includes @tiebreaker as integer' do
+            expect(assigns(:tiebreaker)).to be_kind_of(Integer)
+        end
+    end
+    
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
