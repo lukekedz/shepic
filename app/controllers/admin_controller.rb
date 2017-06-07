@@ -1,18 +1,14 @@
 class AdminController < ApplicationController
     before_action :user_is_admin?
+    
+    before_action :get_active_week,        except: [:add_new_game, :delete_game, :export_results]
+    before_action :get_active_week_games,  except: [:add_new_game, :delete_game, :export_results, :locked]
+    before_action :tbreak_in_active_week?, only:   [:active_week, :lock]
 
     def active_week
-        @teams = Team.all.order(:name)
         @new_game = Game.new
-        @active_week = Week.last # duplicated
-
-        @games = Game.where(week_id: @active_week.id).order(:date, :start_time) # duplicated
-        @tiebreaker = @games.where(tiebreaker: true).count # duplicated
-        @times = @new_game.game_times()
-
-        # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
-        # @max_games = @games.where(tiebreaker: false).count
-        # @tiebreaker_game = @games.where(tiebreaker: true)
+        @teams    = Team.all.order(:name)
+        @times    = @new_game.game_times()
     end
 
     def add_new_game
@@ -40,33 +36,19 @@ class AdminController < ApplicationController
     end
 
     def lock
-        @active_week = Week.last # duplicated
-        @games = Game.where(week_id: @active_week.id).order(:date, :start_time) # duplicated
-        @tiebreaker = @games.where(tiebreaker: true).count # duplicated
-
-        # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
-        # @max_games = @games.where(tiebreaker: false).count
-        # @tiebreaker_game = @games.where(tiebreaker: true)
     end
 
     def locked
-        @active_week = Week.last
         Week.update(@active_week.id, locked: true)
-
         redirect_to admin_active_week_path
     end
 
     def scores
-        @points = []
-        101.times { |i| @points.push i }
-        @locked_week = Week.where(locked: true).last
-        @games = Game.where(week_id: @locked_week.id).order(:date, :start_time)
+        @points = Array.new(101){ |i| i }
     end
 
     def review
-        @games = Game.where(week_id: Week.last.week)
-
-        if Week.last.locked == true
+        if @active_week.locked == true
             params.each do |key, value|
                 
                 # TODO: better logic
@@ -106,12 +88,10 @@ class AdminController < ApplicationController
     end
 
     def finalize
-        @games = Game.where(week_id: Week.last.week)
+        if @active_week.locked == true
+            @active_week.update(finalized: true)
 
-        if Week.last.locked == true
-            Week.last.update(finalized: true)
-
-            @users = User.where(admin: false)
+            users = User.where(admin: false)
 
             @games.each do |game|
                 if game.tiebreaker == true
@@ -121,6 +101,7 @@ class AdminController < ApplicationController
 
                 picks = Pick.where(game_id: game.id)
 
+                # update all the @games picks in the @active_week
                 picks.each do |pick|
                     if game.winner == "push" || game.winner == nil
                         Pick.update(pick.id, correct: nil)
@@ -133,7 +114,8 @@ class AdminController < ApplicationController
                     end
                 end
 
-                @users.each do |user|
+                # calculate new Standings
+                users.each do |user|
                     pick = Pick.where(game_id: game.id, user_id: user.id)
 
                     if pick.any? && pick[0].correct == true
@@ -147,9 +129,9 @@ class AdminController < ApplicationController
                 end
             end
 
-            current_week = Week.last
-            if current_week.locked == true && current_week.finalized == true
-                new_week = Week.new(week: Week.last.week + 1, locked: false, finalized: false)
+            # both these booleans should be true; this is just a double check
+            if @active_week.locked == true && @active_week.finalized == true
+                new_week = Week.new(week: @active_week.week + 1)
 
                 if new_week.save
                     redirect_to admin_active_week_path
@@ -182,6 +164,18 @@ private
         unless current_user.admin
             redirect_to root_path
         end
+    end
+
+    def get_active_week
+        @active_week = Week.last
+    end
+
+    def get_active_week_games
+        @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
+    end
+
+    def tbreak_in_active_week?
+        @tiebreaker = @games.where(tiebreaker: true).count
     end
 
     def game_params
