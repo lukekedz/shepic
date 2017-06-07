@@ -168,10 +168,24 @@ describe AdminController, :type => :controller do
         it 'includes model Game at @games sample' do
             expect(assigns(:games).sample).to be_a(Game)
         end
+    end
+
+    describe 'GET export_results' do
+        before :each do
+            admin = double('user', :admin => true)
+            allow(request.env['warden']).to receive(:authenticate!).and_return(admin)
+            allow(controller).to receive(:current_user).and_return(admin)
+
+            get :export_results
+        end
+
+        it 'includes instance variable @weeks' do
+            expect(assigns(:weeks)).not_to be_nil
+            expect(assigns(:weeks)).to be_a(ActiveRecord::Relation)
+        end
 
 
     end
-
 end
 
 
