@@ -151,13 +151,13 @@ describe AdminController, :type => :controller do
             expect(assigns(:points).sample).to be_kind_of(Integer)
         end
 
-        it 'includes instance variable @locked_week' do
-            expect(assigns(:locked_week)).not_to be_nil
-            expect(assigns(:locked_week)).to be_a(Week)
+        it 'includes instance variable @active_week' do
+            expect(assigns(:active_week)).not_to be_nil
+            expect(assigns(:active_week)).to be_a(Week)
         end
 
-        it '@locked_week attribute locked is true' do
-            expect(assigns(:locked_week).locked).to eq(true)
+        it '@active_week attribute locked is true' do
+            expect(assigns(:active_week).locked).to eq(true)
         end
 
         it 'includes instance variable @games' do
