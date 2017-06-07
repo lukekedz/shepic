@@ -6,10 +6,10 @@ class AdminController < ApplicationController
     def active_week
         @teams = Team.all.order(:name)
         @new_game = Game.new
-        @active_week = Week.last
+        @active_week = Week.last # duplicated
 
-        @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
-        @tiebreaker = @games.where(tiebreaker: true).count
+        @games = Game.where(week_id: @active_week.id).order(:date, :start_time) # duplicated
+        @tiebreaker = @games.where(tiebreaker: true).count # duplicated
         @times = @new_game.game_times()
 
         # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
@@ -42,9 +42,9 @@ class AdminController < ApplicationController
     end
 
     def lock
-        @active_week = Week.last
-        @games = Game.where(week_id: @active_week.id).order(:date, :start_time)
-        @tiebreaker = @games.where(tiebreaker: true).count
+        @active_week = Week.last # duplicated
+        @games = Game.where(week_id: @active_week.id).order(:date, :start_time) # duplicated
+        @tiebreaker = @games.where(tiebreaker: true).count # duplicated
 
         # TODO: NOT IN USE, WAITING FOR REFACTOR TO REMOVE
         # @max_games = @games.where(tiebreaker: false).count
