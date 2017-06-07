@@ -11,7 +11,11 @@ module Shepic
 
     config.time_zone = 'Eastern Time (US & Canada)'
     config.active_record.default_timezone = :local
-    config.serve_static_assets = true
+    config.serve_static_files = true
+
+    # config.serve_static_assets = true
+    # DEPRECATION WARNING: 
+    # The configuration option `config.serve_static_assets` has been renamed to `config.serve_static_files` to clarify its role (it merely enables serving everything in the `public` folder and is unrelated to the asset pipeline). The `serve_static_assets` alias will be removed in Rails 5.0. Please migrate your configuration files accordingly. (called from <class:Application> at /Users/lxk051/projects/shepic/config/application.rb:14)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
