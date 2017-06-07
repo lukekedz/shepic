@@ -79,11 +79,11 @@ ActiveRecord::Schema.define(version: 20170512143737) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "weeks", force: :cascade do |t|
-    t.integer  "week",       null: false
-    t.boolean  "locked"
-    t.boolean  "finalized"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "week",                       null: false
+    t.boolean  "locked",     default: false
+    t.boolean  "finalized",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end

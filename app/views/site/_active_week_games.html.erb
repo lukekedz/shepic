@@ -10,46 +10,40 @@
                     <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
 
                         <div class="row">
-                            <!-- 12 cols -->
                             <div class="col s12">
                                 Game <%= i + 1 %>
                                 <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
                             </div>
 
-                            <!-- 12 cols -->
+                            <!-- DATETIME -->
                             <div class="col s12">
                                 <strong><%= game_day(g[:date]) %> <%= convert_military_to_ampm(g[:start_time]) %></strong>
                             </div>
 
-                            <!-- 12 cols -->
+                            <!-- LOCATION -->
                             <div class="col s12">
                                 @ <%= g[:location] %>
                             </div>
 
-                            <!-- 12 cols -->
                             <! -- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- 12 cols -->
                             <!-- TEAM MATCHUP -->
-                            <strong>
-                            <div class="col s5">
-                                <%= g[:away] %>
-                            </div>
-                            <div class="col s2">
-                                vs.
-                            </div>
-                            <div class="col s5">
-                                <%= g[:home] %>
-                            </div>
+                            <strong class="matchup-smaller-font">
+                                <div class="col s5">
+                                    <%= g[:away] %>
+                                </div>
+                                <div class="col s2">
+                                    vs.
+                                </div>
+                                <div class="col s5">
+                                    <%= g[:home] %>
+                                </div>
                             </strong>
                             
-                            <!-- 12 cols -->
                             <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- 12 cols -->
-                            <!-- 5 -->
                             <!-- AWAY BUTTON/FORM SELECTION -->
                             <div class="col s5">
                                 <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
@@ -68,13 +62,10 @@
                                 <% end %>
                             </div>
 
-                            <!-- 2 -->
                             <div class="col s2">
-                                &nbsp;
+                                <!-- placeholder to match above 'vs.' -->
                             </div>
 
-                            <!-- 5 -->
-                            <!-- HOME BUTTON/FORM SELECTION -->
                             <div class="col s5">
                                 <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
                                 <form action="" role="form" class="pick" method="POST">
@@ -92,23 +83,22 @@
                                 <% end %>
                             </div>
 
-                            <!-- 12 cols -->
-                            <div class="col s5 offset-s7">
+                            <!-- SPREAD -->
+                            <div class="col s5 offset-s7 matchup-smaller-font">
                                 Spread:
                                 <strong>
                                     <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
                                 </strong>
                             </div>
 
+                            <!-- CURRENT SCORE -->
                             <% if g[:game_started] == true %>
-                                <!-- 12 cols -->
                                 <strong>
                                 <div class="col s12">
                                     Current Score:
                                 </div>
                                 </strong>
 
-                                <!-- 12 cols -->
                                 <div class="col s6">
                                     <strong><%= g[:away_pts] %></strong>
                                 </div>
@@ -135,11 +125,10 @@
                                 </div>
                             <% end %>
 
-                             <!-- 12 cols -->
                              <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- 12 cols -->
+                            <!-- MAKE SELECTION / YOUR PICK -->
                             <strong>
                             <div class="col s12" id="your-pick-<%= g[:id] %>">
                                 <% if g[:game_started] == false %>
@@ -154,11 +143,9 @@
                             </div>
                             </strong>
 
-                            <!-- 12 cols -->
                             <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- 12 cols  -->
                             <!-- TIEBREAKER -->
                             <% if @current_week.locked == true && !@current_week.finalized %>
 

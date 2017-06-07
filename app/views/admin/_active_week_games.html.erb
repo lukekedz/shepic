@@ -6,56 +6,57 @@
                 <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
 
                     <div class="row">
-                        <!-- 12 cols -->
                         <div class="col s12">
                             Game <%= i + 1 %>
                             <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
                         </div>
 
-                        <!-- 12 cols -->
+                        <!-- DATETIME -->
                         <div class="col s12">
                             <strong><%= game_day(g[:date]) %> <%= convert_military_to_ampm(g[:start_time]) %></strong>
                         </div>
 
-                        <!-- 12 cols -->
+                        <!-- LOCATION -->
                         <div class="col s12">
                             @ <%= g[:location] %>
                         </div>
 
-                        <!-- 12 cols -->
                         <!-- BREAK -->
                         <div class="col s12"><br/></div>
 
-                        <!-- 12 cols -->
-                        <!-- TEAM MATCHUP -->
-                        <div class="col s5">
-                            <strong><%= g[:away] %></strong></strong>
-                        </div>
-                        <div class="col s2">
-                            <strong>vs.</strong>
-                        </div>
-                        <div class="col s5">
-                            <strong><strong><%= g[:home] %></strong>
-                        </div>
+                        <!-- TEAM MATCHUP  -->
+                        <strong class="matchup-smaller-font">
+                            <div class="col s5">
+                                <%= g[:away] %>
+                            </div>
+                            <div class="col s2">
+                                vs.
+                            </div>
+                            <div class="col s5">
+                                <%= g[:home] %>
+                            </div>
+                        </strong>
 
-                        <!-- 12 cols -->
                         <!-- TEAM LOGOS -->
-                        <div class="col s6">
+                        <div class="col s5">
                             <strong><%= image_tag 'osu.png', :class => 'responsive-img' %></strong>
                         </div>
-                        <div class="col s6">
+                        <div class="col s2">
+                            <!-- placeholder to match above 'vs.' -->
+                        </div>
+                        <div class="col s5">
                             <strong><%= image_tag 'michigan.png', :class => 'responsive-img' %></strong>
                         </div>
 
-                        <!-- 12 cols -->
-                        <div class="col s6 offset-s6">
+                        <!-- SPREAD -->
+                        <div class="col s5 offset-s7 matchup-smaller-font">
                             Spread:
                             <strong>
                                 <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
                             </strong>
                         </div>
 
-                        <!-- 12 cols -->
+                        <!-- DELETE -->
                         <div class="col s12">
                             &nbsp;
                             <% if @active_week.locked == false %>
