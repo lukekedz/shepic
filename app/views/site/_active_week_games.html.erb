@@ -40,7 +40,7 @@
                                     <%= g[:home] %>
                                 </div>
                             </strong>
-                            
+
                             <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
@@ -54,11 +54,11 @@
                                     <input type="hidden" value="away" id="away-home">
 
                                     <button type="submit" name="action">
-                                        <strong><%= image_tag g[:away] + '.png', :class => 'responsive-img' %></strong>
+                                        <strong><%= image_tag g[:away] + '.png' %></strong>
                                     </button>
                                 </form>
                                 <% else %>
-                                    <strong><%= image_tag g[:away] + '.png', :class => 'responsive-img' %></strong>
+                                    <strong><%= image_tag g[:away] + '.png' %></strong>
                                 <% end %>
                             </div>
 
@@ -75,11 +75,11 @@
                                     <input type="hidden" value="home" id="away-home">
 
                                     <button type="submit" name="action">
-                                        <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
+                                        <%= image_tag g[:home] + '.png' %>
                                     </button>
                                 </form>
                                 <% else %>
-                                    <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
+                                    <%= image_tag g[:home] + '.png' %>
                                 <% end %>
                             </div>
 
@@ -114,7 +114,7 @@
                                         <% end %>
 
                                     <% else %>
-                                        
+
                                         <% if @picks[ g[:id] ] == g[:home] %>
                                             <strong style="border: 1px green solid;"><%= g[:home_pts] %></strong>
                                         <% else %>
