@@ -27,6 +27,7 @@ describe AdminController, :type => :controller do
         it 'includes instance variable @teams' do
             expect(assigns(:teams)).not_to be_nil
             expect(assigns(:teams)).to be_kind_of(ActiveRecord::Relation)
+            expect(assigns(:teams).sample).to be_a(Team)
         end
 
         it 'includes model Team at @teams sample' do
@@ -123,7 +124,54 @@ describe AdminController, :type => :controller do
             expect(assigns(:tiebreaker)).to be_kind_of(Integer)
         end
     end
-    
+
+    describe 'GET scores' do
+        before :each do
+            admin = double('user', :admin => true)
+            allow(request.env['warden']).to receive(:authenticate!).and_return(admin)
+            allow(controller).to receive(:current_user).and_return(admin)
+
+            get :scores
+        end
+
+        it 'returns response status 200 if logged in' do
+            expect(response.status).to eq(200)
+        end
+
+        it 'includes instance variable @points' do
+            expect(assigns(:points)).not_to be_nil
+            expect(assigns(:points)).to be_kind_of(Array)
+        end
+
+        it '@points has length 101' do
+            expect(assigns(:points).length).to eq(101)
+        end
+
+        it '@points sample is an integer' do
+            expect(assigns(:points).sample).to be_kind_of(Integer)
+        end
+
+        it 'includes instance variable @locked_week' do
+            expect(assigns(:locked_week)).not_to be_nil
+            expect(assigns(:locked_week)).to be_a(Week)
+        end
+
+        it '@locked_week attribute locked is true' do
+            expect(assigns(:locked_week).locked).to eq(true)
+        end
+
+        it 'includes instance variable @games' do
+            expect(assigns(:games)).not_to be_nil
+            expect(assigns(:games)).to be_a(ActiveRecord::Relation)
+        end
+
+        it 'includes model Game at @games sample' do
+            expect(assigns(:games).sample).to be_a(Game)
+        end
+
+
+    end
+
 end
 
 
