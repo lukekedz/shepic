@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-    skip_before_action :verify_authenticity_token
     before_action :user_is_admin?
 
     def active_week
@@ -69,11 +68,13 @@ class AdminController < ApplicationController
 
         if Week.last.locked == true
             params.each do |key, value|
+                
                 # TODO: better logic
                 if key != 'controller' &&
                    key != 'admin' &&
                    key != 'action' &&
-                   key != 'review'
+                   key != 'review' &&
+                   key != 'authenticity_token'
 
                     game = key.split("-")
                     game_id   = game[0]
@@ -119,6 +120,7 @@ class AdminController < ApplicationController
                 end
 
                 picks = Pick.where(game_id: game.id)
+
                 picks.each do |pick|
                     if game.winner == "push" || game.winner == nil
                         Pick.update(pick.id, correct: nil)
@@ -147,7 +149,7 @@ class AdminController < ApplicationController
 
             current_week = Week.last
             if current_week.locked == true && current_week.finalized == true
-                new_week = Week.new(locked: false, finalized: false)
+                new_week = Week.new(week: Week.last.week + 1, locked: false, finalized: false)
 
                 if new_week.save
                     redirect_to admin_active_week_path
