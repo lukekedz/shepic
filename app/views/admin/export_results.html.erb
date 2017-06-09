@@ -2,22 +2,18 @@
     <div class="col s12">
 
         <div class="row">
-            <!-- 12 cols -->
             <div class="col s12">
                 <h5>Admin: Export Weekly Results</h5>
             </div>
         </div>
 
         <div class="row">
-
-            <!-- 12 cols -->
             <div class="col s12">
                 <% @weeks.each do |wk| %>
-                    <%= link_to 'Week ' + wk.id.to_s, admin_export_results_path(format: :xlsx) %>
+                    <%= link_to 'Week ' + wk.id.to_s, admin_export_results_path(format: :xlsx, id: wk.id)  %>
                     <br/>
                 <% end %>
             </div>
-
         </div>
 
     </div>

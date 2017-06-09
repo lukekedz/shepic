@@ -147,10 +147,12 @@ class AdminController < ApplicationController
     end
 
     def export_results
+        @users = User.where(admin: false).order(:id)
         @weeks = Week.where(locked: true, finalized: true)
-        # rails c
-        # weeks.first.picks OR weeks.each do { |w| w.picks }
-        # have to tie-in username and standings
+
+        if params[:id]
+            @week = Week.find(params[:id]) 
+        end
 
         respond_to do |format|
             format.html

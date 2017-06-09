@@ -1,7 +1,54 @@
 wb = xlsx_package.workbook
 
+center_align = wb.styles.add_style(:alignment => {:horizontal => :center})
+correct_pick = wb.styles.add_style(:bg_color  => "FFFFFF00", :type => :dxf)
+
 wb.add_worksheet(name: "Weekly Results") do |sheet|
-    @weeks.each do |wk|
-      sheet.add_row [wk.id, wk.week, wk.locked, wk.finalized, wk.created_at, wk.updated_at]
+    sheet.add_row ["Week #{@week.week}"], :style => center_align
+
+    header = ["Away", "Away Score", "Home Actual Score", "Spread", "Home Score w/Spread", "Home", "Day and Time", "Winner"]
+    @users.each { |user| header.push user.username }
+
+    sheet.add_row header, :style => center_align
+    sheet.add_row
+
+    tbreak_users_total_pts = []
+    tbreak_game = String.new
+    tbreak_pts  = String.new
+
+    @week.games.order(:date, :start_time).each do |game|
+        date_time = game_day(game.date) + " " + convert_military_to_ampm(game.start_time)
+
+        game_result = [game.away, game.away_pts, game.home_pts, game.spread, game.home_pts + game.spread, game.home, date_time, game[game.winner]]
+
+        game.picks.order(:user_id).each do |pick|
+            game_result.push pick.pick
+
+            if pick.tbreak_pts
+                tbreak_users_total_pts.push pick.tbreak_pts
+            end
+        end
+
+        sheet.add_row game_result, :style => center_align
+
+        if game.tiebreaker == true
+            tbreak_game = game.away + " vs. " + game.home
+            tbreak_pts  = game.total_pts
+        end
     end
+
+    sheet.merge_cells "A14:C14"
+    sheet.merge_cells "D14:F14"
+
+    tiebreaker_row = ["Tiebreaker Game", "", "", tbreak_game, "", "", tbreak_pts, "Tie Breaker"]
+
+    tbreak_users_total_pts.each { |tbreak_user_pts| tiebreaker_row.push tbreak_user_pts }
+
+    sheet.add_row tiebreaker_row, :style => center_align
+
+    sheet.add_conditional_formatting("I4:I13", { :type => :cellIs, :operator => :equal, :formula => "H4:H13", :dxfId => correct_pick, :priority => 1 })
+    sheet.add_conditional_formatting("J4:J13", { :type => :cellIs, :operator => :equal, :formula => "H4:H13", :dxfId => correct_pick, :priority => 1 })
+    sheet.add_conditional_formatting("K4:K13", { :type => :cellIs, :operator => :equal, :formula => "H4:H13", :dxfId => correct_pick, :priority => 1 })
+    sheet.add_conditional_formatting("L4:L13", { :type => :cellIs, :operator => :equal, :formula => "H4:H13", :dxfId => correct_pick, :priority => 1 })
+    sheet.add_conditional_formatting("M4:M13", { :type => :cellIs, :operator => :equal, :formula => "H4:H13", :dxfId => correct_pick, :priority => 1 })
 end
