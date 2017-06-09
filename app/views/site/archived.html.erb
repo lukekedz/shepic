@@ -95,17 +95,19 @@
 
                         <!-- PICK RIGHT/WRONG -->
                         <div class="col s6 matchup-smaller-font">
-                            <strong>Your Pick: <%= @picks[ g[:id] ][:pick] %></strong>
+                            Your Pick: 
+                            <br/>
+                            <strong><%= @picks[ g[:id] ][:pick] %></strong>
                         </div>
                         
-                        <div class="col s6">
+                        <div class="col s6 archived-right-wrong">
                             <% if @picks[ g[:id] ][:correct] == nil %>
                                 <span class="alert">PUSH</span>
                             <% else %>
                                 <% if @picks[ g[:id] ][:correct] == true %>
-                                    <img src='/assets/correct.png' height='30' width='30'>
+                                    <%= image_tag 'correct.png' %>
                                 <% else %>
-                                    <img src='/assets/x.png' height='30' width='30'>
+                                    <%= image_tag 'x.png' %>
                                 <% end %>
                             <% end %>
                         </div>
