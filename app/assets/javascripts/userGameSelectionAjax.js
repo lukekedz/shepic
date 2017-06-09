@@ -17,13 +17,14 @@ $(document).ready(function() {
                               "user_id"   : userId,
                               "away_home" : awayHome }},
             success: function(data){
+                console.log(data);
                 // for displaying check-mark-icon 
-                // var confirmed = "#pick-saved-" + gameId;
-                // $(confirmed).css('visibility', 'visible');
+                var confirmed = "#pick-saved-" + gameId;
+                $(confirmed).css('visibility', 'visible');
 
-                // setTimeout(function(){
-                //     $(confirmed).css('visibility', 'hidden');
-                // }, 1500);
+                setTimeout(function(){
+                    $(confirmed).css('visibility', 'hidden');
+                }, 1500);
 
             var yourPick = "#your-pick-" + gameId;
                 $(yourPick).text("Your Pick: " + gamePick);
