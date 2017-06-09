@@ -28,64 +28,53 @@
             <% @games.each_with_index do |g, i| %>
                 <div class="col s12 <%= if i % 2 == 0 then 'background' end %>">
                     <div class="row">
-                        <!-- 12 cols -->
                         <div class="col s12">
                             Game <%= i + 1 %>
                             <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
                         </div>
 
-                        <!-- 12 cols -->
+                        <!-- DATETIME -->
                         <div class="col s12">
-                            <strong><%= game_day(g[:date]) %> <%= g[:start_time] %></strong>
+                            <strong><%= game_day(g[:date]) %> <%= convert_military_to_ampm(g[:start_time]) %></strong>
                         </div>
 
-                        <!-- 12 cols -->
+                        <!-- LOCATION -->
                         <div class="col s12">
                             @ <%= g[:location] %>
                         </div>
 
-                         <!-- 12 cols -->
                          <!-- BREAK -->
                         <div class="col s12"><br/></div>
 
-                        <!-- 12 cols -->
                         <!-- TEAM MATCHUP -->
-                        <strong>
-                        <div class="col s5">
-                            <%= g[:away] %>
+                        <div class="row matchup-smaller-font">
+                            <div class="col s5">
+                                <strong><%= g[:away] %></strong>
+                            </div>
+                            <div class="col s2">
+                                vs.
+                            </div>
+                            <div class="col s5">
+                                <strong><%= g[:home] %></strong>
+                            </div>
                         </div>
-                        <div class="col s2">
-                            vs.
-                        </div>
-                        <div class="col s5">
-                            <%= g[:home] %>
-                        </div>
-                        </strong>
 
-                        <!-- 12 cols -->
-                        <!-- BREAK -->
-                        <div class="col s12"><br/></div>
-
-                        <!-- 12 cols -->
                         <!-- TEAM LOGOS -->
                         <div class="col s5">
-                            <strong><img class="responsive-img" src="/assets/osu.png"></strong>
+                            <%= image_tag g[:away] + '.png', :class => 'responsive-img game-pick-logo' %>
                         </div>
                         <div class="col s2">
                             &nbsp;
                         </div>
                         <div class="col s5">
-                            <strong><img class="responsive-img" src="/assets/michigan.png"></strong>
+                            <%= image_tag g[:home] + '.png', :class => 'responsive-img game-pick-logo' %>
                         </div>
 
-                        <!-- 12 cols -->
-                        <strong>
-                        <div class="col s12">
-                            Final Score:
+                        <!-- FINAL SCORE -->
+                        <div class="col s12 matchup-smaller-font ">
+                            <strong>Final Score:</strong>
                         </div>
-                        </strong>
 
-                        <!-- 12 cols -->
                         <div class="col s6">
                             <strong><%= g[:away_pts] %></strong>
                         </div>
@@ -93,25 +82,22 @@
                             <strong><%= g[:home_pts] %></strong>
                         </div>
 
-                        <!-- 12 cols -->
-                        <div class="col s6 offset-s6">
+                        <!-- SPREAD -->
+                        <div class="col s6 offset-s6 matchup-smaller-font">
                             Spread:
                             <strong>
                                 <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
                             </strong>
                         </div>
 
-                        <!-- 12 cols -->
                         <!-- BREAK -->
                         <div class="col s12"><br/></div>
 
-                        <!-- 12 cols -->
-                        <strong>
-                        <div class="col s6">
-                            Your Pick: <%= @picks[ g[:id] ][:pick] %>
+                        <!-- PICK RIGHT/WRONG -->
+                        <div class="col s6 matchup-smaller-font">
+                            <strong>Your Pick: <%= @picks[ g[:id] ][:pick] %></strong>
                         </div>
-                        </strong>
-
+                        
                         <div class="col s6">
                             <% if @picks[ g[:id] ][:correct] == nil %>
                                 <span class="alert">PUSH</span>
