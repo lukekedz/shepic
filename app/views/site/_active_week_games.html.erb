@@ -43,9 +43,6 @@
                                 </strong>
                             </div>
 
-                            <!-- BREAK -->
-                            <div class="col s12"><br/></div>
-
                             <!-- AWAY BUTTON/FORM SELECTION -->
                             <div class="col s5">
                                 <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
@@ -55,12 +52,12 @@
                                     <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="away" id="away-home">
 
-                                    <button type="submit" name="action" class="team-logo-btn">
-                                        <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
+                                    <button type="submit" name="action" class="game-pick-team-logo-btn">
+                                        <%= image_tag g[:away] + '.png', :class => 'responsive-img game-pick-logo' %>
                                     </button>
                                 </form>
                                 <% else %>
-                                    <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
+                                    <%= image_tag g[:away] + '.png', :class => 'responsive-img game-pick-logo' %>
                                 <% end %>
                             </div>
 
@@ -76,12 +73,12 @@
                                     <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="home" id="away-home">
 
-                                    <button type="submit" name="action" class="team-logo-btn">
-                                        <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
+                                    <button type="submit" name="action" class="game-pick-team-logo-btn">
+                                        <%= image_tag g[:home] + '.png', :class => 'responsive-img game-pick-logo' %>
                                     </button>
                                 </form>
                                 <% else %>
-                                    <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
+                                    <%= image_tag g[:home] + '.png', :class => 'responsive-img game-pick-logo' %>
                                 <% end %>
                             </div>
 

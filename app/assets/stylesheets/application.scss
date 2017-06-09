@@ -25,10 +25,6 @@ main {
     width:  30px;
 }
 
-.matchup-smaller-font {
-    font-size: 14px;
-}
-
 .alert {
     color: red;
 }
@@ -45,11 +41,21 @@ main {
 .spread {
     margin-top: 10px;
 }
-    
-.team-logo-btn {
+
+.game-pick-team-logo-btn {
     background-color: #F5F5F5;
     box-shadow:       5px 5px 5px #888888;
 
     -webkit-appearance: none;
     -webkit-border-radius: 0;
+}
+
+.game-pick-logo {
+    padding: 5px;
+}
+
+@media screen and (max-width: 765px) {
+    .matchup-smaller-font {
+        font-size: 14px;
+    }
 }
