@@ -132,46 +132,45 @@
                              <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- MAKE SELECTION / YOUR PICK -->
-                            <strong>
-                            <div class="col s12" id="your-pick-<%= g[:id] %>">
-                                <% if @current_week.locked %>
-
+                            <!-- TIEBREAKER -->
+                            <% if @current_week.locked == true && !@current_week.finalized %>
+                                <% if g[:tiebreaker] == true %>
                                     <% if g[:game_started] == false %>
-                                        <% if @picks[ g[:id] ] %>
-                                            Current Pick: <%= @picks[ g[:id] ] %>
-                                        <% else %>
-                                            <span class="make-your-pick">Make Your Selection!</span>
-                                        <% end %>
-                                    <% else %>
-                                        Pick Locked: <%= @picks[ g[:id] ] %>
-                                    <% end %>
+                                        <div class="col s6 offset-s3 tiebreaker">
+                                            <span class="alert">Total Points:</span>
+                                            
+                                            <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+                                            <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
 
+                                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()" min="0">
+                                        </div>
+                                    <% end %>
                                 <% end %>
-                            </div>
-                            </strong>
+                            <% end %>
 
                             <!-- BREAK -->
                             <div class="col s12"><br/></div>
 
-                            <!-- TIEBREAKER -->
-                            <% if @current_week.locked == true && !@current_week.finalized %>
+                            <!-- MAKE SELECTION / YOUR PICK -->
+                            <strong>
+                                <div class="col s12" id="your-pick-<%= g[:id] %>">
+                                    <% if @current_week.locked %>
 
-                                <% if g[:tiebreaker] == true %>
-                                    <div class="col s12">
-                                        <% if !@current_week.finalized && g[:game_started] == false %>
-                                            <span class="alert">Enter Total Points:</span>
-                                            <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
-                                            <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
-                                            <input type="number" value="<%= @tbreak_pts %>" id="tbreak-pts" onchange="tiebreaker()">
+                                        <% if g[:game_started] == false %>
+                                            <% if @picks[ g[:id] ] %>
+                                                Current Pick: <%= @picks[ g[:id] ] %>
+                                            <% else %>
+                                                <span class="make-your-pick">Make Your Selection!</span>
+                                            <% end %>
                                         <% else %>
-                                            <!--  TODO: make display, not disabled input -->
-                                            <input type="number" value="<%= @tbreak_pts %>" disabled>
+                                            Pick Locked: <%= @picks[ g[:id] ] %>
+                                            <br/>
+                                            (tiebreaker pts: <%= @tbreak_pts %>)
                                         <% end %>
-                                    </div>
-                                <% end %>
 
-                            <% end %>
+                                    <% end %>
+                                </div>
+                            </strong>
                         </div>
 
                     </div>
