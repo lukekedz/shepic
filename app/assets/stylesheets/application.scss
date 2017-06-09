@@ -3,9 +3,9 @@ $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
 
 body {
-    display: flex;
-    min-height: 100vh;
+    display:        flex;
     flex-direction: column;
+    min-height:     100vh;
 }
 
 main {
@@ -13,15 +13,16 @@ main {
 }
 
 .football-img {
-    height: 25px; 
-    width:  25px;
+    height:   25px; 
+    width:    25px;
+
     position: relative;
-    right: 10px;
+    right:    10px;
 }
 
 .sia {
     height: 30px;
-    width: 30px;
+    width:  30px;
 }
 
 .matchup-smaller-font {
@@ -37,11 +38,17 @@ main {
 }
 
 .make-your-pick {
-    color: red;
+    color:      red;
     font-style: italic;
 }
+
+.spread {
+    margin-top: 10px;
+}
     
-@media only screen and (max-device-width: 320px) {
-
-
+.team-logo-btn {
+    box-shadow: 5px 5px 5px #888888;
+    
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
 }

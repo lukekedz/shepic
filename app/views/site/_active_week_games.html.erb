@@ -53,12 +53,12 @@
                                     <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="away" id="away-home">
 
-                                    <button type="submit" name="action">
-                                        <strong><%= image_tag g[:away] + '.png', :class => 'responsive-img' %></strong>
+                                    <button type="submit" name="action" class="team-logo-btn">
+                                        <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
                                     </button>
                                 </form>
                                 <% else %>
-                                    <strong><%= image_tag g[:away] + '.png', :class => 'responsive-img' %></strong>
+                                    <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
                                 <% end %>
                             </div>
 
@@ -74,7 +74,7 @@
                                     <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
                                     <input type="hidden" value="home" id="away-home">
 
-                                    <button type="submit" name="action">
+                                    <button type="submit" name="action" class="team-logo-btn">
                                         <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
                                     </button>
                                 </form>
@@ -84,7 +84,7 @@
                             </div>
 
                             <!-- SPREAD -->
-                            <div class="col s5 offset-s7 matchup-smaller-font">
+                            <div class="col s5 offset-s7 matchup-smaller-font spread">
                                 Spread:
                                 <strong>
                                     <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
