@@ -43,11 +43,23 @@ main {
 }
 
 .game-pick-team-logo-btn {
-    background-color: #F5F5F5;
+    background-color: #E8E8E8;
+    border:           2px white solid;
+    border-radius:    10px;
     box-shadow:       5px 5px 5px #888888;
 
     -webkit-appearance: none;
     -webkit-border-radius: 0;
+}
+
+.game-pick-team-logo-btn:hover {
+    background-color: white;
+    border:           2px #64B5F6 solid;
+}
+
+.game-pick-team-logo-btn:active {
+    background-color: #64B5F6;
+    border:           2px white solid;
 }
 
 .game-pick-logo {
