@@ -165,7 +165,9 @@
                                         <% else %>
                                             Pick Locked: <%= @picks[ g[:id] ] %>
                                             <br/>
-                                            (tiebreaker pts: <%= @tbreak_pts %>)
+                                            <% if g[:tiebreaker] == true %>
+                                                (tiebreaker pts: <%= @tbreak_pts %>)
+                                            <% end %>
                                         <% end %>
 
                                     <% end %>
