@@ -95,47 +95,13 @@
                                 </strong>
                             </div>
 
-                            <!-- CURRENT SCORE -->
-                            <% if g[:game_started] == true %>
-                                <strong>
-                                <div class="col s12">
-                                    Current Score:
-                                </div>
-                                </strong>
-
-                                <div class="col s6">
-                                    <strong><%= g[:away_pts] %></strong>
-                                </div>
-                                <div class="col s6">
-                                    <!-- TODO: refactor -->
-                                    <!-- TODO: need PUSH conditional as well -->
-                                    <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
-
-                                        <% if @picks[ g[:id] ] == g[:away] %>
-                                            <strong style="border: 1px green solid;"><%= g[:home_pts] %></strong>
-                                        <% else %>
-                                            <strong style="border: 1px red solid;"><%= g[:home_pts] %></strong>
-                                        <% end %>
-
-                                    <% else %>
-
-                                        <% if @picks[ g[:id] ] == g[:home] %>
-                                            <strong style="border: 1px green solid;"><%= g[:home_pts] %></strong>
-                                        <% else %>
-                                            <strong style="border: 1px red solid;"><%= g[:home_pts] %></strong>
-                                        <% end %>
-
-                                    <% end %>
-                                </div>
-                            <% end %>
-
-                             <!-- BREAK -->
-                            <div class="col s12"><br/></div>
-
                             <!-- TIEBREAKER -->
                             <% if @current_week.locked == true && !@current_week.finalized %>
                                 <% if g[:tiebreaker] == true %>
                                     <% if g[:game_started] == false %>
+                                        <!-- BREAK -->
+                                        <div class="col s12"><br/></div>
+
                                         <div class="col s6 offset-s3 tiebreaker">
                                             <span class="alert">Total Points:</span>
                                             
@@ -163,16 +129,60 @@
                                                 <span class="make-your-pick">Click Your Pick!</span>
                                             <% end %>
                                         <% else %>
-                                            Pick Locked: <%= @picks[ g[:id] ] %>
-                                            <br/>
-                                            <% if g[:tiebreaker] == true %>
-                                                (tiebreaker pts: <%= @tbreak_pts %>)
-                                            <% end %>
+                                            <span class="matchup-smaller-font">
+                                                Pick Locked: <%= @picks[ g[:id] ] %>
+                                                <br/>
+                                                <% if g[:tiebreaker] == true %>
+                                                    (tiebreaker pts: <%= @tbreak_pts %>)
+                                                <% end %>
+                                            </span>
                                         <% end %>
 
                                     <% end %>
                                 </div>
                             </strong>
+
+                            <! -- BREAK -->
+                            <div class="col s12"><br/></div>
+
+                            <!-- CURRENT SCORE -->
+                            <% if g[:game_started] == true %>
+
+                                <!-- TODO: refactor? -->
+                                <div class="col s2 offset-s1">
+                                    <% if (@picks[ g[:id] ] == g[:away]) && (g[:away_pts] != ( g[:home_pts] + g[:spread] )) %>
+                                        
+                                        <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
+                                            <strong class="live-correct-pick"><%= g[:away_pts] %></strong>
+                                        <% else %>
+                                            <strong class="live-incorrect-pick"><%= g[:away_pts] %></strong>
+                                        <% end %>
+
+                                    <% else %>
+                                        <strong><%= g[:away_pts] %></strong>
+                                    <% end %>
+                                </div>
+
+                                <div class="col s6 center-align">
+                                    <!-- TODO: scrape live game data -->
+                                    Q1 4:25
+                                </div>
+                                
+                                <div class="col s2">
+                                    <% if (@picks[ g[:id] ] == g[:home]) && (g[:away_pts] != ( g[:home_pts] + g[:spread] )) %>
+                                        
+                                        <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
+                                            <strong class="live-incorrect-pick"><%= g[:home_pts] %></strong>
+                                        <% else %>
+                                            <strong class="live-correct-pick"><%= g[:home_pts] %></strong>
+                                        <% end %>
+
+                                    <% else %>
+                                        <strong><%= g[:home_pts] %></strong>
+                                    <% end %>
+                                </div>
+
+                            <% end %>
                         </div>
 
                     </div>

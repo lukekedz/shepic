@@ -88,7 +88,6 @@ main {
 .tiebreaker {
     border:     1px #888888 solid;
     box-shadow: 5px 5px 5px #888888;
-
 }
 
 .archived-right-wrong {
@@ -100,6 +99,14 @@ main {
 .archived-right-wrong img {
     height: 30px;
     width: 30px;
+}
+
+.live-correct-pick {
+    color: green;
+}
+
+.live-incorrect-pick {
+    color: red;
 }
 
 @media screen and (max-width: 765px) {
