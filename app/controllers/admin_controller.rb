@@ -169,10 +169,10 @@ class AdminController < ApplicationController
     end
 
     def game_started
-        puts params["admin"][:id].inspect
+        # puts params["admin"][:id].inspect
+        # TODO: set away/home score to 0
         
         Game.update(params["admin"][:id], game_started: true)
-
         render :nothing => true, :status => 200
     end
 
