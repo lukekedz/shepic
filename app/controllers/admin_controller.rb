@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
-    before_action :user_is_admin?
-    
+    before_action :user_is_admin?, except: [:active_game_slate, :game_started]
+    skip_before_action :verify_authenticity_token, only: :game_started
+
     before_action :get_active_week,        except: [:add_new_game, :delete_game, :export_results]
     before_action :get_active_week_games,  except: [:add_new_game, :delete_game, :export_results, :locked]
     before_action :tbreak_in_active_week?, only:   [:active_week, :lock]
@@ -158,6 +159,21 @@ class AdminController < ApplicationController
             format.html
             format.xlsx
         end
+    end
+
+    # raspi route to lock started games 
+    def active_game_slate
+        active_week = Week.where(locked: true, finalized: false).last
+
+        render json: active_week.games.order(:id), :status => 200
+    end
+
+    def game_started
+        puts params["admin"][:id].inspect
+        
+        Game.update(params["admin"][:id], game_started: true)
+
+        render :nothing => true, :status => 200
     end
 
 private

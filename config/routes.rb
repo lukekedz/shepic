@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'admin/review'
   get  'admin/finalize'
   get  'admin/export_results'
+  get  'admin/active_game_slate'
+  post 'admin/game_started'
 
   devise_for :users
 end
