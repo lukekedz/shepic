@@ -61,6 +61,7 @@
                             &nbsp;
                             <% if @active_week.locked == false %>
                                 <form action="/admin/delete_game" role="form" method="POST">
+                                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                                     <input type="hidden" name="id" value="<%= g[:id] %>">
                                     <button class="waves-effect waves-light btn">Delete</button>
                                 </form>
