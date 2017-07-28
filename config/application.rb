@@ -9,6 +9,10 @@ Bundler.require(*Rails.groups)
 module Shepic
   class Application < Rails::Application
 
+    config.action_dispatch.default_headers = {
+        'X-Frame-Options' => 'ALLOWALL'
+    }
+
     config.time_zone = 'Eastern Time (US & Canada)'
     config.active_record.default_timezone = :local
 
