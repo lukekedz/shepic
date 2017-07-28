@@ -20,12 +20,6 @@ var ready = function() {
     // activation
     $(".dropdown-button").dropdown();
     $('select').material_select();
-    
-    $('.datepicker').pickadate({
-        selectMonths: true,
-        closeOnClear: true,
-        format: 'mm-dd-yyyy'
-    });
 };
 
 // LDFE-126 in backlog

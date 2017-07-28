@@ -15,13 +15,6 @@ class AdminController < ApplicationController
     end
 
     def add_new_game
-        year  = params[:game][:date][6..9].to_i
-        month = params[:game][:date][0..1].to_i
-        day   = params[:game][:date][3..4].to_i
-        hour  = params[:game][:start_time][0..1].to_i
-        min   = params[:game][:start_time][2..3].to_i
-
-        params[:game][:date] = DateTime.new(year, month, day, hour, min)
         params[:game][:spread] = params[:game][:spread].to_i
 
         @new_game = Game.new(game_params)
