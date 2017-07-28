@@ -9,7 +9,17 @@
     });
 </script>
 
-<br>
+<div class="row">
+    <% if @game_added %>
+        <div class="col s4 offset-s4 card-panel">
+            <span class="blue-text text-lighten-2"><%= @game_added %></span>
+        </div>
+    <% else %>
+        <div class="col s4 offset-s4">
+            &nbsp;
+        </div>
+    <% end %>
+</div>
 
 <div class="col s4 offset-s4">
     <form action="/admin/add_new_game" role="form" id="add_new_game" method="POST">

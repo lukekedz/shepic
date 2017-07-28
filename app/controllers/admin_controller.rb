@@ -7,6 +7,8 @@ class AdminController < ApplicationController
     before_action :tbreak_in_active_week?, only:   [:active_week, :lock]
 
     def active_week
+        if params[:game_added] then @game_added = params[:game_added] end
+
         @new_game = Game.new
         @teams    = Team.all.order(:name)
         @times    = @new_game.game_times()
@@ -25,7 +27,7 @@ class AdminController < ApplicationController
         @new_game = Game.new(game_params)
 
         if @new_game.save
-            redirect_to admin_active_week_path
+            redirect_to admin_active_week_path(:game_added => 'Game Added!')
         else
             # TODO: error msg
         end
