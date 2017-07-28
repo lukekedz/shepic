@@ -1,6 +1,8 @@
 puts "Seeding DB: Initial..."
 
 # initial setup
+# TODO: add .env variable for dev instance and improve performance here
+# i.e., create an admin account, but do not add to Standings
 if User.count == 0
   User.create!(admin: true,  username: "luke",  email: "luke@gmail.com",  password: "loplop", password_confirmation: "loplop" )
   User.create!(admin: false, username: "kr",    email: "kr@gmail.com",    password: "emmie1", password_confirmation: "emmie1" )
