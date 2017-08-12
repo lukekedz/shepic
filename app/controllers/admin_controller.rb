@@ -46,7 +46,7 @@ class AdminController < ApplicationController
     def review
         if @active_week.locked == true
             params.each do |key, value|
-                
+
                 # TODO: better logic
                 if key != 'controller' &&
                    key != 'admin' &&
@@ -147,7 +147,7 @@ class AdminController < ApplicationController
         @weeks = Week.where(locked: true, finalized: true)
 
         if params[:id]
-            @week = Week.find(params[:id]) 
+            @week = Week.find(params[:id])
         end
 
         respond_to do |format|
@@ -156,9 +156,19 @@ class AdminController < ApplicationController
         end
     end
 
-    # raspi route to lock started games 
+    # raspi route to lock started games
     def active_game_slate
+        puts
+        puts
+        puts 'ACTIVE GAME SLATE'
+        puts params.inspect
+        puts
+        puts
+
         active_week = Week.where(locked: true, finalized: false).last
+        puts 'GAMES'
+        puts active_week.inspect
+        puts
 
         render json: active_week.games.order(:id), :status => 200
     end
@@ -166,7 +176,7 @@ class AdminController < ApplicationController
     def game_started
         # puts params["admin"][:id].inspect
         # TODO: set away/home score to 0
-        
+
         Game.update(params["admin"][:id], game_started: true)
         render :nothing => true, :status => 200
     end
