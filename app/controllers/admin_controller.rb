@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
     before_action :user_is_admin?, except: [:active_game_slate, :game_started]
+    before_action :ip_authorized?, only:   [:active_game_slate, :game_started]
     skip_before_action :verify_authenticity_token, only: :game_started
 
     before_action :get_active_week,        except: [:add_new_game, :delete_game, :export_results]
@@ -156,15 +157,8 @@ class AdminController < ApplicationController
         end
     end
 
-    # raspi route to lock started games
+    # raspi route
     def active_game_slate
-        puts
-        puts
-        puts 'ACTIVE GAME SLATE'
-        puts params.inspect
-        puts request.remote_ip
-        puts
-
         active_week = Week.where(locked: true, finalized: false).last
         puts 'GAMES'
         puts active_week.inspect
@@ -173,15 +167,10 @@ class AdminController < ApplicationController
         # render json: active_week.games.order(:id), :status => 200
         # render json: active_week, :status => 200
 
-        if ENV['RASPI'] == request.remote_ip
-            puts 'anyong!'
-            render json: active_week, :status => 200
-        else
-            puts 'yes, anyong, anyong, anyong'
-            render nothing: true, :status => 401
-        end
+        render json: active_week, :status => 200
     end
 
+    # raspi route
     def game_started
         # puts params["admin"][:id].inspect
         # TODO: set away/home score to 0
@@ -191,6 +180,13 @@ class AdminController < ApplicationController
     end
 
 private
+
+    def ip_authorized?
+        unless ENV['RASPI'] == request.remote_ip
+            # TODO: email alert (for fun)
+            render nothing: true, :status => 401
+        end
+    end
 
     def user_is_admin?
         unless current_user.admin
