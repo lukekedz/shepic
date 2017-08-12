@@ -162,7 +162,6 @@ class AdminController < ApplicationController
         puts
         puts 'ACTIVE GAME SLATE'
         puts params.inspect
-        puts request.domain
         puts request.remote_ip
         puts
 
@@ -172,7 +171,15 @@ class AdminController < ApplicationController
         puts
 
         # render json: active_week.games.order(:id), :status => 200
-        render json: active_week, :status => 200
+        # render json: active_week, :status => 200
+
+        if ENV['RASPI'] == request.remote_ip
+            puts 'anyong!'
+            render json: active_week, :status => 200
+        else
+            puts 'yes, anyong, anyong, anyong'
+            render nothing: true, :status => 401
+        end
     end
 
     def game_started
