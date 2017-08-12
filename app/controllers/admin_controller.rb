@@ -170,7 +170,8 @@ class AdminController < ApplicationController
         puts active_week.inspect
         puts
 
-        render json: active_week.games.order(:id), :status => 200
+        # render json: active_week.games.order(:id), :status => 200
+        render json: active_week, :status => 200
     end
 
     def game_started
