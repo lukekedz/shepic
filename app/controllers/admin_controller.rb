@@ -162,7 +162,8 @@ class AdminController < ApplicationController
         puts
         puts 'ACTIVE GAME SLATE'
         puts params.inspect
-        puts
+        puts request.domain
+        puts request.remote_ip
         puts
 
         active_week = Week.where(locked: true, finalized: false).last
