@@ -43,6 +43,7 @@ class AdminController < ApplicationController
     @points = Array.new(101){ |i| i }
   end
 
+  # TODO: refactor/OO
   def review
     if @active_week.locked == true
       params.each do |key, value|
@@ -83,6 +84,7 @@ class AdminController < ApplicationController
     end
   end
 
+  # TODO: refactor/OO
   def finalize
     if @active_week.locked == true
       @active_week.update(finalized: true)
@@ -158,17 +160,17 @@ class AdminController < ApplicationController
 
   # raspi route
   def active_game_slate
-    active_week = Week.where(locked: true, finalized: false).last
-    render json: active_week, :status => 200
+    active_week     = Week.where(locked: true, finalized: false).last
+    response_object = active_week ? active_week.games.order(:date).order(:start_time) : nil
+
+    render json: response_object, :status => 200
   end
 
   # raspi route
   def game_started
-    # puts params["admin"][:id].inspect
-    # TODO: set away/home score to 0
+    updated_game_record = Game.update(params[:id], game_started: true, away_pts: 0, home_pts: 0)
 
-    Game.update(params["admin"][:id], game_started: true)
-    render :nothing => true, :status => 200
+    render json: updated_game_record, :status => 200
   end
 
 private
@@ -178,10 +180,15 @@ private
     end
   end
 
+  # for raspi routes
   def ip_authorized?
-    unless ENV['RASPI'] == request.remote_ip
-      # TODO: email alert (for fun)
-      render nothing: true, :status => 401
+    unless ENV['RASPI'] == request.remote_ip && ENV['SECRET'] == params[:secret]
+      # TODO: email alert
+      respond_to do |format|
+        format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+        format.xml  { head :not_found }
+        format.any  { head :not_found }
+      end
     end
   end
 
