@@ -16,7 +16,7 @@ class AdminController < ApplicationController
   end
 
   def add_new_game
-    params[:game][:spread] = params[:game][:spread].to_i
+    params[:game][:spread] = params[:game][:spread].to_f
 
     @new_game = Game.new(game_params)
 
