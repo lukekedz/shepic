@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <% if @user.standing.wins == @most_wins %>
+    <% if @user.standing.wins == @most_wins && @week != nil %>
     <div class="row">
       <div class="col s12">
         <%= image_tag 'first_place.png', :class => 'responsive-img standings-easter-egg' %>
@@ -50,7 +50,7 @@
       <% end %>
     </div>
 
-    <% if @user.standing.wins == @fewest_wins %>
+    <% if @user.standing.wins == @fewest_wins && @week != nil %>
     <div class="row">
       <div class="col s12">
         <h5>whomp whomp</h5>
