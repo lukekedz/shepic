@@ -61,10 +61,11 @@ class SiteController < ApplicationController
   end
 
   def standings
-    @current_week = Week.last
-    @week         = Week.where(locked: true, finalized: true).last
-    @standings    = Standing.order(wins: :desc)
-
+    @current_week    = Week.last
+    @week            = Week.where(locked: true, finalized: true).last
+    @standings       = Standing.order(wins: :desc)
+    @most_wins       = Standing.order(:wins).last.wins
+    @fewest_wins     = Standing.order(:wins).first.wins
     @last_weeks_wins = []
 
     # TODO: better way? edge case for wk 1
