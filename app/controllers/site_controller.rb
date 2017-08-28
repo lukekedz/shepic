@@ -78,7 +78,7 @@ class SiteController < ApplicationController
         games.each do |g|
           pick = Pick.where(game_id: g.id, user_id: st.user_id)
 
-          if pick[0].correct == true
+          if pick[0] && pick[0].correct == true
               @last_weeks_wins[index] += 1
           end
         end
@@ -99,7 +99,7 @@ class SiteController < ApplicationController
       games.each do |g|
         pick = Pick.where(game_id: g.id, user_id: current_user.id)
 
-        if pick[0].correct == true
+        if pick[0] && pick[0].correct == true
             @weekly_user_win_total[index] += 1
         end
       end
@@ -116,7 +116,8 @@ class SiteController < ApplicationController
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
-      if user_pick[0] != nil
+
+      if user_pick[0]
         @picks[user_pick[0].game_id] = { pick: user_pick[0].pick, correct: user_pick[0].correct }
 
         if user_pick[0].correct == true
@@ -126,6 +127,8 @@ class SiteController < ApplicationController
         if user_pick[0].tbreak_pts != nil
           @tbreak_pts = user_pick[0].tbreak_pts
         end
+      else
+        @picks[g.id] = { pick: 'n/a', correct: false }
       end
     end
   end

@@ -8,12 +8,14 @@
       </div>
     </div>
 
-    <% if @user.standing.wins == @most_wins && @week != nil %>
-    <div class="row">
-      <div class="col s12">
-        <%= image_tag 'first_place.png', :class => 'responsive-img standings-easter-egg' %>
+    <% if @user.admin == false %>
+      <% if @user.standing.wins == @most_wins && @week != nil %>
+      <div class="row">
+        <div class="col s12">
+          <%= image_tag 'first_place.png', :class => 'responsive-img standings-easter-egg' %>
+        </div>
       </div>
-    </div>
+      <% end %>
     <% end %>
 
     <div class="row">
@@ -50,15 +52,17 @@
       <% end %>
     </div>
 
-    <% if @user.standing.wins == @fewest_wins && @week != nil %>
-    <div class="row">
-      <div class="col s12">
-        <h5>whomp whomp</h5>
+    <% if @user.admin == false %>
+      <% if @user.standing.wins == @fewest_wins && @week != nil %>
+      <div class="row">
+        <div class="col s12">
+          <h5>whomp whomp</h5>
+        </div>
+        <div class="col s12">
+          <%= image_tag 'gingerbread.jpg', :class => 'responsive-img standings-easter-egg' %>
+        </div>
       </div>
-      <div class="col s12">
-        <%= image_tag 'gingerbread.jpg', :class => 'responsive-img standings-easter-egg' %>
-      </div>
-    </div>
+      <% end %>
     <% end %>
 
   </div>
