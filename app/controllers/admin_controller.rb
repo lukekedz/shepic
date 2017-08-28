@@ -15,8 +15,23 @@ class AdminController < ApplicationController
     @times    = @new_game.game_times()
   end
 
+  # TODO: can be optimized! if Pick.table has week_id along with game_id...
   def user_pick_summary
-    @users = User.where(admin: false)
+    @users        = User.where(admin: false)
+    @pick_summary = []
+
+    @users.each do |u|
+      user_pick_count = 0
+
+      @active_week.games.each do |g|
+        if g.picks.where(user_id: u.id)[0]
+          user_pick_count += 1
+        end
+      end
+
+      @pick_summary.push user_pick_count      
+      user_pick_count = 0
+    end
   end
 
   def add_new_game
