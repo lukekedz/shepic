@@ -15,6 +15,10 @@ class AdminController < ApplicationController
     @times    = @new_game.game_times()
   end
 
+  def user_pick_summary
+    @users = User.where(admin: false)
+  end
+
   def add_new_game
     params[:game][:spread] = params[:game][:spread].to_f
 

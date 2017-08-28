@@ -1,0 +1,19 @@
+<div class="row center-align flow-text">
+    <div class="col s12">
+
+        <div class="row">
+            <div class="col s12">
+                <h5>User Pick Summary</h5>
+                <h5>Week: <%= @active_week.week %></h5>
+            </div>
+        </div>
+
+        <strong>Users</strong>
+        <br>
+        <% @users.each do |u| %>
+          <%= u.username %>
+          <br>
+        <% end %>
+
+  </div>
+</div>

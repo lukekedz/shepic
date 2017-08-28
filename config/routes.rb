@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get  'admin/export_results'
   get  'admin/active_game_slate'
   post 'admin/game_started'
+  get  'admin/user_pick_summary'
 
   devise_for :users
 end
