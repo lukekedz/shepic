@@ -104,7 +104,7 @@
 
                                         <div class="col s6 offset-s3 tiebreaker">
                                             <span class="alert">Total Points:</span>
-                                            
+
                                             <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
                                             <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
 
@@ -142,47 +142,6 @@
                                 </div>
                             </strong>
 
-                            <! -- BREAK -->
-                            <div class="col s12"><br/></div>
-
-                            <!-- CURRENT SCORE -->
-                            <% if g[:game_started] == true %>
-
-                                <!-- TODO: refactor? -->
-                                <div class="col s2 offset-s1">
-                                    <% if (@picks[ g[:id] ] == g[:away]) && (g[:away_pts] != ( g[:home_pts] + g[:spread] )) %>
-                                        
-                                        <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
-                                            <strong class="live-correct-pick"><%= g[:away_pts] %></strong>
-                                        <% else %>
-                                            <strong class="live-incorrect-pick"><%= g[:away_pts] %></strong>
-                                        <% end %>
-
-                                    <% else %>
-                                        <strong><%= g[:away_pts] %></strong>
-                                    <% end %>
-                                </div>
-
-                                <div class="col s6 center-align">
-                                    <!-- TODO: scrape live game data -->
-                                    Q1 4:25
-                                </div>
-                                
-                                <div class="col s2">
-                                    <% if (@picks[ g[:id] ] == g[:home]) && (g[:away_pts] != ( g[:home_pts] + g[:spread] )) %>
-                                        
-                                        <% if g[:away_pts] > ( g[:home_pts] + g[:spread] ) %>
-                                            <strong class="live-incorrect-pick"><%= g[:home_pts] %></strong>
-                                        <% else %>
-                                            <strong class="live-correct-pick"><%= g[:home_pts] %></strong>
-                                        <% end %>
-
-                                    <% else %>
-                                        <strong><%= g[:home_pts] %></strong>
-                                    <% end %>
-                                </div>
-
-                            <% end %>
                         </div>
 
                     </div>
