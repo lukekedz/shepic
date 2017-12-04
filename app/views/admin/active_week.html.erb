@@ -15,7 +15,7 @@
             </form>
         <% else %>
 
-            <% if @games.count < 10 %>
+            <% if @games.count < 30 %>
                 <%= render 'add_game' %>
             <% elsif !@current_week.finalized  %>
                 <form action="/admin/lock" role="form" method="GET">
