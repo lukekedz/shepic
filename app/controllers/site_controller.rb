@@ -79,7 +79,7 @@ class SiteController < ApplicationController
           pick = Pick.where(game_id: g.id, user_id: st.user_id)
 
           if pick[0] && pick[0].correct == true
-              @last_weeks_wins[index] += 1
+              @last_weeks_wins[index] += 5
           end
         end
       end
