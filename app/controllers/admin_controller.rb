@@ -137,8 +137,7 @@ class AdminController < ApplicationController
 
           if pick.any? && pick[0].correct == true
             standing    = Standing.where(user_id: user.id)
-            # incremented = standing[0].wins + 1
-            incremented = standing[0].wins + 5
+            incremented = standing[0].wins + 1
 
             Standing.update(standing[0].id, wins: incremented)
           else
