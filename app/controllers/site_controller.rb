@@ -13,7 +13,7 @@ class SiteController < ApplicationController
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
       if user_pick[0] != nil
-        @picks[user_pick[0].game_id] = user_pick[0].pick
+        @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
 
         if user_pick[0].tbreak_pts != nil
           @tbreak_pts = user_pick[0].tbreak_pts

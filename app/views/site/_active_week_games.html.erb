@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col s12">
                                 Game <%= i + 1 %>
-                                <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker)' end %></span>
+                                <span class="alert"><%= if g.tiebreaker == true then '(tiebreaker pts: ' + @tbreak_pts.to_s + ')' end %></span>
                             </div>
 
                             <!-- DATETIME -->
@@ -114,9 +114,6 @@
                                 <% end %>
                             <% end %>
 
-                            <!-- BREAK -->
-                            <div class="col s12"><br/></div>
-
                             <!-- MAKE SELECTION / YOUR PICK -->
                             <strong>
                                 <div class="col s12" id="your-pick-<%= g[:id] %>">
@@ -124,26 +121,53 @@
 
                                         <% if g[:game_started] == false %>
                                             <% if @picks[ g[:id] ] %>
-                                                Current Pick: <%= @picks[ g[:id] ] %>
+                                                Current Pick: <%= @picks[ g[:id] ][:pick] %>
                                             <% else %>
                                                 <span class="make-your-pick">Click Your Pick!</span>
                                             <% end %>
                                         <% else %>
 
-                                            <div class="col s6">
-                                                <strong><%= g[:away_pts] %></strong>
-                                            </div>
-                                            <div class="col s6">
-                                                <strong><%= g[:home_pts] %></strong>
+                                            <span class="matchup-smaller-font">
+                                                Pick Locked: <%= @picks[ g[:id] ][:pick] %>
+                                            </span>
+
+                                            <div class="col s12 archived-right-wrong">
+                                                <% if g[:away_pts] > ( g[:home_pts] + g[:spread]) %>
+                                                    <% if @picks[ g[:id] ][:away_home] == 'away' %>
+                                                        <%= image_tag 'correct.png' %>
+                                                        <% border = 'green dashed;' %>
+                                                    <% else %>
+                                                        <%= image_tag 'x.png' %>
+                                                        <% border = 'red dashed;' %>
+                                                    <% end %>
+                                                <% elsif g[:away_pts] < ( g[:home_pts] + g[:spread]) %>
+                                                    <% if @picks[ g[:id] ][:away_home] == 'home' %>
+                                                        <%= image_tag 'correct.png' %>
+                                                        <% border = 'green dashed;' %>
+                                                    <% else %>
+                                                        <%= image_tag 'x.png' %>
+                                                        <% border = 'red dashed;' %>
+                                                    <% end %>
+                                                <% else %>
+                                                    * PUSH *
+                                                    <% border = 'black dashed;' %>
+                                                <% end %>
                                             </div>
 
-                                            <span class="matchup-smaller-font">
-                                                Pick Locked: <%= @picks[ g[:id] ] %>
-                                                <br/>
-                                                <% if g[:tiebreaker] == true %>
-                                                    (tiebreaker pts: <%= @tbreak_pts %>)
-                                                <% end %>
-                                            </span>
+                                            <div class="col s12"
+                                                style="border: 1px <%= g[:game_finished] == false ? border : 'black solid;' %>"
+                                            >
+                                                <div class="col s3">
+                                                    <strong><%= g[:away_pts] %></strong>
+                                                </div>
+                                                <div class="col s6">
+                                                    <strong><%= g[:time_remaining] %></strong>
+                                                </div>
+                                                <div class="col s3">
+                                                    <strong><%= g[:home_pts] %></strong>
+                                                </div>
+                                            </div>
+
                                         <% end %>
 
                                     <% end %>

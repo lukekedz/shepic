@@ -4,16 +4,11 @@
             :fields:
                 - id
                 - week_id
-                - date
-                - away 
-                - home
-                - spread
-                - location
-                - start_time
                 - game_started
-                - tiebreaker
-                - winner 
-                - away_pts 
+                - game_finished
+                - spread
+                - away
+                - away_pts
+                - home
                 - home_pts
-                - total_pts
-                - updated_at
+                - time_remaining
