@@ -155,7 +155,7 @@
                                             </div>
 
                                             <div class="col s12"
-                                                style="border: 1px <%= g[:game_finished] == false ? border : 'black solid;' %>"
+                                                style="border: 1px <%= g[:game_finished] == true ? 'black solid;' : border %>"
                                             >
                                                 <div class="col s3">
                                                     <strong><%= g[:away_pts] %></strong>
