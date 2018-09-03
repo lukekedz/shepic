@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   end
   # :nocov:
 
+  def after_sign_in_path_for(resource)
+    site_current_week_path
+  end
+
   protected
 
   # :nocov:
