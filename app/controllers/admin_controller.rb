@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
-  before_action :user_is_admin?, except: [:active_game_slate, :game_started]
-  before_action :ip_authorized?, only:   [:active_game_slate, :game_started]
-  skip_before_action :verify_authenticity_token, only: :game_started
+  before_action :user_is_admin?, except: [:active_game_slate, :game_started, :update_score]
+  before_action :ip_authorized?, only:   [:active_game_slate, :game_started, :update_score]
+  skip_before_action :verify_authenticity_token, only: :game_started, :update_score
 
   before_action :get_active_week,        except: [:add_new_game, :delete_game, :export_results]
   before_action :get_active_week_games,  except: [:add_new_game, :delete_game, :export_results, :locked]
@@ -29,7 +29,7 @@ class AdminController < ApplicationController
         end
       end
 
-      @pick_summary.push user_pick_count      
+      @pick_summary.push user_pick_count
       user_pick_count = 0
     end
   end
@@ -188,8 +188,13 @@ class AdminController < ApplicationController
   # raspi route
   def game_started
     updated_game_record = Game.update(params[:id], game_started: true, away_pts: 0, home_pts: 0)
-
     render json: updated_game_record, :status => 200
+  end
+
+  # raspi route
+  def update_score
+    updated_score = Game.update(params[:id], away_pts: params[:away_pts}, home_pts: params[:home_pts])
+    render json: updated_score, :status => 200
   end
 
 private
