@@ -193,7 +193,7 @@ class AdminController < ApplicationController
 
   # raspi route
   def update_score
-    updated_score = Game.update(params[:id], away_pts: params[:away_pts], home_pts: params[:home_pts], game_finished: params[:game_finished])
+    updated_score = Game.update(params[:id], away_pts: params[:away_pts], home_pts: params[:home_pts], game_finished: params[:game_finished], time_remaining: params[:time_remaining])
     render json: updated_score, :status => 200
   end
 
