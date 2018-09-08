@@ -1,15 +1,11 @@
 <div class="row center-align flow-text">
     <div class="col s12">
-
         <%= render 'status' %>
-
         <%= render 'active_week_games' %>
-
     </div>
 
     <div class="footer-copyright center-align">
-        <div class="divider"></div>
-
+        <hr>
         Updated at: <strong><%= @games.last.updated_at.to_s[0..15] %></strong>
     </div>
 </div>
