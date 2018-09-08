@@ -7,8 +7,10 @@
 
     </div>
 
+    <div class="divider"></div>
+
     <div class="footer-copyright center-align">
-        Updated at: <%= @games.last.updated_at %>
+        Updated at: <%= @games.last.updated_at.to_s[0..15] %>
     </div>
 </div>
 
