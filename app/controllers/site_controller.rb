@@ -7,7 +7,7 @@ class SiteController < ApplicationController
 
   def current_week
     @current_week = Week.last
-    @games        = Game.where(week_id: @current_week.id).order(:date, :start_time)
+    @games        = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
 
     @picks = {}
     @games.each do |g|
