@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   # :nocov:
 
   def after_sign_in_path_for(resource)
-    puts resource.inspect
+    puts 'RESOURCE: ' + resource.inspect
     site_current_week_path
   end
 
