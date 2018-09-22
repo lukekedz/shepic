@@ -178,6 +178,12 @@ class AdminController < ApplicationController
   end
 
   # raspi route
+  def week_number_for_scripts
+    active_week = Week.where(locked: true, finalized: false).last
+    render json: active_week, :status => 200
+  end
+
+  # raspi route
   def active_game_slate
     active_week     = Week.where(locked: true, finalized: false).last
     response_object = active_week ? active_week.games.order(:date).order(:start_time) : nil
