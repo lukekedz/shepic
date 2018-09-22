@@ -134,18 +134,18 @@
                                             <div class="col s12 archived-right-wrong">
                                                 <% if g[:away_pts] > ( g[:home_pts] + g[:spread]) %>
                                                     <% if @picks[ g[:id] ][:away_home] == 'away' %>
-                                                        <%= image_tag 'correct.png' %>
+                                                        <%= if g{:game_finished] == true then image_tag 'correct.png' end %>
                                                         <% border = 'green dashed;' %>
                                                     <% else %>
-                                                        <%= image_tag 'x.png' %>
+                                                        <%= if g{:game_finished] == true then image_tag 'x.png' end %>
                                                         <% border = 'red dashed;' %>
                                                     <% end %>
                                                 <% elsif g[:away_pts] < ( g[:home_pts] + g[:spread]) %>
                                                     <% if @picks[ g[:id] ][:away_home] == 'home' %>
-                                                        <%= image_tag 'correct.png' %>
+                                                        <%= if g{:game_finished] == true then image_tag 'correct.png' end %>
                                                         <% border = 'green dashed;' %>
                                                     <% else %>
-                                                        <%= image_tag 'x.png' %>
+                                                        <%= if g{:game_finished] == true then image_tag 'x.png' end %>
                                                         <% border = 'red dashed;' %>
                                                     <% end %>
                                                 <% else %>
