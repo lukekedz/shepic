@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
-  before_action :user_is_admin?, except: [:active_game_slate, :game_started, :update_score]
-  before_action :ip_authorized?, only:   [:active_game_slate, :game_started, :update_score]
+  before_action :user_is_admin?, except: [:active_game_slate, :game_started, :update_score, :week_number_for_scripts]
+  before_action :ip_authorized?, only:   [:active_game_slate, :game_started, :update_score, :week_number_for_scripts]
   skip_before_action :verify_authenticity_token, only: [:game_started, :update_score]
 
   before_action :get_active_week,        except: [:add_new_game, :delete_game, :export_results]

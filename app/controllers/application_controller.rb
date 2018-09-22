@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!, except: [:active_game_slate, :game_started, :update_score]
+  before_action :authenticate_user!, except: [:active_game_slate, :game_started, :update_score, :week_number_for_scripts]
 
   # :nocov:
   before_action do |controller|
