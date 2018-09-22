@@ -120,13 +120,14 @@
                                     <% if @current_week.locked %>
 
                                         <% if g[:game_started] == false %>
+
                                             <% if @picks[ g[:id] ] %>
                                                 Current Pick: <%= @picks[ g[:id] ][:pick] %>
                                             <% else %>
                                                 <span class="make-your-pick">Click Your Pick!</span>
                                             <% end %>
-                                        <% else %>
 
+                                        <% else %>
                                             <span class="matchup-smaller-font">
                                                 Pick Locked: <%= @picks[ g[:id] ][:pick] %>
                                             </span>
