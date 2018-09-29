@@ -144,13 +144,13 @@
                                                 <% elsif g[:away_pts] < ( g[:home_pts] + g[:spread]) %>
                                                     <% if @picks[ g[:id] ][:away_home] == 'home' %>
                                                         <%= if g[:game_finished] == true then image_tag 'correct.png' end %>
-                                                        <% border = 'green double;' %>
+                                                        <% border = 'green dashed;' %>
                                                     <% else %>
                                                         <%= if g[:game_finished] == true then image_tag 'x.png' end %>
                                                         <% border = 'red dashed;' %>
                                                     <% end %>
                                                 <% else %>
-                                                    <% border = 'black dotted;' %>
+                                                    <% border = 'grey dotted;' %>
                                                 <% end %>
                                             </div>
 
