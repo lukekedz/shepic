@@ -242,6 +242,6 @@ private
   end
 
   def game_params
-    params.require(:game).permit(:week_id, :away, :home, :spread, :location, :tiebreaker, :date, :start_time, :game_started)
+    params.require(:game).permit(:week_id, :away, :home, :spread, :location, :tiebreaker, :date, :start_time, :game_started, :game_finished)
   end
 end

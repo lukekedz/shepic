@@ -4,6 +4,7 @@ class Game < ActiveRecord::Base
   validates :home,        presence: true
   validates_inclusion_of :tiebreaker,   in: [true, false]
   validates_inclusion_of :game_started, in: [true, false]
+  validates_inclusion_of :game_finished, in: [true, false]
 
   belongs_to :weeks
   has_many :picks
