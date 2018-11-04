@@ -148,7 +148,8 @@ class AdminController < ApplicationController
 
       # both these booleans should be true; this is just a double check
       if @active_week.locked == true && @active_week.finalized == true
-        new_week = Week.new(week: @active_week.week + 1)
+        week_id_and_num = @active_week.week + 1
+        new_week = Week.new(id: week_id_and_num, week: week_id_and_num)
 
         if new_week.save
           redirect_to admin_active_week_path
