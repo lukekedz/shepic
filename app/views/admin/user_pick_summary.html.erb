@@ -26,10 +26,10 @@
           </div>
 
           <div class="col s6">
-            <% if (10 - @pick_summary[index].to_i) == 0 %>
+            <% if (@WEEKLY_GAME_COUNT - @pick_summary[index].to_i) == 0 %>
               -
             <% else %>
-              <strong><%= 10 - @pick_summary[index].to_i %></strong>
+              <strong><%= @WEEKLY_GAME_COUNT - @pick_summary[index].to_i %></strong>
             <% end %>
           </div>
 

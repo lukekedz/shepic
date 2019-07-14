@@ -1,4 +1,4 @@
-"HOW TO" RUN SIMULATION
+'HOW TO' RUN SIMULATION
 
 From command line, run one at a time in this order:
 

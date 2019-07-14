@@ -1,26 +1,26 @@
 <div class="row">
-    <div class="col s12">
+  <div class="col s12">
 
-        <div class="col s4">
-            Week:<br/>
-            <strong><%= @active_week.week %></strong>
-        </div>
+    <div class="col s4">
+      Week:<br/>
+      <strong><%= @active_week.week %></strong>
+    </div>
 
-        <div class="col s4">
-            Status:<br/> 
-            <strong>
-            <% if @active_week.locked == true %>
-              Locked
-            <% else %>
-              <%= @games.count < 10 ? "Open" : "Max" %>
-            <% end %>
-            </strong>
-        </div>
+    <div class="col s4">
+      Status:<br/> 
+      <strong>
+      <% if @active_week.locked == true %>
+        Locked
+      <% else %>
+        <%= @games.count < @WEEKLY_GAME_COUNT ? "Open" : "Max" %>
+      <% end %>
+      </strong>
+    </div>
 
-        <div class="col s4">
-            Games:<br/>
-            <strong><%= @games.count %></strong>
-        </div>
+    <div class="col s4">
+      Games:<br/>
+      <strong><%= @games.count %></strong>
+    </div>
 
   </div>
 </div>

@@ -1,4 +1,4 @@
-start_times = ["1200", "1215", "1500", "1530", "2000", "2030", "2100"]
+start_times = ['1200', '1215', '1500', '1530', '2000', '2030', '2100']
 
 10.times do
   Game.create(
@@ -10,7 +10,10 @@ start_times = ["1200", "1215", "1500", "1530", "2000", "2030", "2100"]
     tiebreaker:   false,
     date:         Faker::Date.between(Date.today, Date.today + 2),
     start_time:   start_times.sample,
-    game_started: false
+    game_started: false,
+    game_finished: false,
+    time_remaining: nil
+
   )
 end
 

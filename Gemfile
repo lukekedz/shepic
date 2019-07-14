@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
-gem 'pg'
+gem 'rails'
+gem 'pg', '~> 0.18.4'
 gem 'pkg-config'
-
-# TODO: eliminate gems not in use
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -24,27 +22,19 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# additional gems
-gem 'devise'
-gem 'simple_form'
-gem 'materialize-sass'
-gem 'hirb'
-
-# TODO: dev env only
-gem 'faker'
-
-# exporting
+# added
 gem 'axlsx_rails'
-
-# solving problem after brew install postgresql, when trying to restore copy of Heroku db
-# tried bew link readline --force, but still had errors when launching rails c
-gem 'rb-readline'
+gem 'devise'
+gem 'hirb'
+gem 'materialize-sass'
+gem 'simple_form'
 
 group :development, :test do
-	gem 'spring'
 	gem 'dotenv-rails'
+	gem 'faker'
 	gem 'rspec-rails', '~> 3.5'
 	gem 'simplecov', :require => false, :group => :test
+	gem 'spring'
 end
 
 group :production do

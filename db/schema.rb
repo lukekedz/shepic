@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -75,10 +74,9 @@ ActiveRecord::Schema.define(version: 20180903114426) do
     t.datetime "updated_at",                             null: false
     t.string   "username"
     t.boolean  "admin",                  default: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "weeks", force: :cascade do |t|
     t.integer  "week",                       null: false
