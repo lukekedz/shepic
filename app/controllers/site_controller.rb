@@ -5,19 +5,17 @@ class SiteController < ApplicationController
     @weeks = Week.where(locked: true, finalized: true)
   end
 
+  # TODO: could add week_id to picks table, and search with week_id & user_id combined
   def current_week
     @current_week = Week.last
-    @games        = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
+    @games = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
 
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
       if user_pick[0] != nil
         @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
-
-        if user_pick[0].tbreak_pts != nil
-          @tbreak_pts = user_pick[0].tbreak_pts
-        end
+        @tbreak_pts = user_pick[0].tbreak_pts if user_pick[0].tbreak_pts != nil
       end
     end
   end

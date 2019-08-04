@@ -1,20 +1,59 @@
 <div class="row">
-    <div class="col s12">
 
-        <div class="col s4">
-            Week:<br/>
-            <strong><%= @current_week.week %></strong>
-        </div>
+  <div class="col s12">
+    <div class="card grey lighten-3">
+      <div class="card-content blue-text darken-2">
 
-        <div class="col s4">
-            Status:<br/> 
-            <strong><%= @current_week.locked ? "Make Your Picks!" : "Open" %></strong>
-        </div>
+        <% if @current_week.locked %>
+          <p><i>Welcome to Week <%= @current_week.week %>!</i></p>
+        <% else %>
+          <span class="red-text"><i>Week <%= @current_week.week %> games not yet finalized!</i></span>
+        <% end %>
 
-        <div class="col s4">
-            Games:<br/>
-            <strong><%= @games ? @games.count : 0 %></strong>
-        </div>
-
+      </div>
+    </div>
   </div>
+
+  <div class="col s6">
+    <div class="card grey lighten-3">
+      <div class="card-content black-text">
+
+        <span class="card-title">Picks</span>
+        <p>Selected: <%= @picks.count %></p>
+        <p>Remain: <%= @games.count - @picks.count %></p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col s6">
+    <div class="card grey lighten-3">
+      <div class="card-content black-text">
+
+        <span class="card-title">Games</span>
+        <p>In Progress: <%= @games.where(game_started: true).count %></p>
+        <p>Ended: <%= @games.where(game_finished: true).count %></p>
+
+      </div>
+    </div>
+  </div>
+
+  <p>
+    <% if !@games.all? { |g| g.game_started } %>
+      <span style="font-size: 10px;"><i>(Picks can be made/changed until each specific game's start time)</i></span>
+    <% end %>
+  </p>
+
+  <div class="col s12">
+    <div class="card grey lighten-3">
+      <div class="card-content blue-text darken-2">
+
+        <p>
+          <b>Correct Picks: <%= 0 %>/<%= @games.where(game_finished: true).count %></b>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
 </div>
