@@ -1,9 +1,0 @@
-<p>
-  <%= game_day(game[:date]) %> @ <b><%= convert_military_to_ampm(game[:start_time]) %></b>
-</p>
-
-<p>
-  <span style="font-size: 14px; color: red;">
-    <%= if game.tiebreaker == true then '(tiebreaker pts: ' + @tbreak_pts.to_s + ')' end %>
-  </span>
-</p>

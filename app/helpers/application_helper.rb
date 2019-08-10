@@ -1,6 +1,6 @@
 module ApplicationHelper
   def game_day(date)
-    date.strftime("%a %m/%d").upcase
+    date.strftime("%A %m/%d")
   end
 
   def convert_military_to_ampm(military_time_str)

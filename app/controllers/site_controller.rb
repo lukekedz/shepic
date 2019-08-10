@@ -9,13 +9,18 @@ class SiteController < ApplicationController
   def current_week
     @current_week = Week.last
     @games = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
-
+    @last_upd = Game.where(week_id: @current_week.id).order(updated_at: :desc).first.updated_at
+    @correct = 0
+    
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
       if user_pick[0] != nil
         @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
         @tbreak_pts = user_pick[0].tbreak_pts if user_pick[0].tbreak_pts != nil
+        if g[:game_finished] == true
+          @correct += 1 if user_pick[0].away_home == g.winner
+        end
       end
     end
   end

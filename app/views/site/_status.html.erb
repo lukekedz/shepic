@@ -2,10 +2,18 @@
 
   <div class="col s12">
     <div class="card grey lighten-3">
-      <div class="card-content blue-text darken-2">
+      <div class="card-content black-text">
 
         <% if @current_week.locked %>
           <p><i>Welcome to Week <%= @current_week.week %>!</i></p>
+          <p>
+            <% if !@games.all? { |g| g.game_started } %>
+              <span style="font-size: 10px; color: red;"><i>(Picks can be made/changed until each specific game's start time)</i></span>
+            <% end %>
+          </p>
+          <p>
+            <span style="font-size: 10px;">Games Last Updated At: <b><%= @last_upd.strftime("%m/%d @ %H:%M") %></b></span>
+          </p>
         <% else %>
           <span class="red-text"><i>Week <%= @current_week.week %> games not yet finalized!</i></span>
         <% end %>
@@ -21,6 +29,7 @@
         <span class="card-title">Picks</span>
         <p>Selected: <%= @picks.count %></p>
         <p>Remain: <%= @games.count - @picks.count %></p>
+        <p><b>Correct: <%= @correct %></b></p>
 
       </div>
     </div>
@@ -31,26 +40,9 @@
       <div class="card-content black-text">
 
         <span class="card-title">Games</span>
-        <p>In Progress: <%= @games.where(game_started: true).count %></p>
-        <p>Ended: <%= @games.where(game_finished: true).count %></p>
-
-      </div>
-    </div>
-  </div>
-
-  <p>
-    <% if !@games.all? { |g| g.game_started } %>
-      <span style="font-size: 10px;"><i>(Picks can be made/changed until each specific game's start time)</i></span>
-    <% end %>
-  </p>
-
-  <div class="col s12">
-    <div class="card grey lighten-3">
-      <div class="card-content blue-text darken-2">
-
-        <p>
-          <b>Correct Picks: <%= 0 %>/<%= @games.where(game_finished: true).count %></b>
-        </p>
+        <p>Upcoming: <%= @games.where(game_started: false).count %></p>
+        <p>In Progress: <%= @games.where(game_started: true, game_finished: false).count %></p>
+        <p><b>Ended: <%= @games.where(game_finished: true).count %></b></p>
 
       </div>
     </div>

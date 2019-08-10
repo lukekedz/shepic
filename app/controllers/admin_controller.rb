@@ -85,17 +85,8 @@ class AdminController < ApplicationController
           when "away"
             game.update(away_pts: pts)
           when "home"
-            game.update(home_pts: pts)
-
-            # TODO: break out method
-            # also calculating in _active_week_games.html.erb
-            if game.away_pts > ( game.home_pts + game.spread )
-              game.update(winner: "away")
-            elsif game.away_pts < ( game.home_pts + game.spread )
-              game.update(winner: "home")
-            else
-             game.update(winner: "push")
-            end
+            winner = current_game_winner(game.away_pts, game.home_pts, game.spread)
+            game.update(home_pts: pts, winner: winner)
           end
         end
 
@@ -200,11 +191,28 @@ class AdminController < ApplicationController
 
   # raspi route
   def update_score
-    updated_score = Game.update(params[:id], away_pts: params[:away_pts], home_pts: params[:home_pts], game_finished: params[:game_finished], time_remaining: params[:time_remaining])
+    winner = current_game_winner(params[:away_pts], params[:home_pts], params[:spread]) 
+    updated_score = Game.update(params[:id], 
+      away_pts: params[:away_pts], 
+      home_pts: params[:home_pts], 
+      game_finished: params[:game_finished], 
+      time_remaining: params[:time_remaining],
+      winner: winner
+    )
     render json: updated_score, :status => 200
   end
 
 private
+  def current_game_winner(away_pts, home_pts, spread)
+    if away_pts > ( home_pts + spread )
+      'away'
+    elsif away_pts < ( home_pts + spread )
+      'home'
+    else
+      'push'
+    end
+  end
+
   def user_is_admin?
     unless current_user.admin
       redirect_to root_path

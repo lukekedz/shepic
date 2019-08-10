@@ -27,6 +27,7 @@ gem 'axlsx_rails'
 gem 'devise'
 gem 'hirb'
 gem 'materialize-sass'
+gem 'rb-readline'
 gem 'simple_form'
 
 group :development, :test do

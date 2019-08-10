@@ -9,7 +9,7 @@
           <div class="card-content black-text">
             
             <div class="row">
-              <%= render 'time_and_location', game: g, index: i %>
+              <%= render 'matchup_header', game: g, index: i %>
             </div>
 
             <!-- TEAM LOGO BUTTON/FORM SELECTION -->
@@ -49,19 +49,99 @@
               </div>
             </div>
 
-            <!-- SPREAD -->
-            <div class="row">
-              <div class="col s6 offset-s6">
-                Spread:
-                <strong>
-                  <%= g[:spread] > 0 ? "+" : "" %><%= g[:spread] %>
-                </strong>
+            <!-- SPREAD (prior to game start) -->
+            <% if g[:game_started] == false %>
+              <div class="row">
+                <b><%= render 'spread', game: g %></b>
               </div>
+            <% end %>
+
+             <!-- MAKE SELECTION / YOUR PICK -->
+            <div class="row"><strong>
+
+              <div class="col s12" id="your-pick-<%= g[:id] %>">
+                <% if @current_week.locked %>
+                  <% if g[:game_started] == false %>
+                    
+                    <% if @picks[ g[:id] ] %>
+                      Current Pick: <%= @picks[ g[:id] ][:pick] %>
+                    <% else %>
+                      <span class="make-your-pick">Click Your Pick!</span>
+                    <% end %>
+
+                  <% else %>
+                    <span class="matchup-smaller-font">
+                      Pick Locked: <%= @picks[ g[:id] ] ? @picks[ g[:id] ][:pick] : 'n/a' %>
+                    </span>
+                    
+                    <div class="col s12">
+                      <% if g[:winner] == 'push' %>
+                        <% border = 'grey dotted;' %>
+                      <% else %>
+                        <% if g[:winner] == @picks[ g[:id] ][:away_home] %>
+                          <% border = 'green dashed;' %>
+                        <% else %>
+                          <% border = 'red dashed;' %>
+                        <% end %>
+                      <% end %>
+                    </div>
+
+                    <div class="col s12"
+                      style="border: 1px <%= g[:game_finished] == true ? 'black solid;' : border %>; margin-top: 10px; margin-bottom: 10px;"
+                    >
+                      <div class="col s3">
+                        <strong><%= g[:away_pts] %></strong>
+                      </div>
+                      
+                      <div class="col s6">
+                        <strong><%= g[:time_remaining] %></strong>
+                      </div>
+                      
+                      <div class="col s3">
+                        <strong><%= g[:home_pts] %></strong>
+                      </div>
+                    </div>
+
+                    <%= render 'spread', game: g %>
+                    <div class="row"><p>&nbsp;</p></div>
+
+                    <div class="col s12 archived-right-wrong">
+                      <% if g[:winner] == @picks[ g[:id] ][:away_home] %>
+                        <%= if g[:game_finished] == true then image_tag 'correct.png' end %>
+                      <% else %>
+                        <%= if g[:game_finished] == true then image_tag 'x.png' end %>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+                <% end %>
+              </div>
+              
+            </strong></div>
+
+            <!-- TIEBREAKER -->
+            <div class="row">
+              <% if @current_week.locked == true && !@current_week.finalized %>
+                <% if g[:tiebreaker] == true && g[:game_started] == false %>
+                  <div class="col s6 offset-s3 tiebreaker">
+                    <label for="tbreak-pts"><span style="color: red;">Tiebreaker Total Points:</span></label>
+                    <input id="tbreak-pts" type="number" value="<%= @tbreak_pts %>" onchange="tiebreaker()" min="0">
+                    <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
+                    <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
+                  </div>
+                <% else %>
+                  <p>
+                    <span style="font-size: 14px;">
+                      <%= if g[:tiebreaker] == true then '(Tiebreaker - Total Points: ' + @tbreak_pts.to_s + ')' end %>
+                    </span>
+                  </p>
+                <% end %>
+              <% end %>
             </div>
 
-            <div class="row">
-              <%= render 'matchup', game: g %>
-            </div>
+            <p>
+              <span style="font-size: 10px;">Last Updated At: <%= @last_upd.strftime("%m/%d @ %H:%M") %></span>
+            </p>
 
           </div>
         </div>

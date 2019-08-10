@@ -12,3 +12,5 @@
                 - home
                 - home_pts
                 - time_remaining
+                - winner
+                - updated_at
