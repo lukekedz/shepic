@@ -124,14 +124,14 @@
               <% if @current_week.locked == true && !@current_week.finalized %>
                 <% if g[:tiebreaker] == true && g[:game_started] == false %>
                   <div class="col s6 offset-s3 tiebreaker">
-                    <label for="tbreak-pts"><span style="color: red;">Tiebreaker Total Points:</span></label>
+                    <label><span style="color: black; font-size: 20px;">Tiebreaker Total Points:</span></label>
                     <input id="tbreak-pts" type="number" value="<%= @tbreak_pts %>" onchange="tiebreaker()" min="0">
                     <input type="hidden" value="<%= current_user.id %>" id="tbreak-user-id">
                     <input type="hidden" value="<%= g[:id] %>" id="tbreak-game-id">
                   </div>
                 <% else %>
                   <p>
-                    <span style="font-size: 14px;">
+                    <span style="font-size: 24px;">
                       <%= if g[:tiebreaker] == true then '(Tiebreaker - Total Points: ' + @tbreak_pts.to_s + ')' end %>
                     </span>
                   </p>
