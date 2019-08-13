@@ -15,13 +15,21 @@ class SiteController < ApplicationController
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
+
       if user_pick[0] != nil
-        @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
-        @tbreak_pts = user_pick[0].tbreak_pts if user_pick[0].tbreak_pts != nil
+        if user_pick[0].pick
+          @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
+        end
+
+        if user_pick[0].tbreak_pts != nil
+          @tbreak_pts = user_pick[0].tbreak_pts
+        end
+
         if g[:game_finished] == true
           @correct += 1 if user_pick[0].away_home == g.winner
         end
       end
+
     end
   end
 
