@@ -14,39 +14,7 @@
 
             <!-- TEAM LOGO BUTTON/FORM SELECTION -->
             <div class="row">
-              <div class="col s6">
-                <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
-                  <form action="" role="form" class="pick" method="POST">
-                    <input type="hidden" value="<%= current_user.id %>" id="user-id">
-                    <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                    <input type="hidden" value="<%= g[:away] %>" id="away-game-pick-<%= g[:id] %>">
-                    <input type="hidden" value="away" id="away-home">
-
-                    <button type="submit" name="action" class="game-pick-team-logo-btn">
-                      <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
-                    </button>
-                  </form>
-                <% else %>
-                  <%= image_tag g[:away] + '.png', :class => 'responsive-img' %>
-                <% end %>
-              </div>
-
-              <div class="col s6">
-                <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
-                  <form action="" role="form" class="pick" method="POST">
-                    <input type="hidden" value="<%= current_user.id %>" id="user-id">
-                    <input type="hidden" value="<%= g[:id] %>" id="<%= g[:id] %>">
-                    <input type="hidden" value="<%= g[:home] %>" id="home-game-pick-<%= g[:id] %>">
-                    <input type="hidden" value="home" id="away-home">
-
-                    <button type="submit" name="action" class="game-pick-team-logo-btn">
-                      <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
-                    </button>
-                  </form>
-                <% else %>
-                  <%= image_tag g[:home] + '.png', :class => 'responsive-img' %>
-                <% end %>
-              </div>
+              <%= render 'team_logo_form', game: g %>
             </div>
 
             <!-- SPREAD (prior to game start) -->
@@ -58,76 +26,7 @@
 
              <!-- MAKE SELECTION / YOUR PICK -->
             <div class="row"><strong>
-
-              <div class="col s12" id="your-pick-<%= g[:id] %>">
-                <% if @current_week.locked %>
-                  <% if g[:game_started] == false %>
-                    
-                    <% if @picks[ g[:id] ] %>
-                      Your Pick: <%= @picks[ g[:id] ][:pick] %>
-                    <% else %>
-                      <span class="make-your-pick">Click Your Pick!</span>
-                    <% end %>
-
-                  <% else %>
-                    <div class="col s12">
-                      <b>Your Pick: <%= @picks[ g[:id] ] ? @picks[ g[:id] ][:pick] : 'n/a' %></b>
-                    </div>
-                    <div class="col s12" style="font-size: 16px;">
-                      <i>Field: <%= @picks[ g[:id] ][:field] %></i>
-                    </div>
-                    <div class="col s12">
-                      &nbsp;
-                    </div>
-                    
-                    <div class="col s12">
-                      <% if g[:winner] == 'push' %>
-                        <% border = 'grey dotted;' %>
-                      <% else %>
-                        <% if g[:winner] == @picks[ g[:id] ][:away_home] %>
-                          <% border = 'green dashed' %>
-                        <% else %>
-                          <% border = 'red dashed' %>
-                        <% end %>
-                      <% end %>
-                    </div>
-
-                    <div class="col s12"
-                      style="border: 2px <%= g[:game_finished] == true ? 'black solid;' : border %>; margin-top: 10px; margin-bottom: 10px;"
-                    >
-                      <div class="col s3">
-                        <strong><%= g[:away_pts] %></strong>
-                      </div>
-                      
-                      <div class="col s6">
-                        <strong><%= g[:time_remaining] %></strong>
-                      </div>
-                      
-                      <div class="col s3">
-                        <strong><%= g[:home_pts] %></strong>
-                      </div>
-                    </div>
-
-                    <%= render 'spread', game: g %>
-
-                    <% if g[:game_finished] == true  %>
-                      <div class="col s12 archived-right-wrong">
-                        <% if g[:winner] == 'push' %>
-                          PUSH
-                        <% else %>
-                          <% if g[:winner] == @picks[ g[:id] ][:away_home] %>
-                            <%= image_tag 'correct.png' %>
-                          <% else %>
-                            <%= image_tag 'x.png' %>
-                          <% end %>
-                        <% end %>
-                    </div>
-                    <% end %>
-
-                  <% end %>
-                <% end %>
-              </div>
-              
+              <%= render 'scoring', game: g %>
             </strong></div>
 
             <!-- TIEBREAKER -->

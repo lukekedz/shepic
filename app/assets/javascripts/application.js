@@ -18,7 +18,7 @@
 
 var ready = function() {
     // activation
-    $(".dropdown-button").dropdown();
+    $(".dropdown-trigger").dropdown();
     $('select').material_select();
 };
 

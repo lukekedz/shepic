@@ -1,0 +1,33 @@
+<div class="col s6">
+  <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
+    <form action="" role="form" class="pick" method="POST">
+      <input type="hidden" value="<%= current_user.id %>" id="user-id">
+      <input type="hidden" value="<%= game[:id] %>" id="<%= game[:id] %>">
+      <input type="hidden" value="<%= game[:away] %>" id="away-game-pick-<%= game[:id] %>">
+      <input type="hidden" value="away" id="away-home">
+
+      <button type="submit" name="action" class="game-pick-team-logo-btn">
+        <%= image_tag game[:away] + '.png', :class => 'responsive-img' %>
+      </button>
+    </form>
+  <% else %>
+    <%= image_tag game[:away] + '.png', :class => 'responsive-img' %>
+  <% end %>
+</div>
+
+<div class="col s6">
+  <% if @current_week.locked == true && !@current_week.finalized && game[:game_started] == false %>
+    <form action="" role="form" class="pick" method="POST">
+      <input type="hidden" value="<%= current_user.id %>" id="user-id">
+      <input type="hidden" value="<%= game[:id] %>" id="<%= game[:id] %>">
+      <input type="hidden" value="<%= game[:home] %>" id="home-game-pick-<%= game[:id] %>">
+      <input type="hidden" value="home" id="away-home">
+
+      <button type="submit" name="action" class="game-pick-team-logo-btn">
+        <%= image_tag game[:home] + '.png', :class => 'responsive-img' %>
+      </button>
+    </form>
+  <% else %>
+    <%= image_tag game[:home] + '.png', :class => 'responsive-img' %>
+  <% end %>
+</div>
