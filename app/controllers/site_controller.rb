@@ -8,17 +8,33 @@ class SiteController < ApplicationController
   # TODO: could add week_id to picks table, and search with week_id & user_id combined
   def current_week
     @current_week = Week.last
-    @games = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
-    @last_upd = Game.where(week_id: @current_week.id).order(updated_at: :desc).first.updated_at
+    games = Game.where(week_id: @current_week.id)
+    @games = games.order(:game_finished, :date, :start_time)
+    @last_upd = games.order(updated_at: :desc).first.updated_at
     @correct = 0
     
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
+      pick_count = g.picks.count.to_f
+      away_count = g.picks.where(away_home: 'away').count.to_f
+      home_count = g.picks.where(away_home: 'home').count.to_f
+
+      if away_count > home_count
+        field = "#{g.away} (#{(away_count / pick_count) * 100}%)"
+      elsif home_count > away_count
+        field = "#{g.home} (#{(home_count / pick_count) * 100}%)"
+      else
+        field = 'split 50/50'
+      end
 
       if user_pick[0] != nil
         if user_pick[0].pick
-          @picks[user_pick[0].game_id] = { :pick => user_pick[0].pick, :away_home => user_pick[0].away_home }
+          @picks[user_pick[0].game_id] = { 
+            :pick => user_pick[0].pick, 
+            :away_home => user_pick[0].away_home,
+            :field => field
+          }
         end
 
         if user_pick[0].tbreak_pts != nil
