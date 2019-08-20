@@ -1,5 +1,5 @@
 <div class="col s6">
-  <% if @current_week.locked == true && !@current_week.finalized && g[:game_started] == false %>
+  <% if @current_week.locked == true && !@current_week.finalized && game[:game_started] == false %>
     <form action="" role="form" class="pick" method="POST">
       <input type="hidden" value="<%= current_user.id %>" id="user-id">
       <input type="hidden" value="<%= game[:id] %>" id="<%= game[:id] %>">
