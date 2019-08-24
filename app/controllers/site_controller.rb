@@ -1,4 +1,4 @@
-xzclass SiteController < ApplicationController
+class SiteController < ApplicationController
   before_action :user
 
   def index

@@ -19,9 +19,8 @@
 var ready = function() {
     // activation
     $(".dropdown-trigger").dropdown();
-    $('select').material_select();
 };
 
 // LDFE-126 in backlog
 $(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).on('turbolinks:load', ready);
