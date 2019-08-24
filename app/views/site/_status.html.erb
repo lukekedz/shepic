@@ -15,7 +15,12 @@
             <span style="font-size: 10px;">Games Last Updated At: <b><%= @last_upd.strftime("%m/%d @ %H:%M") %></b></span>
           </p>
         <% else %>
-          <span class="red-text"><i>Week <%= @current_week.week %> games not yet finalized!</i></span>
+          <p>
+            <span class="red-text"><i>Week <%= @current_week.week %> games not yet finalized!</i></span>
+          </p>
+          <p>
+            <span style="font-size: 10px;">Last Updated At: <b><%= @last_upd.strftime("%m/%d @ %H:%M") %></b></span>
+          </p>
         <% end %>
 
       </div>

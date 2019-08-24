@@ -40,18 +40,35 @@
 <% end %>
 
 <nav>
-    <div class="nav-wrapper">
-        <a href="/"><%= image_tag 'football.png', :class => 'football-img' %><span id="title-header">Gary's Pick 'Em!</span></a>
+  <div class="nav-wrapper">
+    <a href="/"><%= image_tag 'football.png', :class => 'football-img' %><span id="title-header">Gary's Pick 'Em!</span></a>
 
-        <ul class="right">
-            <!-- Dropdown Trigger -->
-            <% if current_user && current_user.admin == true %>
-            <li><a class="dropdown-trigger btn" href="#!" data-constrainwidth="false" data-target="dropdown1"><i class="material-icons">menu</i></a></li>
-            <% else %>
-            <li><a class="dropdown-trigger btn" href="#!" data-constrainwidth="false" data-target="dropdown2"><i class="material-icons">menu</i></a></li>
-            <% end %>
-        </ul>
-    </div>
+    <ul class="right">
+      <!-- Dropdown Trigger -->
+      <% if current_user && current_user.admin == true %>
+        <li>
+          <a 
+            class="dropdown-trigger btn" 
+            href="#!" 
+            data-constrainwidth="false" 
+            data-target="dropdown1"
+          >
+            <i class="material-icons">menu</i>
+          </a>
+        </li>
+      <% else %>
+        <li>
+          <a class="dropdown-trigger btn" 
+            href="#!" 
+            data-constrainwidth="false" 
+            data-target="dropdown2"
+          >
+            <i class="material-icons">menu</i>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </nav>
 
 

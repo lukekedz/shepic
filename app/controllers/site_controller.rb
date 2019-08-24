@@ -1,4 +1,4 @@
-class SiteController < ApplicationController
+xzclass SiteController < ApplicationController
   before_action :user
 
   def index
@@ -8,11 +8,15 @@ class SiteController < ApplicationController
   # TODO: could add week_id to picks table, and search with week_id & user_id combined
   def current_week
     @current_week = Week.last
-    games = Game.where(week_id: @current_week.id)
-    @games = games.order(:game_finished, :date, :start_time)
-    @last_upd = games.length > 0 ? games.order(updated_at: :desc).first.updated_at : ''
+    @games = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
+
+    if Game.where(week_id: @current_week.id).order(updated_at: :desc).first
+      @last_upd = Game.where(week_id: @current_week.id).order(updated_at: :desc).first.updated_at
+    else
+      @last_upd = @current_week.updated_at
+    end
+
     @correct = 0
-    
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
