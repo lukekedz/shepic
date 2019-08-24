@@ -4,13 +4,14 @@
     <div class="col s12">
       <div class="card grey lighten-3">
         <div class="card-content black-text">
-          <h5>Week <%= @archived_week.week %> => <%= @weekly_user_win_total %> wins</h5>
+          <h5>Week <%= @archived_week.week %>: <b><%= @weekly_user_win_total %> wins</b></h5>
+          <div>&nbsp;</div>
           <ul id="dropdown3" class="dropdown-content">
               <% @weeks.each do |wk| %>
                   <li><%= link_to "Week " + wk.week.to_s, site_archived_path(:week => wk.id) %></li>
               <% end %>
           </ul>
-          <a class="dropdown-trigger btn" href="#!" data-activates="dropdown3">
+          <a class="dropdown-trigger btn" href="#!" data-target="dropdown3">
               History
               <i class="mdi-navigation-arrow-drop-down right"></i>
           </a>
@@ -80,13 +81,13 @@
             <% if g[:game_finished] == true  %>
               <div class="col s12 archived-right-wrong">
                 <% if @picks[ g[:id] ][:correct] == nil %>
-                    <span class="alert">PUSH</span>
+                  <span class="alert">PUSH</span>
                 <% else %>
-                    <% if @picks[ g[:id] ][:correct] == true %>
-                        <%= image_tag 'correct.png' %>
-                    <% else %>
-                        <%= image_tag 'x.png' %>
-                    <% end %>
+                  <% if @picks[ g[:id] ][:correct] == true %>
+                      <%= image_tag 'correct.png' %>
+                  <% else %>
+                      <%= image_tag 'x.png' %>
+                  <% end %>
                 <% end %>
               </div>
             <% end %>
