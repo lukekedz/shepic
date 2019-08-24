@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '~> 2.4'
+# ruby '2.6.3'
 
 gem 'rails'
 gem 'pg', '~> 0.18.4'
@@ -36,7 +36,8 @@ group :development, :test do
 	gem 'faker'
 	gem 'rspec-rails', '~> 3.5'
 	gem 'simplecov', :require => false, :group => :test
-	gem 'spring'
+	# gem 'spring'
+  # https://stackoverflow.com/questions/24276033/rails-console-doesnt-start
 end
 
 group :production do

@@ -1,6 +1,31 @@
 $(document).ready(function() {
 
-  $(".pick").on("click", function(event){
+  $(".pick-away").on("click", function(event){
+    console.log('away!')
+    event.preventDefault();
+
+    var userId   = event.currentTarget[0].value;
+    var gameId   = event.currentTarget[1].value;
+    var awayHome = event.currentTarget[3].value;
+    var selector = "#" + awayHome + "-game-pick-" + gameId;
+    var gamePick = $(selector)[0].value;
+
+    $.ajax({
+      type: "POST",
+      url: "/site/game_pick",
+      data: {"pick" : { "game_id"   : gameId,
+                        "pick"      : gamePick,
+                        "user_id"   : userId,
+                        "away_home" : awayHome }},
+      success: function(data){
+        var yourPick = "#your-pick-" + gameId;
+        $(yourPick).text("Your Pick: " + gamePick);
+      }
+    });
+  });
+
+  $(".pick-home").on("click", function(event){
+    console.log('home!')
     event.preventDefault();
 
     var userId   = event.currentTarget[0].value;

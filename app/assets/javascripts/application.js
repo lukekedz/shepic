@@ -22,5 +22,5 @@ var ready = function() {
 };
 
 // LDFE-126 in backlog
-$(document).ready(ready);
+// $(document).ready(ready);
 $(document).on('turbolinks:load', ready);
