@@ -11,7 +11,7 @@
       <div class="col s12">
         <% @weeks.each_with_index do |wk, index| %>
           <%= 
-            link_to ("Week " + wk.week.to_s + ": &nbsp;<b>" + @weekly_user_win_total[index].to_s + " wins</b>").html_safe, 
+            link_to ("Week " + wk.week.to_s + ": <b>" + @weekly_user_win_total[index].to_s + " wins</b>").html_safe, 
             site_archived_path(:week => wk.id) 
           %>
           <br/>
