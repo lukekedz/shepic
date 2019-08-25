@@ -31,7 +31,7 @@
     <div class="card grey lighten-3">
       <div class="card-content black-text">
 
-        <span class="card-title">Picks</span>
+        <span class="card-title"><u>Picks</u></span>
         <p>Selected: <%= @picks.count %></p>
         <p>Remain: <%= @games.count - @picks.count %></p>
         <p><b>Correct: <%= @correct %></b></p>
@@ -44,7 +44,7 @@
     <div class="card grey lighten-3">
       <div class="card-content black-text">
 
-        <span class="card-title">Games</span>
+        <span class="card-title"><u>Games</u></span>
         <p>Upcoming: <%= @games.where(game_started: false).count %></p>
         <p>In Progress: <%= @games.where(game_started: true, game_finished: false).count %></p>
         <p><b>Ended: <%= @games.where(game_finished: true).count %></b></p>

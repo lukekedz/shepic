@@ -7,19 +7,44 @@ class SiteController < ApplicationController
 
   # TODO: could add week_id to picks table, and search with week_id & user_id combined
   def current_week
-    @current_week = Week.last
-    @games = Game.where(week_id: @current_week.id).order(:game_finished, :date, :start_time)
+    standings = Standing.all.order(:wins).reverse
 
-    if Game.where(week_id: @current_week.id).order(updated_at: :desc).first
-      @last_upd = Game.where(week_id: @current_week.id).order(updated_at: :desc).first.updated_at
+    user_standing_index = nil
+    standings.each_with_index do |st, index|
+      user_standing_index = index if st.user_id == current_user.id
+    end
+
+    ahead_user_standings = standings[user_standing_index - 1]
+    behind_user_standings = standings[user_standing_index + 1]
+
+    ahead_user = User.find(ahead_user_standings.user_id)
+    behind_user = User.find(behind_user_standings.user_id)
+
+    @user_standing = {
+      place: user_standing_index + 1,
+      wins: standings[user_standing_index].wins
+    }
+
+    @current_week = Week.last
+    games = Game.where(week_id: @current_week.id)
+    @games = games.order(:game_finished, :date, :start_time)
+
+    if games.order(updated_at: :desc).first
+      @last_upd = games.order(updated_at: :desc).first.updated_at
     else
       @last_upd = @current_week.updated_at
     end
 
     @correct = 0
+    ahead_correct = 0
+    behind_correct = 0
+
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
+      ahead_pick = g.picks.where(user_id: ahead_user.id)
+      behind_pick = g.picks.where(user_id: behind_user.id)
+
       pick_count = g.picks.count.to_f
       away_count = g.picks.where(away_home: 'away').count.to_f
       home_count = g.picks.where(away_home: 'home').count.to_f
@@ -47,10 +72,23 @@ class SiteController < ApplicationController
 
         if g[:game_finished] == true
           @correct += 1 if user_pick[0].away_home == g.winner
+          ahead_correct += 1 if ahead_pick[0].away_home == g.winner
+          behind_correct += 1 if behind_pick[0].away_home == g.winner
         end
       end
-
     end
+
+    @ahead = {
+      user: ahead_user.username,
+      wins: ahead_user_standings.wins,
+      correct_this_week: ahead_correct
+    }
+
+    @behind = {
+      user: behind_user.username,
+      wins: behind_user_standings.wins,
+      correct_this_week: behind_correct
+    }
   end
 
   def game_pick

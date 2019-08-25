@@ -1,5 +1,9 @@
 <div class="row center-align flow-text">
   <%= render 'status' %>
   <%= render 'active_week_games' %>
+
+    <% if @current_week.locked && @current_week.week > 1 %>
+      <%= render 'standings_info_blurb' %>
+    <% end %>
 </div>
 

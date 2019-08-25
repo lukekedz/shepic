@@ -14,3 +14,14 @@
                 - time_remaining
                 - winner
                 - updated_at
+    User:
+        :options:
+            :fields:
+                - id
+                - email
+                - sign_in_count
+                - last_sign_in_at
+                - last_sign_in_ip
+                - updated_at
+                - username
+                - admin

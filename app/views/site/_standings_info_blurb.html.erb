@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card grey lighten-3">
+      <div class="card-content black-text">
+
+        <p><u>Standings Snapshot</u></p>  
+        <p><span style="font-size: 14px;">
+          <i>At the start of this week...  you stand in <b><%= @user_standing[:place].ordinalize %></b> place with <b><%= @user_standing[:wins] %> wins</b>.</i>
+        </span></p>
+
+        <ul>
+          <li style="list-style: square;">
+            User <i><%= @ahead[:user] %></i> leads you with <b><%= @ahead[:wins] %> wins</b>. This week, <i><%= @ahead[:user] %></i> has picked <b><%= @ahead[:correct_this_week] %></b> correct games!
+          </li>
+
+          <li style="list-style: square;">
+            User <i><%= @behind[:user] %></i> trails you with <b><%= @behind[:wins] %> wins</b>. This week, <i><%= @behind[:user] %></i> has picked <b><%= @behind[:correct_this_week] %></b> correct games!
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
