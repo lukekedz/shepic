@@ -191,7 +191,7 @@ class AdminController < ApplicationController
 
   # raspi route
   def update_score
-    winner = current_game_winner(params[:away_pts], params[:home_pts], params[:spread].to_i) 
+    winner = current_game_winner(params[:away_pts].to_i, params[:home_pts].to_i, params[:spread].to_i) 
     updated_score = Game.update(params[:id], 
       away_pts: params[:away_pts], 
       home_pts: params[:home_pts], 
