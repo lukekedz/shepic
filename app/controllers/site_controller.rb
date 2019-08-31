@@ -73,11 +73,11 @@ class SiteController < ApplicationController
         if g[:game_finished] == true
           @correct += 1 if user_pick[0].away_home == g.winner
 
-          if ahead_pick != nil
+          if ahead_pick != nil ahead_pick[0]
             ahead_correct += 1 if ahead_pick[0].away_home == g.winner
           end
 
-          if behind_pick != nil
+          if behind_pick != nil && behind_pick[0]
             behind_correct += 1 if behind_pick[0].away_home == g.winner
           end
         end
