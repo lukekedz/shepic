@@ -14,11 +14,11 @@ class SiteController < ApplicationController
       user_standing_index = index if st.user_id == current_user.id
     end
 
-    ahead_user_standings = standings[user_standing_index - 1]
-    behind_user_standings = standings[user_standing_index + 1]
+    ahead_user_standings = (user_standing_index == 0) ? nil : standings[user_standing_index - 1]
+    behind_user_standings = (user_standing_index + 1 == Standing.all.count) ? nil : standings[user_standing_index + 1]
 
-    ahead_user = User.find(ahead_user_standings.user_id)
-    behind_user = User.find(behind_user_standings.user_id)
+    ahead_user = ahead_user_standings == nil ? nil : User.find(ahead_user_standings.user_id)
+    behind_user = behind_user_standings == nil ? nil : User.find(behind_user_standings.user_id)
 
     @user_standing = {
       place: user_standing_index + 1,
@@ -42,8 +42,8 @@ class SiteController < ApplicationController
     @picks = {}
     @games.each do |g|
       user_pick = g.picks.where(user_id: current_user.id)
-      ahead_pick = g.picks.where(user_id: ahead_user.id)
-      behind_pick = g.picks.where(user_id: behind_user.id)
+      ahead_pick = ahead_user == nil ? nil : g.picks.where(user_id: ahead_user.id)
+      behind_pick = behind_user == nil ? nil : g.picks.where(user_id: behind_user.id)
 
       pick_count = g.picks.count.to_f
       away_count = g.picks.where(away_home: 'away').count.to_f
@@ -72,23 +72,37 @@ class SiteController < ApplicationController
 
         if g[:game_finished] == true
           @correct += 1 if user_pick[0].away_home == g.winner
-          ahead_correct += 1 if ahead_pick[0].away_home == g.winner
-          behind_correct += 1 if behind_pick[0].away_home == g.winner
+
+          if ahead_pick != nil
+            ahead_correct += 1 if ahead_pick[0].away_home == g.winner
+          end
+
+          if behind_pick != nil
+            behind_correct += 1 if behind_pick[0].away_home == g.winner
+          end
         end
       end
     end
 
-    @ahead = {
-      user: ahead_user.username,
-      wins: ahead_user_standings.wins,
-      correct_this_week: ahead_correct
-    }
+    if ahead_user == nil
+      @ahead = nil
+    else
+      @ahead = {
+        user: ahead_user.username,
+        wins: ahead_user_standings.wins,
+        correct_this_week: ahead_correct
+      }
+    end
 
-    @behind = {
-      user: behind_user.username,
-      wins: behind_user_standings.wins,
-      correct_this_week: behind_correct
-    }
+    if behind_user == nil
+      @behind = nil
+    else
+      @behind = {
+        user: behind_user.username,
+        wins: behind_user_standings.wins,
+        correct_this_week: behind_correct
+      }
+    end
   end
 
   def game_pick
