@@ -1,6 +1,7 @@
 <script>
-    $(".dropdown-button").dropdown();
-    $('select').material_select();
+    // $(".dropdown-button").dropdown();
+    // $('select').material_select();
+    // $('select').formSelect();
 
     $('.datepicker').pickadate({
         selectMonths: true,
@@ -31,7 +32,7 @@
 
         <div class="input-field row">
             <label class="active">Away</label>
-            <select name="game[away]" class="validate" required>
+            <select name="game[away]" class="browser-default" required>
                 <option disabled selected>Select Team</option>
 
                 <% @teams.each do |away| %>
@@ -40,9 +41,11 @@
             </select>
         </div>
 
+        <br/>
+
         <div class="input-field row">
             <label class="active">Home</label>
-            <select name="game[home]" class="validate" required>
+            <select name="game[home]" class="browser-default" required>
                 <option disabled selected>Select Team</option>
 
                 <% @teams.each do |home| %>
@@ -50,6 +53,8 @@
                 <% end %>
             </select>
         </div>
+
+        <br/>
 
         <div class="input-field row">
             <label class="active">Spread</label>
@@ -66,9 +71,11 @@
             <input type="date" placeholder="Select Date" name="game[date]" required>
         </div>
 
+        <br/>
+
         <div class="input-field row">
             <label class="active">Kickoff</label>
-            <select name="game[start_time]" required>
+            <select name="game[start_time]" class="browser-default" required>
                 <option value="" disabled selected>All Times Must Be EST!</option>
 
                 <% @times.each do |t| %>
@@ -77,14 +84,21 @@
             </select>
         </div>
 
+        <br/>
+
         <div class="row">
             <button class="waves-effect waves-light btn" action="submit">Add Game</button>
         </div>
 
+        <br/>
+
         <div class="row">
             <% if @tiebreaker == 0  %>
-                <input type="checkbox" id="tiebreaker" name="game[tiebreaker]"/>
-                <label for="tiebreaker">Tiebreaker</label>
+                
+                <label for="tiebreaker">
+                    <input type="checkbox" id="tiebreaker" name="game[tiebreaker]"/>
+                    Tiebreaker
+                </label>
             <% end %>
         </div>
     </form>
