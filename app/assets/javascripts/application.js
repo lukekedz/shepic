@@ -18,9 +18,8 @@
 
 var ready = function() {
     // activation
+    $('select').formSelect();
     $(".dropdown-trigger").dropdown();
 };
 
-// LDFE-126 in backlog
-// $(document).ready(ready);
 $(document).on('turbolinks:load', ready);
