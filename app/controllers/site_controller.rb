@@ -115,7 +115,7 @@ class SiteController < ApplicationController
         if @pick.save
           format.json { render json: @pick.to_json }
         else
-          # TODO: error msg
+          format.html { redirect_to new_user_session_path }
         end
       else
         @pick = Pick.update(@current_pick[0].id, pick: params[:pick][:pick], away_home: params[:pick][:away_home])
