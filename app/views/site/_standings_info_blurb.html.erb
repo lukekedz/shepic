@@ -10,13 +10,13 @@
 
         <ul>
           <% if @ahead_user != nil %>
-            <li style="list-style: square;">
+            <li style="list-style: none;">
               User <i><%= @ahead_user[:user] %></i> leads you with <b><%= @ahead_user[:wins] %> wins</b>. This week, <i><%= @ahead_user[:user] %></i> has picked <b><%= @ahead_user[:correct_this_week] %></b> correct games!
             </li>
           <% end %>
 
           <% if @behind_user != nil %>
-            <li style="list-style: square;">
+            <li style="list-style: none;">
               User <i><%= @behind_user[:user] %></i> trails you with <b><%= @behind_user[:wins] %> wins</b>. This week, <i><%= @behind_user[:user] %></i> has picked <b><%= @behind_user[:correct_this_week] %></b> correct games!
             </li>
           <% end %>
