@@ -50,9 +50,9 @@ class SiteController < ApplicationController
       home_count = g.picks.where(away_home: 'home').count.to_f
 
       if away_count > home_count
-        field = "#{g.away} (#{(away_count / pick_count).round(2) * 100}%)"
+        field = "#{g.away} (#{((away_count / pick_count) * 100).round(2)}%)"
       elsif home_count > away_count
-        field = "#{g.home} (#{(home_count / pick_count).round(2) * 100}%)"
+        field = "#{g.home} (#{((home_count / pick_count) * 100).round(2)}%)"
       else
         field = 'split 50/50'
       end
@@ -85,9 +85,9 @@ class SiteController < ApplicationController
     end
 
     if ahead_user == nil
-      @ahead = nil
+      @ahead_user = nil
     else
-      @ahead = {
+      @ahead_user = {
         user: ahead_user.username,
         wins: ahead_user_standings.wins,
         correct_this_week: ahead_correct
@@ -95,9 +95,9 @@ class SiteController < ApplicationController
     end
 
     if behind_user == nil
-      @behind = nil
+      @behind_user = nil
     else
-      @behind = {
+      @behind_user = {
         user: behind_user.username,
         wins: behind_user_standings.wins,
         correct_this_week: behind_correct
@@ -204,9 +204,9 @@ class SiteController < ApplicationController
       home_count = g.picks.where(away_home: 'home').count.to_f
 
       if away_count > home_count
-        field = "#{g.away} (#{(away_count / pick_count).round(2) * 100}%)"
+        field = "#{g.away} (#{((away_count / pick_count) * 100).round(2)}%)"
       elsif home_count > away_count
-        field = "#{g.home} (#{(home_count / pick_count).round(2) * 100}%)"
+        field = "#{g.home} (#{((home_count / pick_count) * 100).round(2)}%)"
       else
         field = 'split 50/50'
       end
