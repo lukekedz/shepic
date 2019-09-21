@@ -50,9 +50,9 @@ class SiteController < ApplicationController
       home_count = g.picks.where(away_home: 'home').count.to_f
 
       if away_count > home_count
-        field = "#{g.away} (#{(away_count / pick_count) * 100}%)"
+        field = "#{g.away} (#{(away_count / pick_count).round(2) * 100}%)"
       elsif home_count > away_count
-        field = "#{g.home} (#{(home_count / pick_count) * 100}%)"
+        field = "#{g.home} (#{(home_count / pick_count).round(2) * 100}%)"
       else
         field = 'split 50/50'
       end
@@ -204,9 +204,9 @@ class SiteController < ApplicationController
       home_count = g.picks.where(away_home: 'home').count.to_f
 
       if away_count > home_count
-        field = "#{g.away} (#{(away_count / pick_count) * 100}%)"
+        field = "#{g.away} (#{(away_count / pick_count).round(2) * 100}%)"
       elsif home_count > away_count
-        field = "#{g.home} (#{(home_count / pick_count) * 100}%)"
+        field = "#{g.home} (#{(home_count / pick_count).round(2) * 100}%)"
       else
         field = 'split 50/50'
       end
