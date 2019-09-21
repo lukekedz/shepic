@@ -11,13 +11,13 @@
         <ul>
           <% if @ahead_user != nil %>
             <li style="list-style: square;">
-              User <i><%= @ahead[:user] %></i> leads you with <b><%= @ahead[:wins] %> wins</b>. This week, <i><%= @ahead[:user] %></i> has picked <b><%= @ahead[:correct_this_week] %></b> correct games!
+              User <i><%= @ahead_user[:user] %></i> leads you with <b><%= @ahead_user[:wins] %> wins</b>. This week, <i><%= @ahead_user[:user] %></i> has picked <b><%= @ahead_user[:correct_this_week] %></b> correct games!
             </li>
           <% end %>
 
           <% if @behind_user != nil %>
             <li style="list-style: square;">
-              User <i><%= @behind[:user] %></i> trails you with <b><%= @behind[:wins] %> wins</b>. This week, <i><%= @behind[:user] %></i> has picked <b><%= @behind[:correct_this_week] %></b> correct games!
+              User <i><%= @behind_user[:user] %></i> trails you with <b><%= @behind_user[:wins] %> wins</b>. This week, <i><%= @behind_user[:user] %></i> has picked <b><%= @behind_user[:correct_this_week] %></b> correct games!
             </li>
           <% end %>
         </ul>
