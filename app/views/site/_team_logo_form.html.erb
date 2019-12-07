@@ -1,4 +1,4 @@
-<div class="col s12">
+<div class="row">
   <div class="col s6">
     <% if @current_week.locked == true && !@current_week.finalized && game[:game_started] == false %>
       <form action="" role="form" class="pick" method="POST">
@@ -34,14 +34,16 @@
   </div>
 </div>
 
-<div class="col s12" id="your-pick-<%= game[:id] %>">
-  <% if @current_week.locked %>
-    <% if game[:game_started] == false %>
-      <% if @picks[ game[:id] ] %>
-        Your Pick: <%= @picks[ game[:id] ][:pick] %>
-      <% else %>
-        <span class="make-your-pick">Click Your Pick!</span>
+<div class="row">
+  <div class="col s12" id="your-pick-<%= game[:id] %>">
+    <% if @current_week.locked %>
+      <% if game[:game_started] == false %>
+        <% if @picks[ game[:id] ] %>
+          Your Pick: <%= @picks[ game[:id] ][:pick] %>
+        <% else %>
+          <span class="make-your-pick">Click Your Pick!</span>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
