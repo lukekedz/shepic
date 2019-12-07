@@ -1,14 +1,9 @@
-<% if @picks[ game[:id] ] && game[:game_started] %>
+<% if @picks[ game[:id] ] %>
 
   <div class="col s12" id="your-pick-<%= game[:id] %>">
     <% if @current_week.locked %>
       <% if game[:game_started] == false %>
         
-        <% if @picks[ game[:id] ] %>
-          Your Pick: <%= @picks[ game[:id] ][:pick] %>
-        <% else %>
-          <span class="make-your-pick">Click Your Pick!</span>
-        <% end %>
 
       <% else %>
         <div class="col s12">

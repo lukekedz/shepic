@@ -31,3 +31,15 @@
     <%= image_tag game[:home] + '.png', :class => 'responsive-img' %>
   <% end %>
 </div>
+
+<div class="col s12" id="your-pick-<%= game[:id] %>">
+  <% if @current_week.locked %>
+    <% if game[:game_started] == false %>
+      <% if @picks[ game[:id] ] %>
+        Your Pick: <%= @picks[ game[:id] ][:pick] %>
+      <% else %>
+        <span class="make-your-pick">Click Your Pick!</span>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
