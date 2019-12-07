@@ -1,69 +1,73 @@
-<div class="col s12" id="your-pick-<%= game[:id] %>">
-  <% if @current_week.locked %>
-    <% if game[:game_started] == false %>
-      
-      <% if @picks[ game[:id] ] %>
-        Your Pick: <%= @picks[ game[:id] ][:pick] %>
-      <% else %>
-        <span class="make-your-pick">Click Your Pick!</span>
-      <% end %>
+<% if @picks[ game[:id] ] %>
 
-    <% else %>
-      <div class="col s12">
-        <b>Your Pick: <%= @picks[ game[:id] ] ? @picks[ game[:id] ][:pick] : 'n/a' %></b>
-      </div>
-      <div class="col s12" style="font-size: 16px;">
-        <i>Field: <%= @picks[ game[:id] ][:field] %></i>
-      </div>
-      <div class="col s12">
-        &nbsp;
-      </div>
-      
-      <div class="col s12">
-        <% if game[:winner] == 'push' %>
-          <% border = 'grey dotted;' %>
+  <div class="col s12" id="your-pick-<%= game[:id] %>">
+    <% if @current_week.locked %>
+      <% if game[:game_started] == false %>
+        
+        <% if @picks[ game[:id] ] %>
+          Your Pick: <%= @picks[ game[:id] ][:pick] %>
         <% else %>
-          <% if game[:winner] == @picks[ game[:id] ][:away_home] %>
-            <% border = 'green dashed' %>
-          <% else %>
-            <% border = 'red dashed' %>
-          <% end %>
+          <span class="make-your-pick">Click Your Pick!</span>
         <% end %>
-      </div>
 
-      <div class="col s12"
-        style="border: 2px <%= game[:game_finished] == true ? 'black solid;' : border %>; margin-top: 10px; margin-bottom: 10px;"
-      >
-        <div class="col s3">
-          <strong><%= game[:away_pts] %></strong>
+      <% else %>
+        <div class="col s12">
+          <b>Your Pick: <%= @picks[ game[:id] ] ? @picks[ game[:id] ][:pick] : 'n/a' %></b>
+        </div>
+        <div class="col s12" style="font-size: 16px;">
+          <i>Field: <%= @picks[ game[:id] ][:field] %></i>
+        </div>
+        <div class="col s12">
+          &nbsp;
         </div>
         
-        <div class="col s6">
-          <strong><%= game[:time_remaining] %></strong>
-        </div>
-        
-        <div class="col s3">
-          <strong><%= game[:home_pts] %></strong>
-        </div>
-      </div>
-
-      <%= render 'spread', game: game %>
-
-      <!-- CORRECT PICK DISPLAY -->
-      <% if game[:game_finished] == true  %>
-        <div class="col s12 archived-right-wrong">
+        <div class="col s12">
           <% if game[:winner] == 'push' %>
-            PUSH
+            <% border = 'grey dotted;' %>
           <% else %>
             <% if game[:winner] == @picks[ game[:id] ][:away_home] %>
-              <%= image_tag 'correct.png' %>
+              <% border = 'green dashed' %>
             <% else %>
-              <%= image_tag 'x.png' %>
+              <% border = 'red dashed' %>
             <% end %>
           <% end %>
-      </div>
-      <% end %>
+        </div>
 
+        <div class="col s12"
+          style="border: 2px <%= game[:game_finished] == true ? 'black solid;' : border %>; margin-top: 10px; margin-bottom: 10px;"
+        >
+          <div class="col s3">
+            <strong><%= game[:away_pts] %></strong>
+          </div>
+          
+          <div class="col s6">
+            <strong><%= game[:time_remaining] %></strong>
+          </div>
+          
+          <div class="col s3">
+            <strong><%= game[:home_pts] %></strong>
+          </div>
+        </div>
+
+        <%= render 'spread', game: game %>
+
+        <!-- CORRECT PICK DISPLAY -->
+        <% if game[:game_finished] == true  %>
+          <div class="col s12 archived-right-wrong">
+            <% if game[:winner] == 'push' %>
+              PUSH
+            <% else %>
+              <% if game[:winner] == @picks[ game[:id] ][:away_home] %>
+                <%= image_tag 'correct.png' %>
+              <% else %>
+                <%= image_tag 'x.png' %>
+              <% end %>
+            <% end %>
+        </div>
+        <% end %>
+
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+
+<% end %>
