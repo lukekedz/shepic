@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:active_game_slate, :game_started, :update_score, :week_number_for_scripts]
   before_action :share_globals
 
-  WEEKLY_GAME_COUNT = 10.freeze
+  WEEKLY_GAME_COUNT = 30.freeze
 
   # :nocov:
   before_action do |controller|
